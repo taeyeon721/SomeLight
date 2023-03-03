@@ -21,11 +21,13 @@
 
 - develop : BE/FE/AI 작업물 merge 
 
-- branch name : BE/FE/AI
+- branch name : BE/FE/AI + 기능
+
+ex) BE/API, AI/MODEL
 
 - commit message : [기능] 변경내역
 
-ex) [BE] api fix
+ex) [BE]fix: api fix
 
 ⛏ fix: 내 코드베이스에서 발생한 버그를 수정했을 때
 
