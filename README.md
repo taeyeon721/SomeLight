@@ -14,4 +14,17 @@
 
 5. ERD
 
+### Git Convention
+
+- 커밋 메세지는 전부 영어로
+
+- main branch : local push 금지/ develop에서 무조건 merge request 
+
+- develop : BE/FE/AI 작업물 merge 
+
+- branch name : BE/FE/AI
+
+- commit message : [기능] 변경내역
+    ex) [BE] api fix
+
 
