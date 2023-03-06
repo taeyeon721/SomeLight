@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-
+from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -35,13 +35,16 @@ INSTALLED_APPS = [
     'stories',
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_framework_simplejwt.token_blacklist'
     'dj_rest_auth',
+    'dj_rest_auth.registration',
     'django_extensions',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.naver',
     'dj_rest_auth.registration',
-    'drf-spectacular',
+    # 'drf-spectacular',
     'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,8 +54,44 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+# AUTHENTICATION_BACKENDS = [
+#     'django.contrib.auth.backends.ModelBackend',
+#     'allauth.account.auth_backends.AuthenticationBackend',
+# ]
+
+# SOCIALACCOUNT_PROVIDERS= {
+#     'naver':{ 'APP':{
+#         # 추후에 삭제 
+#                         'client_id':"pJlxbZkInS30nxIaXdUW",
+#                         'secret':"fQGWwRTdZu",
+#                         'key':"",
+#     }
+        
+#     },    
+# }
+
+
+LOGIN_REDIRECT_URL = '/' # social Login redirect
+ACCOUNT_LOGOUT_REDIRECT_URL = '/' # Logout redirect
+
+
 REST_FRAMEWORK ={
-    
+    'DEFAULT_PERMISSION_CLASSES':(
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES':(
+        'rest_framework.authentication.SessionAuthentication',
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
+    )
+}
+
+REST_USE_JWT = True
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME':timedelta(hours=2),
+    'REFRESH_TOKEN_LIFETIME':timedelta(days=7),
+    'ROTATE_REFRESH_TOKENS':False,
+    'BLACKLIST_AFTER_ROTATION':True,
 }
 
 SPECTACULAR_SETTINGS = {

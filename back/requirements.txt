@@ -11,6 +11,7 @@ django-allauth==0.52.0
 django-cors-headers==3.14.0
 django-extensions==3.2.1
 djangorestframework==3.14.0
+djangorestframework-simplejwt==5.2.2
 drf-spectacular==0.25.1
 idna==3.4
 inflection==0.5.1
