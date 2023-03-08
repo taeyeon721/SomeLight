@@ -42,9 +42,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.naver',
     'dj_rest_auth.registration',
-    # 'drf-spectacular',
     'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -54,26 +52,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-# AUTHENTICATION_BACKENDS = [
-#     'django.contrib.auth.backends.ModelBackend',
-#     'allauth.account.auth_backends.AuthenticationBackend',
-# ]
-
-# SOCIALACCOUNT_PROVIDERS= {
-#     'naver':{ 'APP':{
-#         # 추후에 삭제 
-#                         'client_id':"pJlxbZkInS30nxIaXdUW",
-#                         'secret':"fQGWwRTdZu",
-#                         'key':"",
-#     }
-        
-#     },    
-# }
-
-
 LOGIN_REDIRECT_URL = '/' # social Login redirect
 ACCOUNT_LOGOUT_REDIRECT_URL = '/' # Logout redirect
 
+SITE_ID = 1
 
 REST_FRAMEWORK ={
     'DEFAULT_PERMISSION_CLASSES':(
@@ -187,4 +169,4 @@ CORS_ALLOWED_ORIGINS = [
     
 ]
 
-AUTH_USER_MODEL = 'account.User'
+AUTH_USER_MODEL = 'accounts.User'
