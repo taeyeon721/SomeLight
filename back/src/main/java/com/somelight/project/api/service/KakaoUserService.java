@@ -18,5 +18,4 @@ public interface KakaoUserService {
     HashMap<String, Object> getKakaoUserInfo(String token) throws Exception;
 
     Boolean validationIdToken(String id_token);
-
 }

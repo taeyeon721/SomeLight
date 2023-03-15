@@ -5,9 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
@@ -17,6 +15,7 @@ import javax.persistence.Table;
 @Table(name = "vote")
 public class Vote {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int vote_id;
     private int user_id;
     private int story_id;
