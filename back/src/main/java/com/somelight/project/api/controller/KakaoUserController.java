@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 
 @RestController
-@RequestMapping("/kakao")
+@RequestMapping("/login")
 @AllArgsConstructor
 public class KakaoUserController {
 
@@ -20,7 +20,7 @@ public class KakaoUserController {
     private UserRepository userRepository;
 
     @CrossOrigin("*")
-    @GetMapping("/login")
+    @GetMapping("/kakao")
     public ResponseEntity<HashMap<String, Object>> kakaoLogin(@RequestParam String code) {
         HashMap<String, Object> resultMap = new HashMap<>();
         HttpStatus status = null;
@@ -69,7 +69,7 @@ public class KakaoUserController {
         }
 
         @CrossOrigin("*")
-        @PostMapping("/login")
+        @PostMapping("/kakao")
         public ResponseEntity<?> login(Authentication authentication, @RequestBody User user) {
 
             System.out.println("신규 유저 정보 입력");

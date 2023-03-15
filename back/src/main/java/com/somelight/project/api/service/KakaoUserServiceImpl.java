@@ -45,8 +45,7 @@ public class KakaoUserServiceImpl implements KakaoUserService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=8147c85395148371709b2199642f9108"); // TODO REST_API_KEY 입력
-//            sb.append("&redirect_uri=http://localhost:5173/oauth/callback/kakao"); // TODO 인가코드 받은 redirect_uri 입력
-            sb.append("&redirect_uri=http://localhost:8081/kakao/login");
+            sb.append("&redirect_uri=http://localhost:8081/login/kakao");
             sb.append("&code=" + code);
             bw.write(sb.toString());
             bw.flush();
@@ -75,6 +74,7 @@ public class KakaoUserServiceImpl implements KakaoUserService {
             id_Token = element.getAsJsonObject().get("id_token").getAsString();
 
             tokenInfo.put(("access_token"), access_Token);
+            tokenInfo.put(("refresh_token"),refresh_Token);
             tokenInfo.put(("id_token"), id_Token);
 
             br.close();
@@ -102,12 +102,10 @@ public class KakaoUserServiceImpl implements KakaoUserService {
 
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
-            conn.setRequestProperty("Authorization",
-                    "Bearer " + token); //전송할 header 작성, access_token전송
+            conn.setRequestProperty("Authorization", "Bearer " + token); //전송할 header 작성, access_token전송
 
             //결과 코드가 200이라면 성공
             int responseCode = conn.getResponseCode();
-//            System.out.println("responseCode : " + responseCode);
 
             //요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -117,14 +115,10 @@ public class KakaoUserServiceImpl implements KakaoUserService {
             while ((line = br.readLine()) != null) {
                 result += line;
             }
-//            System.out.println("response body : " + result);
 
             //Gson 라이브러리로 JSON파싱
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result);
-
-            //여기서 사용하는 id는 정확히 뭔지 모르겠음, 그냥 식별자 그 자체고 우리가 활용하는 데이터는 아닌거같음
-//            int id = element.getAsJsonObject().get("id").getAsInt();
 
             boolean hasEmail = element.getAsJsonObject().get("kakao_account").getAsJsonObject()
                     .get("has_email").getAsBoolean();
