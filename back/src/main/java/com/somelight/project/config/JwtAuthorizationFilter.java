@@ -45,7 +45,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain chain) throws IOException, ServletException {
-//        super.doFilterInternal(request, response, chain);
 
         String jwtHeader = request.getHeader("Authorization");
 
@@ -92,13 +91,11 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             String nickname = String.valueOf(jwt.getClaims().get("nickname")).replace("\"", "");
             String email = String.valueOf(jwt.getClaims().get("email")).replace("\"", "");
 
-            System.out.println("=================토큰 정보 디코딩=================");
             System.out.println(nickname);
             System.out.println(email);
 
             if (!nickname.equals("null") && !email.equals("null")) {
 
-                System.out.println("jwtAuthentication 설정=================");
                 UsernamePasswordAuthenticationToken jwtAuthentication = new UsernamePasswordAuthenticationToken(
                         nickname, email);
                 jwtAuthentication.setDetails(new User());

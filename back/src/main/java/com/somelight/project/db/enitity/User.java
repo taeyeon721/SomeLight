@@ -20,7 +20,7 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int user_id;
+    private int userId;
     private String email;
     private String nickname;
     private String AccessToken;

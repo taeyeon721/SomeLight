@@ -37,8 +37,8 @@ public class KakaoUserController {
             System.out.println("id_token : " + id_token);
             HashMap<String, Object> kakaoUserInfo = kakaoUserServiceimpl.getKakaoUserInfo(access_token);
 
-            System.out.println((String) kakaoUserInfo.get("email"));
-            System.out.println((String) kakaoUserInfo.get("nickname"));
+//          System.out.println((String) kakaoUserInfo.get("email"));
+//          System.out.println((String) kakaoUserInfo.get("nickname"));
 
             resultMap.put("nickname", kakaoUserInfo.get("nickname"));
             resultMap.put("userEmail", kakaoUserInfo.get("email"));
@@ -52,55 +52,50 @@ public class KakaoUserController {
                             .email((String) kakaoUserInfo.get("email"))
                             .nickname((String)kakaoUserInfo.get("nickname"))
                             .build());
-                } else {
-                    resultMap.put("newUser", 0);
-                }
-
-                resultMap.put(("token"), id_token);
-                resultMap.put(("message"), "토큰 발급 완료");
-                status = HttpStatus.OK;
-
-            } catch (Exception e) {
-                resultMap.put(("message"), e.getMessage());
-                status = HttpStatus.INTERNAL_SERVER_ERROR;
+            } else {
+                resultMap.put("newUser", 0);
             }
 
-            return new ResponseEntity<HashMap<String, Object>>(resultMap, status);
+            resultMap.put(("token"), id_token);
+            resultMap.put(("message"), "토큰 발급 완료");
+            status = HttpStatus.OK;
+
+        } catch (Exception e) {
+            resultMap.put(("message"), e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
 
-        @CrossOrigin("*")
-        @PostMapping("/kakao")
-        public ResponseEntity<?> login(Authentication authentication, @RequestBody User user) {
-
-            System.out.println("신규 유저 정보 입력");
-
-            HashMap<String, Object> resultMap = new HashMap<>();
-            HttpStatus status = null;
-
-            try {
-                System.out.println(user.toString());
-
-                System.out.println("Data 1 : " + authentication.getPrincipal()); //닉네임
-                System.out.println("Data 2 : " + authentication.getCredentials()); //이메일
-
-                userRepository.save(User.builder()
-                        .email((String) authentication.getCredentials())
-                        .nickname((String) authentication.getPrincipal())
-                        .build());
-
-                resultMap.put("userEmail", authentication.getCredentials());
-                status = HttpStatus.OK;
-                resultMap.put(("message"), "회원 저장");
-
-
-            } catch (Exception e) {
-                System.out.println("에러발생@@@@@@@@@@@@@@@@@");
-                resultMap.put(("message"), e.getMessage());
-                status = HttpStatus.INTERNAL_SERVER_ERROR;
-
-            }
-
-            return new ResponseEntity<HashMap<String, Object>>(resultMap, status);
-        }
+        return new ResponseEntity<HashMap<String, Object>>(resultMap, status);
     }
 
+    @CrossOrigin("*")
+    @PostMapping("/kakao")
+    public ResponseEntity<?> login(Authentication authentication, @RequestBody User user) {
+
+        HashMap<String, Object> resultMap = new HashMap<>();
+        HttpStatus status = null;
+
+        try {
+            System.out.println(user.toString());
+
+            System.out.println("Data 1 : " + authentication.getPrincipal()); //닉네임
+            System.out.println("Data 2 : " + authentication.getCredentials()); //이메일
+
+            userRepository.save(User.builder()
+                    .email((String) authentication.getCredentials())
+                    .nickname((String) authentication.getPrincipal())
+                    .build());
+
+            resultMap.put("userEmail", authentication.getCredentials());
+            status = HttpStatus.OK;
+            resultMap.put(("message"), "회원 저장");
+
+        } catch (Exception e) {
+            System.out.println("에러발생@@@@@@@@@@@@@@@@@");
+            resultMap.put(("message"), e.getMessage());
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+
+        return new ResponseEntity<HashMap<String, Object>>(resultMap, status);
+    }
+}
