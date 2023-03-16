@@ -19,10 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/community")
 public class CommunityController {
 
-    @Autowired
     private CommunityService communityService;
-    @Autowired
     private UserService userService;
+
+    @Autowired
+    public CommunityController(CommunityService communityService, UserService userService) {
+        this.communityService = communityService;
+        this.userService = userService;
+    }
 
 
     @PostMapping()

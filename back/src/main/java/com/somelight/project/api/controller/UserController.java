@@ -22,10 +22,15 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private UserService userservice;
-    @Autowired
+    private UserService userService;
     private CommunityService communityService;
+
+    @Autowired
+    public UserController(UserService userService, CommunityService communityService) {
+        this.userService = userService;
+        this.communityService = communityService;
+    }
+
 
     @GetMapping()
     public ResponseEntity<UserInfoResponse> getUserInfo (@Nullable Authentication authentication) {
@@ -34,7 +39,7 @@ public class UserController {
         List<Story> user_stories = new ArrayList<>();
         if (authentication != null) {
             email = (String) authentication.getCredentials();
-            user = userservice.getUserId(email);
+            user = userService.getUserId(email);
             user_stories = communityService.getUserStories(user.getUserId());
         }
         UserInfoResponse res = UserInfoResponse.of(user_stories, user);

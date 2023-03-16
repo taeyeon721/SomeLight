@@ -20,6 +20,6 @@ public class Vote {
     private int voteId;
     private int userId;
     private int storyId;
-    @ColumnDefault("N")
+
     private boolean isRed;
 }

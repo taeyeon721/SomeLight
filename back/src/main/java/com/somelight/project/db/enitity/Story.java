@@ -24,10 +24,10 @@ public class Story {
     private int userId;
     private String content;
     private int result;
-    @ColumnDefault("N")
+
     private boolean isChanged;
     private LocalDateTime createdDate;
-    @ColumnDefault("N")
+
     private boolean isExposure;
 
     @Builder

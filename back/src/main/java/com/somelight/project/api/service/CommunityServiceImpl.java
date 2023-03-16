@@ -11,11 +11,15 @@ import java.util.List;
 
 @Service
 public class CommunityServiceImpl implements CommunityService{
-    @Autowired
     private UserRepository userRepository;
+    private CommunityRepository communityRepository;
 
     @Autowired
-    private CommunityRepository communityRepository;
+    public CommunityServiceImpl(UserRepository userRepository, CommunityRepository communityRepository) {
+        this.userRepository = userRepository;
+        this.communityRepository = communityRepository;
+    }
+
 
     public List<Story> getUserStories(int user_id){
         List<Story> userStories = communityRepository.getStoriesByUserId(user_id).orElse(null);
