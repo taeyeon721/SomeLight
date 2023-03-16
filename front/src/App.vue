@@ -1,13 +1,22 @@
 <template>
+  <Navbar />
   <router-view />
 </template>
 
+<script lang="ts">
+import Navbar from "@/components/appview/Navbar.vue";
+
+export default {
+  components: {
+    Navbar,
+  },
+  setup() {},
+};
+</script>
 <style>
 @import "@/assets/css/reset.css";
-.fontEnglish {
-  font-family: "Covered By Your Grace", cursive;
-}
-.fontKorean {
-  font-family: "Nanum Pen Script", cursive;
+/* 너비 체크용 */
+div {
+  box-shadow: 0 0 0 1px #f00 inset;
 }
 </style>
