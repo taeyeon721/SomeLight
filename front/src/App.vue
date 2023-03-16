@@ -19,4 +19,8 @@ export default {
 div {
   box-shadow: 0 0 0 1px #f00 inset;
 }
+
+.font {
+  font-family: "DM Sans", sans-serif;
+}
 </style>
