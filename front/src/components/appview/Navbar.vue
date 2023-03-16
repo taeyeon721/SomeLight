@@ -1,16 +1,17 @@
 <template>
-  <div id="minaWrapper"></div>
+  <div id="navWrapper"></div>
 </template>
-
-<script>
+<script lang="ts">
 export default {
   setup() {},
 };
 </script>
 
 <style scoped>
-#minaWrapper {
+#navWrapper {
   width: 100vw;
-  height: 100vh;
+  height: 10vh;
+  position: fixed;
+  top: 0px;
 }
 </style>
