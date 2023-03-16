@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -17,19 +20,21 @@ import java.time.LocalDateTime;
 public class Story {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int story_id;
-    private int user_id;
+    private int storyId;
+    private int userId;
     private String content;
     private int result;
+    @ColumnDefault("N")
     private boolean isChanged;
-    private LocalDateTime created_date;
+    private LocalDateTime createdDate;
+    @ColumnDefault("N")
     private boolean isExposure;
 
     @Builder
-    public Story(int user_id, String content, int result, LocalDateTime created_date){
-        this.user_id = user_id;
+    public Story(int userId, String content, int result, LocalDateTime createdDate){
+        this.userId = userId;
         this.content = content;
         this.result = result;
-        this.created_date = created_date;
+        this.createdDate = createdDate;
     }
 }

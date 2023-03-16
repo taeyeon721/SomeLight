@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -16,8 +17,9 @@ import javax.persistence.*;
 public class Vote {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int vote_id;
-    private int user_id;
-    private int story_id;
+    private int voteId;
+    private int userId;
+    private int storyId;
+    @ColumnDefault("N")
     private boolean isRed;
 }

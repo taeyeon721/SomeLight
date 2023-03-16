@@ -35,7 +35,7 @@ public class UserController {
         if (authentication != null) {
             email = (String) authentication.getCredentials();
             user = userservice.getUserId(email);
-            user_stories = communityService.getUserStories(user.getUser_id());
+            user_stories = communityService.getUserStories(user.getUserId());
         }
         UserInfoResponse res = UserInfoResponse.of(user_stories, user);
         return new ResponseEntity<>(res, HttpStatus.OK);

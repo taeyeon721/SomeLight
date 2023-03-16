@@ -13,6 +13,7 @@ import java.util.List;
 public class CommunityServiceImpl implements CommunityService{
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private CommunityRepository communityRepository;
 
@@ -22,13 +23,13 @@ public class CommunityServiceImpl implements CommunityService{
     }
 
     public Story registerStory(String email, String content, int result){
-        int user_id = userRepository.findByEmail(email).get().getUser_id();
+        int userId = userRepository.findByEmail(email).get().getUserId();
         LocalDateTime created_date = LocalDateTime.now();
         Story story = Story.builder()
-                .user_id(user_id)
+                .userId(userId)
                 .content(content)
                 .result(result)
-                .created_date(created_date)
+                .createdDate(created_date)
                 .build();
         communityRepository.save(story);
         return story;

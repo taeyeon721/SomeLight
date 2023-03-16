@@ -12,5 +12,5 @@ import java.util.Optional;
 @EnableJpaRepositories
 public interface CommunityRepository extends JpaRepository<Story, Integer> {
 
-    Optional <List<Story>> getStoriesByUserId(int user_id);
+    Optional <List<Story>> getStoriesByUserId(int userId);
 }
