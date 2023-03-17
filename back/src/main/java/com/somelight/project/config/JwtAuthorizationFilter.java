@@ -96,7 +96,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
             if (!nickname.equals("null") && !email.equals("null")) {
 
-                // UsernamePasswordAuthenticationToken (getPrincipal(보통 username), getCredentials(보통 password))
                 UsernamePasswordAuthenticationToken jwtAuthentication = new UsernamePasswordAuthenticationToken(
                         nickname, email);
                 jwtAuthentication.setDetails(new User());

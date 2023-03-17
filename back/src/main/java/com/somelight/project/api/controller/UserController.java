@@ -1,50 +1,48 @@
 package com.somelight.project.api.controller;
 
-import com.somelight.project.api.service.ArticleService;
+import com.somelight.project.api.response.UserInfoResponse;
+import com.somelight.project.api.service.CommunityService;
 import com.somelight.project.api.service.UserService;
-import com.somelight.project.db.enitity.Article;
+import com.somelight.project.db.enitity.Story;
 import com.somelight.project.db.enitity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.data.domain.Pageable;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
     private UserService userService;
-    @Autowired
-    private ArticleService articleService;
+    private CommunityService communityService;
 
     @Autowired
-    public UserController(UserService userService, ArticleService articleService) {
+    public UserController(UserService userService, CommunityService communityService) {
         this.userService = userService;
-        this.articleService = articleService;
+        this.communityService = communityService;
     }
+
 
     @GetMapping()
-    public ResponseEntity<List<Article>> getUserArticles(Authentication authentication,
-                                                        @RequestParam(value = "page", defaultValue = "0") int page) {
-        String email = (String) authentication.getCredentials();
-        int userId = userService.getUserId(email);
-        Pageable pageable = PageRequest.of(page-1, 15);
-        List<Article> userStories = userService.getUserArticles(userId, pageable);
-        return new ResponseEntity<>(userStories, HttpStatus.OK);
-    }
-
-    @GetMapping("/info")
-    public ResponseEntity<User> getUserInfo (Authentication authentication) {
-        String email = (String) authentication.getCredentials();
-        String nickname = (String) authentication.getPrincipal();
-
-        User res = new User(email,nickname);
+    public ResponseEntity<UserInfoResponse> getUserInfo (@Nullable Authentication authentication) {
+        String email = null;
+        User user = null;
+        List<Story> user_stories = new ArrayList<>();
+        if (authentication != null) {
+            email = (String) authentication.getCredentials();
+            user = userService.getUserId(email);
+            user_stories = communityService.getUserStories(user.getUserId());
+        }
+        UserInfoResponse res = UserInfoResponse.of(user_stories, user);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }

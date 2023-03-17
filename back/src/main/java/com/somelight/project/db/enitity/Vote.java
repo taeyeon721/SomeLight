@@ -19,6 +19,7 @@ public class Vote {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int voteId;
     private int userId;
-    private int articleId;
+    private int storyId;
+
     private boolean isRed;
 }
