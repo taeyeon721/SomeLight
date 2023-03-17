@@ -1,5 +1,6 @@
 <template>
   <div id="minaWrapper"></div>
+  
 </template>
 
 <script>
