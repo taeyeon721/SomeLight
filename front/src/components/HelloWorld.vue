@@ -1,6 +1,14 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <a
+      href="https://kauth.kakao.com/oauth/authorize?client_id=1ff9c0d8399e2993bcc0f81a9c899269&redirect_uri=https://i8a109.p.ssafy.io/kakao&response_type=code"
+    >
+      <!-- <a
+      href="https://kauth.kakao.com/oauth/authorize?client_id=8147c85395148371709b2199642f9108&redirect_uri=http://localhost:3000/kakao&response_type=code"
+    >
+      카카오 -->
+    </a>
     <p>
       For a guide and recipes on how to configure / customize this project,<br />
       check out the
@@ -103,10 +111,30 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "HelloWorld",
   props: {
     msg: String,
+  },
+  setup() {
+    const login = () => {
+      console.log("감자");
+      axios({
+        method: "get",
+        url: `http://localhost:8080/login/kakao`,
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log("실패");
+          console.log(err);
+        });
+    };
+
+    return { login };
   },
 };
 </script>
