@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public interface ArticleService {
-    Article registerStory(String email, String content, int result);
+    Article createArticle(int userId, String content);
 }

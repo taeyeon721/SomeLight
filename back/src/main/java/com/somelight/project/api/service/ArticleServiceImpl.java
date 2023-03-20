@@ -17,16 +17,19 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleRepository articleRepository;
 
-    public Article registerStory(String email, String content, int result){
-        int userId = userRepository.findByEmail(email).get().getUserId();
+    public Article createArticle(int userId, String content /*, int result */){
         LocalDateTime created_date = LocalDateTime.now();
-        Article story = Article.builder()
+        Article article = Article.builder()
                 .userId(userId)
                 .content(content)
-                .result(result)
+                .isChanged(false)
+                .result((int) (Math.random()*3))
+                // .result(result)
+                .isExposure(false)
                 .createdDate(created_date)
                 .build();
-        articleRepository.save(story);
-        return story;
+        articleRepository.save(article);
+        return article;
     }
+
 }
