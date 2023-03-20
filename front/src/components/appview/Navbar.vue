@@ -7,11 +7,8 @@
     </div>
     <div id="itemWrapper">
       <ul>
-        <!-- 로그인일 경우 -->
-        <!-- <li>LOGOUT</li> -->
-        <!-- 로그아웃일 경우 -->
+        <!-- 메인화면일경우 -->
         <li>START</li>
-        <li>COMMUNITY</li>
       </ul>
     </div>
   </div>
@@ -29,6 +26,7 @@ export default {
   position: fixed;
   top: 0px;
   display: flex;
+  background-color: rgba(255, 255, 255, 50%);
 }
 
 #logoWrapper {
@@ -49,7 +47,7 @@ export default {
 
 #itemWrapper {
   height: 100%;
-  margin-left: 45vw;
+  margin-left: 55vw;
 }
 ul {
   height: 100%;

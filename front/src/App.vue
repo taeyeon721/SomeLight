@@ -4,7 +4,8 @@
 </template>
 
 <script lang="ts">
-import Navbar from "@/components/appview/Navbar.vue";
+import Navbar from "@/components/appView/Navbar.vue";
+// import Navbar from "@/components/appView/Navbar.vue";
 
 export default {
   components: {
