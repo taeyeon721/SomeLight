@@ -10,7 +10,7 @@
     >
       카카오 -->
     <a
-      href="https://kauth.kakao.com/oauth/authorize?client_id=8147c85395148371709b2199642f9108&redirect_uri=http://j8a109.p.ssafy.io/kakao&response_type=code"
+      href="https://kauth.kakao.com/oauth/authorize?client_id=8147c85395148371709b2199642f9108&redirect_uri=https://j8a109.p.ssafy.io/kakao&response_type=code"
     >
       카카오2
     </a>
