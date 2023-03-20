@@ -1,7 +1,6 @@
 package com.somelight.project.db.repository;
 
-import com.somelight.project.db.enitity.Story;
-import lombok.NonNull;
+import com.somelight.project.db.enitity.Article;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,10 +12,7 @@ import java.util.Optional;
 
 @Repository
 @EnableJpaRepositories
-public interface CommunityRepository extends JpaRepository<Story, Integer> {
-
-    Optional <List<Story>> getStoriesByUserId(int userId);
-
-
-    Page<Story> findAll(Pageable pageable);
+public interface ArticleRepository extends JpaRepository<Article, Integer> {
+    Page<Article> findAll(Pageable pageable);
+    List<Article> findAllByUserId(int userId, Pageable pageable);
 }

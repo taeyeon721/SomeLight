@@ -23,8 +23,6 @@ public class User {
     private int userId;
     private String email;
     private String nickname;
-    private String AccessToken;
-    private String RefreshToken;
 
     @Builder
     public User(String email, String nickname)
