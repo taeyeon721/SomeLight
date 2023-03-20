@@ -30,7 +30,7 @@
         id="kakaobtn" 
         v-on:click="kakaoLogin"
         >
-        <img src="src\assets\img\main\kakaoImg.png">
+        <img src="../../../src/assets/img/main/kakaoImg.png" width="30" height="30">
         카카오톡 로그인
       </button>
     </div>

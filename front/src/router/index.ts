@@ -11,6 +11,21 @@ const routes = [
     name:"login",
     component: () => import("../views/LoginView.vue")
   },
+  {
+    path:"/mypage",
+    name:"mypage",
+    component: () => import("../views/MypageView.vue")
+  },
+  {
+    path:"/community",
+    name:"community",
+    component: () => import("../views/CommunityView.vue")
+  },
+  {
+    path:"/community/:story_id",
+    name:"communitydetail",
+    component: () => import("../views/CommunityDetailView.vue")
+  },
 ];
 
 const router = createRouter({
