@@ -4,8 +4,7 @@
 </template>
 
 <script lang="ts">
-import Navbar from "@/components/appView/Navbar.vue";
-// import Navbar from "@/components/appView/Navbar.vue";
+import Navbar from "@/components/appview/Navbar.vue";
 
 export default {
   components: {
@@ -18,7 +17,7 @@ export default {
 @import "@/assets/css/reset.css";
 /* 너비 체크용 */
 div {
-  box-shadow: 0 0 0 1px #f00 inset;
+  /* box-shadow: 0 0 0 1px #f00 inset; */
 }
 
 .font {
