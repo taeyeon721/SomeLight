@@ -30,7 +30,7 @@ export default {
       // console.log(code);
       axios({
         method: "get",
-        url: `http://j8a109.p.ssafy.io:8080/login/kakao?code=${code}`,
+        url: `https://j8a109.p.ssafy.io:8080/login/kakao?code=${code}`,
       })
         .then((res) => {
           console.log(res);
