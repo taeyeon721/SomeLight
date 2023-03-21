@@ -24,6 +24,18 @@ public class ArticleServiceImpl implements ArticleService {
         return articles;
     }
 
+//    public List<Article> getUserArticles(int userId, Pageable pageable){
+//        List<Article> articles = null;
+//        articles = articleRepository.findAllByUserId(userId, pageable);
+//        return articles;
+//    }
+    @Override
+    public Article getArticleByArticleId(int articleId) {
+        Article article = null;
+        article = articleRepository.findByArticleId(articleId);
+        return article;
+    }
+
     public Article registerStory(String email, String content, int result){
         int userId = userRepository.findByEmail(email).get().getUserId();
         LocalDateTime created_date = LocalDateTime.now();

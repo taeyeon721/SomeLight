@@ -9,5 +9,6 @@ import java.util.List;
 @Service
 public interface ArticleService {
     Page<Article> findArticles(Pageable pageable);
+    Article getArticleByArticleId(int articleId);
     Article registerStory(String email, String content, int result);
 }

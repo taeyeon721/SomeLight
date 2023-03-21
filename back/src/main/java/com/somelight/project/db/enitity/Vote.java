@@ -21,4 +21,11 @@ public class Vote {
     private int userId;
     private int articleId;
     private boolean isRed;
+
+    @Builder
+    public  Vote(int userId, int articleId, boolean isRed) {
+        this.userId = userId;
+        this.articleId = articleId;
+        this.isRed = isRed;
+    }
 }

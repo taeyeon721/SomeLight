@@ -24,12 +24,25 @@ public class Article {
     private boolean isChanged;
     private LocalDateTime createdDate;
     private boolean isExposure;
+    private int redCount;
+    private int greenCount;
 
     @Builder
-    public Article(int userId, String content, int result, LocalDateTime createdDate){
+    public Article(int userId, String content, int result, boolean isChanged, LocalDateTime createdDate, boolean isExposure, int redCount, int greenCount){
         this.userId = userId;
         this.content = content;
         this.result = result;
+        this.isChanged = isChanged;
         this.createdDate = createdDate;
+        this.isExposure = isExposure;
+        this.redCount = redCount;
+        this.greenCount = greenCount;
     }
+
+//    public double getRedRatio() {
+//        return (double)redCount / (greenCount + redCount) * 100;
+//    }
+//    public double getGreenRatio() {
+//        return (double)greenCount / (greenCount + redCount);
+//    }
 }
