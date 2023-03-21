@@ -29,8 +29,11 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	// spring-security
+	implementation 'org.springframework.security:spring-security-oauth2-client:5.7.5'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	testImplementation 'org.springframework.security:spring-security-test'
+
+
 
 	// MariaDB
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.0'

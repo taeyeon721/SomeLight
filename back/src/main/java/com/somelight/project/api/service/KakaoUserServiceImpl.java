@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.somelight.project.db.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +20,12 @@ public class KakaoUserServiceImpl implements KakaoUserService {
 
     @Autowired
     private UserRepository userRepository;
-
-
-    /*
-     * 인가코드(code)를 받으면 AccessToken + ID Token을 발급
-     * */
+    @Value("${clientId}")
+    private String clientId;
+    @Value("${clientSecret}")
+    private String clientSecret;
+    @Value("${redirectUri}")
+    private String redirectUri;
 
     public HashMap<String, Object> getKakaoAccessToken(String code) {
         String access_Token = "";
@@ -45,9 +47,10 @@ public class KakaoUserServiceImpl implements KakaoUserService {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
-            sb.append("&client_id=8147c85395148371709b2199642f9108"); // TODO REST_API_KEY 입력
-            sb.append("&redirect_uri=http://localhost:8080/login/kakao");
+            sb.append("&client_id=" + clientId); // TODO REST_API_KEY 입력
+            sb.append("&redirect_uri=" + redirectUri);
             sb.append("&code=" + code);
+            sb.append("&client_secret=" + clientSecret);
             bw.write(sb.toString());
             bw.flush();
 
@@ -70,12 +73,8 @@ public class KakaoUserServiceImpl implements KakaoUserService {
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result);
 
-            access_Token = element.getAsJsonObject().get("access_token").getAsString();
-            refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
             id_Token = element.getAsJsonObject().get("id_token").getAsString();
 
-            tokenInfo.put(("access_token"), access_Token);
-            tokenInfo.put(("refresh_token"),refresh_Token);
             tokenInfo.put(("id_token"), id_Token);
 
             br.close();
