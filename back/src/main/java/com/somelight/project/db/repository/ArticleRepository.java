@@ -16,4 +16,5 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
     Page<Article> findAll(Pageable pageable);
     Article findByArticleId(int articleId);
     List<Article> findAllByUserId(int userId, Pageable pageable);
+    Page<Article> findAll(Pageable pageable);
 }
