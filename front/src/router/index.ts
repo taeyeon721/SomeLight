@@ -16,6 +16,31 @@ const routes = [
     name: "storyCreate",
     component: () => import("../views/StoryCreateView.vue"),
   },
+  {
+    path: "/kakao",
+    name: "kakao",
+    component: () => import( "../views/kakaoView.vue"),
+  },
+
+  {
+    path:"/mypage",
+    name:"mypage",
+    component: () => import("../views/MypageView.vue")
+  },
+  {
+    path:"/community",
+    name:"community",
+    component: () => import("../views/CommunityView.vue")
+  },
+  {
+    path:"/community/:story_id",
+    name:"communitydetail",
+    component: () => import("../views/CommunityDetailView.vue")
+  },
+  {
+    path:"/login/oauth2/code/kakao",
+    component:()=>import("../views/Redirect.vue")
+  },
 ];
 
 const router = createRouter({
