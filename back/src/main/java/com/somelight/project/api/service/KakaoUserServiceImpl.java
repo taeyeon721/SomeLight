@@ -41,14 +41,19 @@ public class KakaoUserServiceImpl implements KakaoUserService {
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
 
+            //Content-Type 헤더 설정
+            //conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
             //POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=8147c85395148371709b2199642f9108"); // TODO REST_API_KEY 입력
 //            sb.append("&redirect_uri=http://localhost:8080/login/kakao");
-            sb.append("&redirect_uri=https://j8a109.p.ssafy.io:8080/login/kakao");
+//            sb.append("&redirect_uri=http://localhost:8081/kakao");
+            sb.append("&redirect_uri=https://j8a109.p.ssafy.io/kakao");
             sb.append("&code=" + code);
+            sb.append("&client_secret=eDlEMx37ioqJCap8H6Iv2LTrzgKeByav");
             bw.write(sb.toString());
             bw.flush();
 

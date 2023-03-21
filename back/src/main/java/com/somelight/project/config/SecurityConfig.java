@@ -24,7 +24,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.userService = userService;
     }
 
-
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
@@ -35,7 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(),
                         userService)); //인증필터 거쳐야함, 유효성 검사 Filter
-
 
         /*
          * authorizeRequests()이 인가에 대한 부분이고 formLogin, OAuthLogin 이게 인증에 대한 부분인데
