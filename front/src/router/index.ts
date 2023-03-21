@@ -12,6 +12,12 @@ const routes = [
     component: () => import("../views/LoginView.vue")
   },
   {
+    path: "/kakao",
+    name: "kakao",
+    component: () => import( "../views/kakaoView.vue"),
+  },
+
+  {
     path:"/mypage",
     name:"mypage",
     component: () => import("../views/MypageView.vue")
@@ -25,6 +31,10 @@ const routes = [
     path:"/community/:story_id",
     name:"communitydetail",
     component: () => import("../views/CommunityDetailView.vue")
+  },
+  {
+    path:"/login/oauth2/code/kakao",
+    component:()=>import("../views/Redirect.vue")
   },
 ];
 
