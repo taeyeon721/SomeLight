@@ -31,7 +31,8 @@ public class ResultController {
         if (authentication != null) email = (String) authentication.getCredentials();
         int userId = userService.getUserId(email);
         //int result = null;
-        Article article = articleService.createArticle(userId, content/*, result */);
+        //Article article = articleService.createArticle(userId, content/*, result */);
+        Article article = null;
         ResultResponse res = ResultResponse.of(article, keyword, null, null, null, null);
         if (article.getResult() == 2)
         {
