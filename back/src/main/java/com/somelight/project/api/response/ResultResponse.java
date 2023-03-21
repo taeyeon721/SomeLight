@@ -32,5 +32,4 @@ public class ResultResponse {
         return res;
     }
 
-
 }

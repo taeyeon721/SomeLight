@@ -2,6 +2,7 @@ package com.somelight.project.api.controller;
 
 import com.somelight.project.api.request.KeywordRequest;
 import com.somelight.project.api.response.ResultResponse;
+import com.somelight.project.api.service.ApiService;
 import com.somelight.project.api.service.ArticleService;
 import com.somelight.project.api.service.UserService;
 import com.somelight.project.db.enitity.Article;
@@ -18,10 +19,9 @@ import static com.somelight.project.api.response.ResultResponse.*;
 @RestController
 @RequestMapping("/result")
 public class ResultController {
-
     private UserService userService;
-
     private ArticleService articleService;
+    private ApiService apiService;
 
     @PostMapping()
     public ResponseEntity<ResultResponse> registerArticle(@Nullable Authentication authentication,
@@ -37,7 +37,7 @@ public class ResultController {
         {
 
         }
-        else if (article.getResult() == 1)
+        else if (article.getResult() == 0)
         {
 
         }

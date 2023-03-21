@@ -31,7 +31,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             "https://kauth.kakao.com").cached(10, 7, TimeUnit.DAYS) // 7일간 최대 10개 캐시
             .build();
 
-
     private UserService userService;
 
     public JwtAuthorizationFilter(AuthenticationManager authenticationManager,
