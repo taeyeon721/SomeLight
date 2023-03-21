@@ -14,9 +14,9 @@ public class VoteServiceImpl implements VoteService{
         this.voteRepository = voteRepository;
     }
 
+    @Override
     public Vote getVoteByArticleIdAndUserId(int articleId, int userId) {
-        Vote vote = null;
-        vote = voteRepository.findByArticleIdAndUserId(articleId, userId);
+        Vote vote = voteRepository.findByArticleIdAndUserId(articleId, userId).orElse(null);
         return vote;
     }
 }

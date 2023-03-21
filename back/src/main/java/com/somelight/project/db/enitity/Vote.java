@@ -20,12 +20,12 @@ public class Vote {
     private int voteId;
     private int userId;
     private int articleId;
-    private boolean isRed;
+    private int voteResult;
 
     @Builder
-    public  Vote(int userId, int articleId, boolean isRed) {
+    public  Vote(int userId, int articleId, int voteResult) {
         this.userId = userId;
         this.articleId = articleId;
-        this.isRed = isRed;
+        this.voteResult = voteResult;
     }
 }

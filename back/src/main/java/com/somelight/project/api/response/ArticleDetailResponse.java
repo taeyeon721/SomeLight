@@ -20,18 +20,9 @@ public class ArticleDetailResponse {
     boolean isExposure;
     double redPercent;
     double greenPercent;
-    boolean isRed;
+    int voteResult;
 
-    public static ArticleDetailResponse of(Article article, Vote vote) {
-        int redCount;
-        int greenCount;
-        double redRatio;
-        double greenRatio;
-        redCount = article.getRedCount();
-        greenCount = article.getGreenCount();
-        redRatio = (double)redCount / (greenCount + redCount) * 100;
-        greenRatio = (double)greenCount / (greenCount + redCount);
-
+    public static ArticleDetailResponse of(Article article, Vote vote, double redPercent, double greenPercent) {
 
         ArticleDetailResponse res = ArticleDetailResponse.builder()
                 .articleId(article.getArticleId())
@@ -40,9 +31,9 @@ public class ArticleDetailResponse {
                 .isChanged(article.isChanged())
                 .createdDate(article.getCreatedDate())
                 .isExposure(article.isExposure())
-                .redPercent(redRatio)
-                .greenPercent(greenRatio)
-                .isRed(vote.isRed())
+                .redPercent(redPercent)
+                .greenPercent(greenPercent)
+                .voteResult(vote.getVoteResult())
                 .build();
         return res;
 
