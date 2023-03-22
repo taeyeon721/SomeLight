@@ -10,4 +10,6 @@ public class ResultServiceImpl implements ResultService{
     @Autowired
     private ArticleRepository articleRepository;
 
+
+
 }

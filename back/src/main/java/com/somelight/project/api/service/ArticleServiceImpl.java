@@ -36,17 +36,18 @@ public class ArticleServiceImpl implements ArticleService {
         return article;
     }
 
-    public Article registerStory(String email, String content, int result){
-        int userId = userRepository.findByEmail(email).get().getUserId();
-        LocalDateTime created_date = LocalDateTime.now();
+    @Override
+    public Article createArticle(int userId, String content, int result) {
+        LocalDateTime nowDate = LocalDateTime.now();
         Article article = Article.builder()
                 .userId(userId)
                 .content(content)
+                .result(result)
                 .isChanged(false)
-                .result((int) (Math.random()*3))
-                // .result(result)
+                .createdDate(nowDate)
                 .isExposure(false)
-                .createdDate(created_date)
+                .redCount(0)
+                .greenCount(0)
                 .build();
         articleRepository.save(article);
         return article;

@@ -26,17 +26,18 @@ public class ResultController {
     @PostMapping()
     public ResponseEntity<ResultResponse> registerArticle(@Nullable Authentication authentication,
                                                           @RequestPart(value = "content") String content,
+                                                          @RequestPart(value = "result") int result,
                                                           @RequestPart(value = "keyword") List<KeywordRequest> keyword){
-        String email = null;
-        if (authentication != null) email = (String) authentication.getCredentials();
-        int userId = userService.getUserId(email);
-        //int result = null;
-        //Article article = articleService.createArticle(userId, content/*, result */);
-        Article article = null;
+        int userId = 0;
+        if (authentication != null) {
+            String email = (String) authentication.getCredentials();
+            userId = userService.getUserId(email);
+        }
+        Article article = articleService.createArticle(userId, content, result);
         ResultResponse res = ResultResponse.of(article, keyword, null, null, null, null);
         if (article.getResult() == 2)
         {
-
+            
         }
         else if (article.getResult() == 0)
         {

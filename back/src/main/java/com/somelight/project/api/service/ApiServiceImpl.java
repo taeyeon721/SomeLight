@@ -21,18 +21,25 @@ public class ApiServiceImpl implements ApiService{
     @Value("${naver.movieUrl}")
     private String movieUrl;
 
-    public MovieResponse requestMovie(int result, List<KeywordRequest> keyword) {
+    public MovieResponse requestMovie(int result, List<KeywordRequest> keywordlist) {
         final HttpHeaders headers = new HttpHeaders();
         headers.set("X-Naver-Client-Id", clientId);
         headers.set("X-Naver-Client-Secret", clientSecret);
+        final HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        String searchWord = null;
         Comparator<KeywordRequest> comparator = new Comparator<KeywordRequest>() {
             @Override
             public int compare(KeywordRequest A, KeywordRequest B) {
                 return B.getCnt() - A.getCnt();
             }
         };
-        Collections.sort(keyword, comparator);
-        final HttpEntity<String> entity = new HttpEntity<>(headers);
+        if (keywordlist != null)
+        {
+            Collections.sort(keywordlist, comparator);
+            searchWord = keywordlist.get(0).getKeyword();
+        }
+
         return null;
     }
 
