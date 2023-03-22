@@ -20,12 +20,7 @@ public class Movie {
     @Id
     private int movieId;
     private int result;
-    private Item[] items;
-    @Data
-    static class Item {
-        public String title;
-        public String link;
-        public String image;
-        public String subtitle;
-    }
+    private String title;
+    private String movieImage;
+
 }

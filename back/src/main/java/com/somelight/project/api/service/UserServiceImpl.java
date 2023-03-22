@@ -6,7 +6,6 @@ import com.somelight.project.db.repository.ArticleRepository;
 import com.somelight.project.db.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +26,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public List<Article> getUserArticles(int userId, Pageable pageable){
-        List<Article> articles = null;
+    public Page<Article> getUserArticles(int userId, Pageable pageable){
+        Page<Article> articles = null;
         articles = articleRepository.findAllByUserId(userId, pageable);
         return articles;
     }

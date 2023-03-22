@@ -13,7 +13,9 @@ import java.util.Optional;
 @Repository
 @EnableJpaRepositories
 public interface ArticleRepository extends JpaRepository<Article, Integer> {
+
     Optional<Article> findByArticleId(int articleId);
-    List<Article> findAllByUserId(int userId, Pageable pageable);
+    Page<Article> findAllByUserId(int userId, Pageable pageable);
     Page<Article> findAll(Pageable pageable);
+
 }
