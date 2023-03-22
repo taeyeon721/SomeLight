@@ -74,12 +74,9 @@ public class ArticleController {
 
         }
         String email = null;
-        int userId;
+        int userId = 0;
         if (email != null) {
             userId = userService.getUserId(email);
-        } else {
-        //  임시방편
-            userId = 0;
         }
         Vote vote = voteService.getVoteByArticleIdAndUserId(articleId, userId);
 
