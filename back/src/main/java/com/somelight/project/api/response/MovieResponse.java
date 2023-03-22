@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Data
 public class MovieResponse {
-    private int dispaly;
+    private int display;
     private Item[] items;
     @Data
     static class Item {

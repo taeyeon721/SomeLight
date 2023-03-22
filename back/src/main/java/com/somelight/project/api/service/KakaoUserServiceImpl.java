@@ -15,11 +15,7 @@ import java.util.Base64;
 import java.util.HashMap;
 
 @Service
-@AllArgsConstructor
 public class KakaoUserServiceImpl implements KakaoUserService {
-
-    @Autowired
-    private UserRepository userRepository;
     @Value("${clientId}")
     private String clientId;
     @Value("${clientSecret}")
@@ -28,8 +24,6 @@ public class KakaoUserServiceImpl implements KakaoUserService {
     private String redirectUri;
 
     public HashMap<String, Object> getKakaoAccessToken(String code) {
-        String access_Token = "";
-        String refresh_Token = "";
         String id_Token = "";
         String reqURL = "https://kauth.kakao.com/oauth/token";
 
@@ -54,6 +48,7 @@ public class KakaoUserServiceImpl implements KakaoUserService {
             bw.write(sb.toString());
             bw.flush();
 
+            System.out.println(sb);
             //결과 코드가 200이라면 성공
             int responseCode = conn.getResponseCode();
             System.out.println("responseCode : " + responseCode);
