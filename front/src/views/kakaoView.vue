@@ -1,5 +1,5 @@
 <template>
-  <div>카카오 로그인2</div>
+  <div>카카오 로그인3</div>
 </template>
 
 <script>
