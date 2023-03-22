@@ -13,4 +13,5 @@ public interface ArticleService {
 
     Article createArticle(int userId, String content, int result);
 
+    void deleteArticle(int articleId);
 }

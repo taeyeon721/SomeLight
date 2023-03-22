@@ -3,7 +3,6 @@ package com.somelight.project.api.service;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.somelight.project.db.repository.UserRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,6 @@ import java.util.Base64;
 import java.util.HashMap;
 
 @Service
-@AllArgsConstructor
 public class KakaoUserServiceImpl implements KakaoUserService {
 
     @Autowired

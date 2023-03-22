@@ -50,6 +50,7 @@ public class ArticleController {
 //        return new ResponseEntity<>(res, HttpStatus.ACCEPTED);
 //    }
 
+    @CrossOrigin("*")
     @GetMapping()
     public ResponseEntity<Page<Article>> getArticleList(@RequestParam(required = false, defaultValue = "1", value = "page") int pageNo) {
         Pageable pageable = PageRequest.of(pageNo-1, 15);
@@ -57,6 +58,7 @@ public class ArticleController {
         return new ResponseEntity<>(articles, HttpStatus.OK);
     }
 
+    @CrossOrigin("*")
     @GetMapping("/{articleId}")
     public ResponseEntity<?> getArticleDetail(@PathVariable("articleId") int articleId) {
         Article article = articleService.getArticleByArticleId(articleId);
@@ -90,21 +92,22 @@ public class ArticleController {
         }
     }
 
-//    @DeleteMapping("/{articleId}")
-//    public ResponseEntity<?> deleteArticle(@PathVariable("articleId") int articleId) {
-////        String userEmail = (String) authentication.getCredentials();
-//        String email = "garong1997@naver.com";
-//        int userId;
-//        if (email != null) {
-//            userId = userService.getUserId(email);
-//        } else {
-//            userId = 0;
-//        }
-//        Article article = articleService.getArticleByArticleId(articleId);
-//        if (userId != article.getArticleId())
-//            return new ResponseEntity<>("수정할 권한이 없습니다.", HttpStatus.BAD_REQUEST);
-//        articleService.deleteArticle(articleId);
-//        voteService.deleteVoteList(articleId);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
+    @CrossOrigin("*")
+    @DeleteMapping("/{articleId}")
+    public ResponseEntity<?> deleteArticle(@PathVariable("articleId") int articleId) {
+//        String userEmail = (String) authentication.getCredentials();
+        String email = "garong1997@naver.com";
+        int userId;
+        if (email != null) {
+            userId = userService.getUserId(email);
+        } else {
+            userId = 0;
+        }
+        Article article = articleService.getArticleByArticleId(articleId);
+        if (userId != article.getArticleId())
+            return new ResponseEntity<>("수정할 권한이 없습니다.", HttpStatus.BAD_REQUEST);
+        articleService.deleteArticle(articleId);
+        voteService.deleteVoteList(articleId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

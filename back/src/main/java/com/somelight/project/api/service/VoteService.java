@@ -6,4 +6,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface VoteService {
     Vote getVoteByArticleIdAndUserId(int articleId, int userId);
+    void deleteVoteList(int articleId);
 }
