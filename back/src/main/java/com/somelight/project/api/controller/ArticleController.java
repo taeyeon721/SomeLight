@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -61,7 +62,8 @@ public class ArticleController {
 
     @CrossOrigin("*")
     @GetMapping("/{articleId}")
-    public ResponseEntity<?> getArticleDetail(@PathVariable("articleId") int articleId) {
+    public ResponseEntity<?> getArticleDetail(@Nullable Authentication authentication,
+                                              @PathVariable("articleId") int articleId) {
         Article article = articleService.getArticleByArticleId(articleId);
         ArticleDetailResponse res = null;
         double redPercent;
@@ -76,9 +78,10 @@ public class ArticleController {
             greenPercent = (double)greenCnt / (greenCnt + redCnt) * 100;
 
         }
-        String email = null;
+
         int userId = 0;
-        if (email != null) {
+        if (authentication != null) {
+            String email = (String) authentication.getCredentials();
             userId = userService.getUserId(email);
         }
         Vote vote = voteService.getVoteByArticleIdAndUserId(articleId, userId);
@@ -93,17 +96,15 @@ public class ArticleController {
         }
     }
 
+
+
     @CrossOrigin("*")
     @DeleteMapping("/{articleId}")
-    public ResponseEntity<?> deleteArticle(@PathVariable("articleId") int articleId) {
-//        String userEmail = (String) authentication.getCredentials();
-        String email = "garong1997@naver.com";
+    public ResponseEntity<?> deleteArticle(Authentication authentication,
+                                           @PathVariable("articleId") int articleId) {
         int userId;
-        if (email != null) {
-            userId = userService.getUserId(email);
-        } else {
-            userId = 0;
-        }
+        String email = (String) authentication.getCredentials();
+        userId = userService.getUserId(email);
         Article article = articleService.getArticleByArticleId(articleId);
         if (userId != article.getArticleId())
             return new ResponseEntity<>("수정할 권한이 없습니다.", HttpStatus.BAD_REQUEST);
