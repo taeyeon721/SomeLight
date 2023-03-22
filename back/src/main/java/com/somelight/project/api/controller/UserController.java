@@ -28,7 +28,7 @@ public class UserController {
         this.userService = userService;
         this.articleService = articleService;
     }
-
+    @CrossOrigin("*")
     @GetMapping()
     public ResponseEntity<List<Article>> getUserArticles(Authentication authentication,
                                                         @RequestParam(value = "page", defaultValue = "0") int page) {
@@ -38,7 +38,7 @@ public class UserController {
         List<Article> userStories = userService.getUserArticles(userId, pageable);
         return new ResponseEntity<>(userStories, HttpStatus.OK);
     }
-
+    @CrossOrigin("*")
     @GetMapping("/info")
     public ResponseEntity<User> getUserInfo (Authentication authentication) {
         String email = (String) authentication.getCredentials();

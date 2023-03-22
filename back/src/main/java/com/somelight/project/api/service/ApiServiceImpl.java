@@ -6,6 +6,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
@@ -21,7 +22,7 @@ public class ApiServiceImpl implements ApiService{
     @Value("${naver.movieUrl}")
     private String movieUrl;
 
-    public MovieResponse requestMovie(int result, List<KeywordRequest> keywordlist) {
+    public MovieResponse requestMovie(int result, List<KeywordRequest> keywordlist, String content) {
         final HttpHeaders headers = new HttpHeaders();
         headers.set("X-Naver-Client-Id", clientId);
         headers.set("X-Naver-Client-Secret", clientSecret);

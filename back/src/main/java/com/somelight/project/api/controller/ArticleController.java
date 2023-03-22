@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/article")
+@CrossOrigin("*")
 public class ArticleController {
 
     @Autowired

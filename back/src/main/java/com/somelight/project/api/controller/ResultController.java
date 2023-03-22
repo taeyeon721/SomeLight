@@ -1,6 +1,7 @@
 package com.somelight.project.api.controller;
 
 import com.somelight.project.api.request.KeywordRequest;
+import com.somelight.project.api.response.MovieResponse;
 import com.somelight.project.api.response.ResultResponse;
 import com.somelight.project.api.service.ApiService;
 import com.somelight.project.api.service.ArticleService;
@@ -22,7 +23,7 @@ public class ResultController {
     private UserService userService;
     private ArticleService articleService;
     private ApiService apiService;
-
+    @CrossOrigin("*")
     @PostMapping()
     public ResponseEntity<ResultResponse> registerArticle(@Nullable Authentication authentication,
                                                           @RequestPart(value = "content") String content,
@@ -35,13 +36,10 @@ public class ResultController {
         }
         Article article = articleService.createArticle(userId, content, result);
         ResultResponse res = ResultResponse.of(article, keyword, null, null, null, null);
-        if (article.getResult() == 2)
+        if (article.getResult() != 1)
         {
-            
-        }
-        else if (article.getResult() == 0)
-        {
-
+            MovieResponse movieResponse = apiService.requestMovie(result, keyword, content);
+            //String title = movieResponse;
         }
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
