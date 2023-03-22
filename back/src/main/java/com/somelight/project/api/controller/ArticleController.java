@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -91,4 +92,22 @@ public class ArticleController {
                     .body(ArticleDetailResponse.of(article, vote, redPercent, greenPercent));
         }
     }
+
+//    @DeleteMapping("/{articleId}")
+//    public ResponseEntity<?> deleteArticle(@PathVariable("articleId") int articleId) {
+////        String userEmail = (String) authentication.getCredentials();
+//        String email = "garong1997@naver.com";
+//        int userId;
+//        if (email != null) {
+//            userId = userService.getUserId(email);
+//        } else {
+//            userId = 0;
+//        }
+//        Article article = articleService.getArticleByArticleId(articleId);
+//        if (userId != article.getArticleId())
+//            return new ResponseEntity<>("수정할 권한이 없습니다.", HttpStatus.BAD_REQUEST);
+//        articleService.deleteArticle(articleId);
+//        voteService.deleteVoteList(articleId);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 }
