@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,7 +34,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Article getArticleByArticleId(int articleId) {
         Article article = null;
-        article = articleRepository.findByArticleId(articleId);
+        article = articleRepository.findByArticleId(articleId).orElseThrow();
         return article;
     }
 
@@ -53,4 +55,10 @@ public class ArticleServiceImpl implements ArticleService {
         return article;
     }
 
+    @Override
+    @Transactional
+    public void deleteArticle(int articleId) {
+        Article article = articleRepository.findByArticleId(articleId).orElseThrow();
+        articleRepository.delete(article);
+    }
 }
