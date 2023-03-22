@@ -53,7 +53,7 @@ public class KakaoUserServiceImpl implements KakaoUserService {
 //            sb.append("&redirect_uri=http://localhost:8081/kakao");
             sb.append("&redirect_uri=https://j8a109.p.ssafy.io/kakao");
             sb.append("&code=" + code);
-            sb.append("&client_secret=eDlEMx37ioqJCap8H6Iv2LTrzgKeByav");
+            sb.append("&client_secret=hGt8M3JgE0sKlFwhJ8TfeDDmBvUqXYl8");
             bw.write(sb.toString());
             bw.flush();
 

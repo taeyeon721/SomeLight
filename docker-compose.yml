@@ -1,0 +1,59 @@
+# 안전상 3버전을 사용한다.
+version: "3.0"
+
+services:
+  mysql:
+    image: mariadb:10.3.38
+    container_name: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: somelight
+      MYSQL_ROOT_PASSWORD: ssafy
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ssafy
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/config:/etc/mysql/conf.d
+    privileged: true #컨테이너를 실행할 때 호스트 시스템의 커널 기능에 대한 완전한 액세스 권한을 부여하는 옵션
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    networks:
+      - bridge
+
+  front:
+    build: ./front
+    ports:
+      - "3000:3000"
+    volumes:
+      - /home/S08P22A109/front:/app
+
+  back:
+    build: ./back
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://mysql:3306/somelight?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true"
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: ssafy
+      #  SPRING_REDIS_HOST: "redis"
+      # 모든 요청을 허가하겠다.
+      server.address: 0.0.0.0
+    depends_on:
+      - mysql
+    networks:
+      - bridge
+
+#  레디스는 사용하지 않는다.
+#  redis:
+#   image: redis:6.2.4-alpine
+#   container_name: redis
+#   volumes:
+#    - ./redis/redis-data:/data
+#   ports:
+#    - "6379:6379"
+#   networks:
+#    - bridge
+
+networks:
+  bridge:
