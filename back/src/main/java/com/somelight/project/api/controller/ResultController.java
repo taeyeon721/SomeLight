@@ -1,7 +1,8 @@
 package com.somelight.project.api.controller;
 
 import com.somelight.project.api.request.KeywordRequest;
-import com.somelight.project.api.response.MovieResponse;
+import com.somelight.project.api.response.MovieOneResponse;
+import com.somelight.project.api.response.MovieResultResponse;
 import com.somelight.project.api.response.ResultResponse;
 import com.somelight.project.api.service.ApiService;
 import com.somelight.project.api.service.ArticleService;
@@ -14,8 +15,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import static com.somelight.project.api.response.ResultResponse.*;
 
 @RestController
 @RequestMapping("/result")
@@ -38,8 +37,9 @@ public class ResultController {
         ResultResponse res = ResultResponse.of(article, keyword, null, null, null, null);
         if (article.getResult() != 1)
         {
-            MovieResponse movieResponse = apiService.requestMovie(result, keyword, content);
-            //String title = movieResponse;
+            MovieOneResponse movieOneResponse = apiService.requestMovie(result, keyword, content);
+            String title = movieOneResponse.getTitle();
+            String movieUrl = movieOneResponse.getImage();
         }
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
