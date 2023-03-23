@@ -32,7 +32,7 @@ public class UserController {
     @CrossOrigin("*")
     @GetMapping()
     public ResponseEntity<Page<Article>> getUserArticles(Authentication authentication,
-                                                         @RequestParam(value = "page", defaultValue = "0") int page) {
+                                                         @RequestParam(value = "page", defaultValue = "1") int page) {
         String email = (String) authentication.getCredentials();
         int userId = userService.getUserId(email);
         Pageable pageable = PageRequest.of(page-1, 15);

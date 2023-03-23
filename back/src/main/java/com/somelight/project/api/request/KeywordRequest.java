@@ -1,17 +1,17 @@
 package com.somelight.project.api.request;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.repository.query.QueryLookupStrategy;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class KeywordRequest {
     String keyword;
     int cnt;
 
+    @Builder
     public static KeywordRequest of(String keyword, int cnt) {
         KeywordRequest res = KeywordRequest.builder()
                 .keyword(keyword)

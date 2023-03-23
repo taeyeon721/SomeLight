@@ -3,7 +3,6 @@ package com.somelight.project.db.enitity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Data
@@ -11,13 +10,14 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "movie")
-public class Movie {
+@Table(name = "book")
+public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int movieId;
+    private int bookId;
     private int result;
     private String title;
-    private String movieImage;
+    private String description;
+    private String bookImage;
 
 }

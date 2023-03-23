@@ -35,23 +35,6 @@ public class ArticleController {
         this.userService = userService;
     }
 
-//    @PostMapping()
-//    public ResponseEntity<?> registerContent(
-//            @Nullable Authentication authentication,
-//            CommunityResultRequest communityResultRequest) {
-//        CommunityResultResponse res = null;
-//        if (authentication != null) {
-//            String email = (String) authentication.getCredentials();
-//            Article article = articleService.registerStory(email, communityResultRequest.getContent(),
-//                    communityResultRequest.getResult());
-//        }
-//
-////        if (communityResultRequest.getResult() == 1) {
-////            return
-////        }
-//        return new ResponseEntity<>(res, HttpStatus.ACCEPTED);
-//    }
-
     @CrossOrigin("*")
     @GetMapping()
     public ResponseEntity<Page<Article>> getArticleList(@RequestParam(required = false, defaultValue = "1", value = "page") int pageNo) {
