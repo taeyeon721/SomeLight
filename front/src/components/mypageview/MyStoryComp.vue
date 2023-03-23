@@ -1,12 +1,15 @@
 <template>
   <div id="mystory">
-    <p id="mystorytitle">내가 쓴 사연</p>
-  
+    <div id="mystorytitle">내가 쓴 사연</div>
+    <my-story-list-comp />
   </div>
 </template>
 
 <script>
+import MyStoryListComp from './MyStoryListComp.vue'
+
 export default {
+  components: { MyStoryListComp },
 
 }
 </script>
@@ -14,8 +17,9 @@ export default {
 <style scoped>
 #mystory{
   width: 40vw;
-  height: 55vh;
+  height: 70vh;
   border-radius: 20px;
+  color:#4D455D;
   background-color: #F5E9CF;
   opacity: 0.85;
   display: flex;
@@ -28,6 +32,8 @@ export default {
   font-size:30px;
   font-weight: bold;
   color: #4D455D;
+  text-align: center;
 }
+
 
 </style>

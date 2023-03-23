@@ -1,5 +1,5 @@
 <template>
-  <div id="commulist">
+  <div id="mystorylist">
     <table id="commutable">
       <thead>
         <th id="area1">No.</th>
@@ -35,7 +35,7 @@
   <div id="page" 
   style="
   position:absolute;
-  padding-top:29.5%;"
+  padding-top:29%;"
   >
   <button v-on:click="prevPage">prev</button>
   <span v-for="p in totalpage" v-bind:key="p">
@@ -54,27 +54,33 @@
 <script>
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080"
+const BASE_URL ="http://localhost:8080"
 
 export default {
-  data(){
+    data(){
     return{
-      page:1, // 페이지네이션 초기값
       articles:[],
       totalpage:1,
+      page:1,
     }
   },
   methods:{
-    getAllArticle(){
+    getArticle(){
       axios({
         method:"get",
-        url: `${BASE_URL}/article`,
+        url:`${BASE_URL}/user`,
+        headers:{
+          Authorization:`Bearer ${sessionStorage.getItem("token")}`
+        },
         params:{
           "page":this.page,
         }
+
       })
       .then((res)=>{
         this.articles = []
+        console.log(res.data)
+        console.log(this.page)
         for (let i = 0 ; i<res.data.numberOfElements; i++){
           this.articles.push(res.data.content[i])
         }
@@ -87,18 +93,18 @@ export default {
     prevPage(){
       if (this.page >= 1){
         this.page -= 1
-        this.getAllArticle()
+        this.getArticle()
       }
     },
     nextPage(){
       if (this.page < this.totalpage){
         this.page += 1
-        this.getAllArticle()
+        this.getArticle()
       }
     },
     changePage(p){
       this.page = p
-      this.getAllArticle()
+      this.getArticle()
     },
     goDetail(pk){
       axios({
@@ -112,26 +118,25 @@ export default {
       .catch((err)=>{
         console.log(err)
       })
-    }
+    },
   },
   created(){
-    this.getAllArticle()
+    this.getArticle()
   }
+
+
 }
 </script>
 
 <style scoped>
-#commulist{
-    width: 42vw;
+#mystorylist{
+    width: 30vw;
     height: 70vh;
-    background-color: white;
-    color: #4D455D;
-    opacity: 0.4;
-    border-radius: 20px;
-    box-shadow: 3px 3px 3px gray;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     flex-direction: column;
+    margin-left: 5vw;
 }
 
 #commutable{
@@ -141,16 +146,16 @@ export default {
 }
 
 thead{
-  font-size: 25px;
+  font-size: 20px;
   font-weight: bold;
   text-align: center;
 }
 tbody{
-  font-size: 20px;
+  font-size: 15px;
 }
 
 #area1, #area3{
-  width:5vw;
+  width:10vw;
   text-align: center;
 }
 #area2{
@@ -159,7 +164,7 @@ tbody{
 }
 
 button{
-  font-size: 23px;
+  font-size: 20px;
   border: 0px solid black;
   background-color:transparent ;
 }

@@ -1,13 +1,70 @@
 <template>
   <div id="myinfo">
-    <h1 id="username">NICKNAME</h1>
+    <h1 id="username">{{ nickname }}</h1>
     <p id="userdelete">회원탈퇴</p>
   </div>
 </template>
 
 <script>
-export default {
+import axios from "axios";
+// import { reactive } from 'vue';
 
+export default {
+  // props:{
+  //   nickname: String,
+  // },
+  data(){
+    return{
+      nickname:"",
+    }
+  },
+  setup(){
+    // const state = reactive({ nickname:"" })
+
+    // const info = () => {
+    //   axios({
+    //     method:"get",
+    //     url:"http://localhost:8080/user/info",
+    //     headers:{
+    //       Authorization:`Bearer ${sessionStorage.getItem("token")}`
+    //     }
+    //   })
+    //   .then(function(res){
+    //     state.nickname = res.data.nickname
+    //   })
+    //   .catch(function(err){
+    //     console.log(err)
+    //   })
+
+    // }
+    // return{
+    //   state,
+    //   info
+    // }
+  },
+  methods:{
+    info(){
+      axios({
+        method:"get",
+        url:"http://localhost:8080/user/info",
+        headers:{
+          Authorization:`Bearer ${sessionStorage.getItem("token")}`
+        }
+      })
+      .then((res)=>{
+        console.log(this.nickname)
+        this.nickname = res.data.nickname
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    }
+  
+  },
+  created(){
+    this.info()
+  
+  }
 }
 </script>
 

@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory, NavigationGuardNext } from "vue-router";
 
 const routes = [
   {
@@ -16,16 +16,20 @@ const routes = [
     name: "storyCreate",
     component: () => import("../views/StoryCreateView.vue"),
   },
-  {
-    path: "/kakao",
-    name: "kakao",
-    component: () => import( "../views/kakaoView.vue"),
-  },
 
   {
     path:"/mypage",
     name:"mypage",
-    component: () => import("../views/MypageView.vue")
+    component: () => import("../views/MypageView.vue"),
+    // beforeEnter(next:any){
+    //   if (sessionStorage.getItem("token")==null){
+    //     alert("로그인하세요")
+    //     return next({name:"login"})
+    //   } else {
+    //     return next({name:"mypage"})
+    //   }
+    // }
+    
   },
   {
     path:"/community",
@@ -38,7 +42,7 @@ const routes = [
     component: () => import("../views/CommunityDetailView.vue")
   },
   {
-    path:"/login/oauth2/code/kakao",
+    path:"/login/kakao",
     component:()=>import("../views/Redirect.vue")
   },
 ];
@@ -47,5 +51,6 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
+
 
 export default router;

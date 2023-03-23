@@ -35,8 +35,12 @@
         width="30" 
         height="30"
         style="margin-right:10px">
-        <a href="https://kauth.kakao.com/oauth/authorize?client_id=8147c85395148371709b2199642f9108&redirect_uri=http://localhost:3000/login/oauth2/code/kakao&state=kakao&response_type=code">카카오</a>
-        카카오톡 로그인
+        <a 
+        href="https://kauth.kakao.com/oauth/authorize?client_id=8147c85395148371709b2199642f9108&redirect_uri=http://localhost:3000/login/kakao&state=kakao&response_type=code"
+        style="
+        text-decoration:none;
+        color:white;"
+        >카카오톡 로그인</a>
       </button>
 
     </div>
@@ -44,7 +48,6 @@
 </template>
 
 <script >
-import axios from "axios"
 
 // const BASE_URL = "http://localhost:8080"
 
@@ -57,12 +60,6 @@ export default {
         nonmemberLogin(){
 
         },
-        kakaoLogin(){
-          // const login_url = "https://kauth.kakao.com/oauth/authorize?client_id=8147c85395148371709b2199642f9108&redirect_uri=http://localhost:8080/login/kakao&state=kakao&response_type=code"
-          // window.open(login_url)
-
-          
-        }
     },
     created(){
       
