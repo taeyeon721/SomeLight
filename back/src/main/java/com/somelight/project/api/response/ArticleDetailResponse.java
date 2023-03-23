@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 public class ArticleDetailResponse {
+    int userId;
     int articleId;
     String content;
     int result;
@@ -25,6 +26,7 @@ public class ArticleDetailResponse {
     public static ArticleDetailResponse of(Article article, Vote vote, double redPercent, double greenPercent) {
 
         ArticleDetailResponse res = ArticleDetailResponse.builder()
+                .userId(article.getUserId())
                 .articleId(article.getArticleId())
                 .content(article.getContent())
                 .result(article.getResult())
