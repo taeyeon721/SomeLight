@@ -1,6 +1,7 @@
 package com.somelight.project.api.service;
 
 import com.somelight.project.db.enitity.Article;
+import com.somelight.project.db.enitity.Vote;
 import com.somelight.project.db.repository.ArticleRepository;
 import com.somelight.project.db.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -52,6 +52,45 @@ public class ArticleServiceImpl implements ArticleService {
                 .greenCount(0)
                 .build();
         articleRepository.save(article);
+        return article;
+    }
+
+    @Override
+    @Transactional
+    public Article updateArticle(boolean isChanged, boolean isExposure, int articleId) {
+        Article article = articleRepository.findByArticleId(articleId).orElseThrow();
+        article.setChanged(isChanged);
+        article.setExposure(isExposure);
+
+        articleRepository.save(article);
+        return article;
+    }
+
+    @Override
+    @Transactional
+    public Article updateVote(int articleId, int voteResultReq, Vote vote) {
+        Article article = articleRepository.findByArticleId(articleId).orElseThrow();
+        int greenCount = article.getGreenCount();
+        int redCount = article.getRedCount();
+        int greenCnt;
+        int redCnt;
+        if (voteResultReq == 1) {
+            greenCnt = greenCount + 1;
+            if (vote != null) {
+                redCnt = redCount - 1;
+                article.setRedCount(redCnt);
+            }
+            article.setGreenCount(greenCnt);
+            articleRepository.save(article);
+        } else {
+            redCnt = redCount + 1;
+            if (vote != null) {
+                greenCnt = greenCount - 1;
+                article.setGreenCount(greenCnt);
+            }
+            article.setRedCount(redCnt);
+            articleRepository.save(article);
+        }
         return article;
     }
 
