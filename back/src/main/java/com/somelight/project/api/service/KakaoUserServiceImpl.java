@@ -23,6 +23,7 @@ public class KakaoUserServiceImpl implements KakaoUserService {
     private String redirectUri;
 
     public HashMap<String, Object> getKakaoAccessToken(String code) {
+        String access_token = "";
         String id_Token = "";
         String reqURL = "https://kauth.kakao.com/oauth/token";
 
@@ -62,13 +63,14 @@ public class KakaoUserServiceImpl implements KakaoUserService {
             }
 
             System.out.println("response body : " + result);
-
             //Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result);
 
+            access_token = element.getAsJsonObject().get("access_token").getAsString();
             id_Token = element.getAsJsonObject().get("id_token").getAsString();
 
+            tokenInfo.put(("access_token"), access_token);
             tokenInfo.put(("id_token"), id_Token);
 
             br.close();

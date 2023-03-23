@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public int getUserId(String email){
-        User user = userRepository.findByEmail(email).orElse(null);
+        User user = userRepository.findByEmail(email);
         return user.getUserId();
     }
 

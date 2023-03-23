@@ -5,7 +5,6 @@ import com.somelight.project.db.enitity.Article;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -13,7 +12,6 @@ import java.util.List;
 @Setter
 @Builder
 public class ResultResponse {
-
     Article article;
     List<KeywordRequest> keyword;
     String movie;

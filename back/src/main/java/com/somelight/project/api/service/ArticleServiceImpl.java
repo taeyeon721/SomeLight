@@ -25,12 +25,6 @@ public class ArticleServiceImpl implements ArticleService {
         articles = articleRepository.findAll(pageable);
         return articles;
     }
-
-//    public List<Article> getUserArticles(int userId, Pageable pageable){
-//        List<Article> articles = null;
-//        articles = articleRepository.findAllByUserId(userId, pageable);
-//        return articles;
-//    }
     @Override
     public Article getArticleByArticleId(int articleId) {
         Article article = null;
@@ -39,15 +33,16 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    @Transactional
     public Article createArticle(int userId, String content, int result) {
         LocalDateTime nowDate = LocalDateTime.now();
         Article article = Article.builder()
                 .userId(userId)
                 .content(content)
                 .result(result)
-                .isChanged(false)
+                .changed(false)
                 .createdDate(nowDate)
-                .isExposure(false)
+                .exposure(false)
                 .redCount(0)
                 .greenCount(0)
                 .build();
