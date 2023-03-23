@@ -8,10 +8,11 @@
 </template>
 
 <script>
-import DeleteComp from './DeleteComp.vue'
-import FeedbackComp from './FeedbackComp.vue'
-import ShareComp from './ShareComp.vue'
-import VoteComp from './VoteComp.vue'
+import DeleteComp from './mystory/DeleteComp.vue'
+import FeedbackComp from './mystory/FeedbackComp.vue'
+import ShareComp from './mystory/ShareComp.vue'
+import VoteComp from './notmystory/VoteComp.vue'
+
 export default {
   components: { FeedbackComp, DeleteComp, ShareComp, VoteComp },
 

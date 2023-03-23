@@ -6,7 +6,6 @@
 import router from "@/router";
 import axios from 'axios';
 
-
 export default {
     methods:{
         getUser(code){
@@ -18,7 +17,7 @@ export default {
                 },
             })
             .then((res)=>{
-                console.log("해치웠나")
+                console.log(res.data)
                 sessionStorage.setItem("token",res.data.token)
                 // console.log(res)
             })
@@ -30,7 +29,7 @@ export default {
     created(){
         const code = this.$route.query.code
         console.log('code', code)
-        if (code) {
+        if (code!=null) {
             this.getUser(code)
             router.push({path:"/mypage"})
         } else {

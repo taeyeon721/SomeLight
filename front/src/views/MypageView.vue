@@ -30,7 +30,8 @@ export default {
 }
 #mypageback{
   width: 70vw;
-  height: 80vh;
+  margin-top:10vh ;
+  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;

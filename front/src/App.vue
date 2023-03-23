@@ -16,9 +16,9 @@ export default {
 <style>
 @import "@/assets/css/reset.css";
 /* 너비 체크용 */
-div {
-  /* box-shadow: 0 0 0 1px #f00 inset; */
-}
+/* div {
+  box-shadow: 0 0 0 1px #f00 inset;
+} */
 
 .font {
   font-family: "DM Sans", sans-serif;
