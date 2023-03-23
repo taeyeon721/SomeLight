@@ -1,11 +1,11 @@
 package com.somelight.project.api.controller;
 
+import com.somelight.project.api.request.ArticleUpdateRequest;
 import com.somelight.project.api.response.ArticleDetailResponse;
 import com.somelight.project.api.service.ArticleService;
 import com.somelight.project.api.service.UserService;
 import com.somelight.project.api.service.VoteService;
 import com.somelight.project.db.enitity.Article;
-import com.somelight.project.db.enitity.User;
 import com.somelight.project.db.enitity.Vote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -96,7 +96,31 @@ public class ArticleController {
         }
     }
 
-
+    @CrossOrigin("*")
+    @PutMapping("/{articleId}")
+    public ResponseEntity<?> updateArticle(Authentication authentication,
+                                           @PathVariable("articleId") int articleId,
+                                           @RequestBody ArticleUpdateRequest req) {
+        System.out.println(req);
+        String email = (String) authentication.getCredentials();
+        int userId = userService.getUserId(email);
+        Article article = articleService.getArticleByArticleId(articleId);
+        Vote vote = voteService.getVoteByArticleIdAndUserId(articleId, userId);
+        if (req.isChanged() != article.isChanged() || req.isExposure() != article.isExposure()) {
+            if (userId != article.getUserId()) {
+                System.out.println(1);
+                return new ResponseEntity<>("수정할 권한이 없습니다.", HttpStatus.BAD_REQUEST);
+            } else {
+                System.out.println(2);
+                articleService.updateArticle(req.isChanged(), req.isExposure(), articleId);
+            }
+        }
+        if (req.getVoteResult() != 0) {
+            voteService.updateVote(userId, articleId, req.getVoteResult());
+            articleService.updateVote(articleId, req.getVoteResult(), vote);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
     @CrossOrigin("*")
     @DeleteMapping("/{articleId}")
@@ -106,7 +130,7 @@ public class ArticleController {
         String email = (String) authentication.getCredentials();
         userId = userService.getUserId(email);
         Article article = articleService.getArticleByArticleId(articleId);
-        if (userId != article.getArticleId())
+        if (userId != article.getUserId())
             return new ResponseEntity<>("수정할 권한이 없습니다.", HttpStatus.BAD_REQUEST);
         articleService.deleteArticle(articleId);
         voteService.deleteVoteList(articleId);

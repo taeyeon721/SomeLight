@@ -24,6 +24,22 @@ public class VoteServiceImpl implements VoteService{
     }
 
     @Override
+    public void updateVote(int userId, int articleId, int voteResult) {
+        Vote vote = voteRepository.findByArticleIdAndUserId(articleId, userId).orElse(null);
+        if (vote == null) {
+            voteRepository.save(Vote.builder()
+                    .articleId(articleId)
+                    .userId(userId)
+                    .voteResult(voteResult)
+                    .build());
+        } else {
+            vote.setVoteResult(voteResult);
+            voteRepository.save(vote);
+        }
+
+    }
+
+    @Override
     @Transactional
     public void deleteVoteList(int articleId) {
         voteRepository.deleteAllByArticleId(articleId);

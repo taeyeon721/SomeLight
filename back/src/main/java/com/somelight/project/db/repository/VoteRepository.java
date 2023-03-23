@@ -19,4 +19,5 @@ public interface VoteRepository extends JpaRepository<Vote, Integer> {
     @Transactional
     @Modifying(clearAutomatically = true)
     void deleteAllByArticleId(int articleId);
+
 }
