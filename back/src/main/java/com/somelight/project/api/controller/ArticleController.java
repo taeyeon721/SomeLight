@@ -106,20 +106,45 @@ public class ArticleController {
         int userId = userService.getUserId(email);
         Article article = articleService.getArticleByArticleId(articleId);
         Vote vote = voteService.getVoteByArticleIdAndUserId(articleId, userId);
+        if (userId == article.getUserId()){
+            if (req.getVoteResult() != 0) {
+                return new ResponseEntity<>("수정할 권한이 없습니다.", HttpStatus.BAD_REQUEST);
+            }
+        }
         if (req.isChanged() != article.isChanged() || req.isExposure() != article.isExposure()) {
             if (userId != article.getUserId()) {
-                System.out.println(1);
                 return new ResponseEntity<>("수정할 권한이 없습니다.", HttpStatus.BAD_REQUEST);
             } else {
-                System.out.println(2);
                 articleService.updateArticle(req.isChanged(), req.isExposure(), articleId);
             }
         }
         if (req.getVoteResult() != 0) {
             voteService.updateVote(userId, articleId, req.getVoteResult());
             articleService.updateVote(articleId, req.getVoteResult(), vote);
+            Vote newVote = voteService.getVoteByArticleIdAndUserId(articleId, userId);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        Article newArticle = articleService.getArticleByArticleId(articleId);
+
+        double redPercent;
+        double greenPercent;
+        int redCnt = newArticle.getRedCount();
+        int greenCnt = newArticle.getGreenCount();
+        if (redCnt == 0 && greenCnt == 0) {
+            redPercent = 0;
+            greenPercent = 0;
+        } else {
+            redPercent = (double)redCnt/ (greenCnt + redCnt) * 100;
+            greenPercent = (double)greenCnt / (greenCnt + redCnt) * 100;
+
+        }
+
+        if (vote == null) {
+            return ResponseEntity.status(200)
+                    .body(ArticleDetailResponse.of(article, new Vote(), redPercent, greenPercent));
+        } else {
+            return ResponseEntity.status(200)
+                    .body(ArticleDetailResponse.of(article, vote, redPercent, greenPercent));
+        }
     }
 
     @CrossOrigin("*")
