@@ -16,9 +16,9 @@ public class ArticleDetailResponse {
     int articleId;
     String content;
     int result;
-    boolean changed;
+    Boolean isChanged;
     LocalDateTime createdDate;
-    boolean exposure;
+    Boolean isExposure;
     double redPercent;
     double greenPercent;
     int voteResult;
@@ -30,9 +30,9 @@ public class ArticleDetailResponse {
                 .articleId(article.getArticleId())
                 .content(article.getContent())
                 .result(article.getResult())
-                .changed(article.getIsChanged())
+                .isChanged(article.getIsChanged())
                 .createdDate(article.getCreatedDate())
-                .exposure(article.getIsExposure())
+                .isExposure(article.getIsExposure())
                 .redPercent(redPercent)
                 .greenPercent(greenPercent)
                 .voteResult(vote.getVoteResult())
