@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/article")
-
 public class ArticleController {
 
     private ArticleService articleService;
@@ -80,7 +79,6 @@ public class ArticleController {
     public ResponseEntity<?> updateArticle(Authentication authentication,
                                            @PathVariable("articleId") int articleId,
                                            @RequestBody ArticleUpdateRequest req) {
-        System.out.println(req);
         String email = (String) authentication.getCredentials();
         int userId = userService.getUserId(email);
         Article article = articleService.getArticleByArticleId(articleId);
