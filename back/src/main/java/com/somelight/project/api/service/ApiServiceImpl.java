@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Service
@@ -50,7 +50,7 @@ public class ApiServiceImpl implements ApiService{
                 .queryParam("query", keyword)
                 .queryParam("genre", genre)
                 .queryParam("display", 100)
-                .encode(Charset.forName("UTF-8"))
+                .encode(StandardCharsets.UTF_8)
                 .build()
                 .toUri();
 
@@ -91,6 +91,7 @@ public class ApiServiceImpl implements ApiService{
                 check = similar;
             }
         }
+        System.out.println(book);
         return book;
     }
 

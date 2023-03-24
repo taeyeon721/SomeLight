@@ -17,6 +17,7 @@ public class Book {
     private int bookId;
     private int result;
     private String title;
+    @Column(length = 1500)
     private String description;
     private String bookImage;
 
