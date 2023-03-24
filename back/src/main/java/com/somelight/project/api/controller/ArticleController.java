@@ -117,10 +117,10 @@ public class ArticleController {
         Vote newVote = voteService.getVoteByArticleIdAndUserId(articleId, userId);
         if (newVote == null) {
             return ResponseEntity.status(200)
-                    .body(ArticleDetailResponse.of(article, new Vote(), redPercent, greenPercent));
+                    .body(ArticleDetailResponse.of(newArticle, new Vote(), redPercent, greenPercent));
         } else {
             return ResponseEntity.status(200)
-                    .body(ArticleDetailResponse.of(article, newVote, redPercent, greenPercent));
+                    .body(ArticleDetailResponse.of(newArticle, newVote, redPercent, greenPercent));
         }
     }
 

@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 @Service
 public interface ArticleService {
 
-    Page<Article> findArticles(boolean isExposure, Pageable pageable);
+    Page<Article> findArticles(Boolean isExposure, Pageable pageable);
     Article getArticleByArticleId(int articleId);
     Article createArticle(int userId, String content, int result);
-    Article updateArticle(boolean isChanged, boolean isExposure, int articleId);
+    Article updateArticle(Boolean isChanged, Boolean isExposure, int articleId);
     Article updateVote(int articleId, int voteResultReq, Vote vote);
     void deleteArticle(int articleId);
 
