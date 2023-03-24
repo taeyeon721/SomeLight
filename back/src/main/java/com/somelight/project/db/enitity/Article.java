@@ -26,9 +26,9 @@ public class Article {
     private int userId;
     private String content;
     private int result;
-    private boolean changed;
+    private Boolean isChanged;
     private LocalDateTime createdDate;
-    private boolean exposure;
+    private Boolean isExposure;
     private int redCount;
     private int greenCount;
 

@@ -20,9 +20,9 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleRepository articleRepository;
 
-    public Page<Article> findArticles(Pageable pageable) {
+    public Page<Article> findArticles(boolean isExposure, Pageable pageable) {
         Page<Article> articles = null;
-        articles = articleRepository.findAll(pageable);
+        articles = articleRepository.findAllByIsExposure(isExposure, pageable);
         return articles;
     }
     @Override
@@ -40,9 +40,9 @@ public class ArticleServiceImpl implements ArticleService {
                 .userId(userId)
                 .content(content)
                 .result(result)
-                .changed(false)
+                .isChanged(null)
                 .createdDate(nowDate)
-                .exposure(false)
+                .isExposure(false)
                 .redCount(0)
                 .greenCount(0)
                 .build();
@@ -54,8 +54,8 @@ public class ArticleServiceImpl implements ArticleService {
     @Transactional
     public Article updateArticle(boolean isChanged, boolean isExposure, int articleId) {
         Article article = articleRepository.findByArticleId(articleId).orElseThrow();
-        article.setChanged(isChanged);
-        article.setExposure(isExposure);
+        article.setIsChanged(isChanged);
+        article.setIsExposure(isExposure);
 
         articleRepository.save(article);
         return article;
