@@ -22,33 +22,30 @@ import org.springframework.web.bind.annotation.*;
 
 public class ArticleController {
 
-    @Autowired
     private ArticleService articleService;
-    @Autowired
     private UserService userService;
-    @Autowired
     private VoteService voteService;
 
     @Autowired
-    public ArticleController(ArticleService articleService, UserService userService) {
+    public ArticleController(ArticleService articleService, UserService userService, VoteService voteService) {
         this.articleService = articleService;
         this.userService = userService;
+        this.voteService =  voteService;
     }
 
     @CrossOrigin("*")
     @GetMapping()
     public ResponseEntity<Page<Article>> getArticleList(@RequestParam(required = false, defaultValue = "1", value = "page") int pageNo) {
         Pageable pageable = PageRequest.of(pageNo-1, 15);
-        Page<Article> articles = articleService.findArticles(pageable);
+        Page<Article> articles = articleService.findArticles(true, pageable);
         return new ResponseEntity<>(articles, HttpStatus.OK);
     }
 
     @CrossOrigin("*")
     @GetMapping("/{articleId}")
-    public ResponseEntity<?> getArticleDetail(@Nullable Authentication authentication,
+    public ResponseEntity<ArticleDetailResponse> getArticleDetail(@Nullable Authentication authentication,
                                               @PathVariable("articleId") int articleId) {
         Article article = articleService.getArticleByArticleId(articleId);
-        ArticleDetailResponse res = null;
         double redPercent;
         double greenPercent;
         int redCnt = article.getRedCount();
@@ -67,9 +64,8 @@ public class ArticleController {
             String email = (String) authentication.getCredentials();
             userId = userService.getUserId(email);
         }
+
         Vote vote = voteService.getVoteByArticleIdAndUserId(articleId, userId);
-
-
         if (vote == null) {
             return ResponseEntity.status(200)
                     .body(ArticleDetailResponse.of(article, new Vote(), redPercent, greenPercent));
@@ -94,7 +90,7 @@ public class ArticleController {
                 return new ResponseEntity<>("수정할 권한이 없습니다.", HttpStatus.BAD_REQUEST);
             }
         }
-        if (req.isChanged() != article.isChanged() || req.isExposure() != article.isExposure()) {
+        if (req.isChanged() != article.getIsChanged() || req.isExposure() != article.getIsExposure()) {
             if (userId != article.getUserId()) {
                 return new ResponseEntity<>("수정할 권한이 없습니다.", HttpStatus.BAD_REQUEST);
             } else {
@@ -104,7 +100,6 @@ public class ArticleController {
         if (req.getVoteResult() != 0) {
             voteService.updateVote(userId, articleId, req.getVoteResult());
             articleService.updateVote(articleId, req.getVoteResult(), vote);
-            Vote newVote = voteService.getVoteByArticleIdAndUserId(articleId, userId);
         }
         Article newArticle = articleService.getArticleByArticleId(articleId);
 
@@ -121,12 +116,13 @@ public class ArticleController {
 
         }
 
-        if (vote == null) {
+        Vote newVote = voteService.getVoteByArticleIdAndUserId(articleId, userId);
+        if (newVote == null) {
             return ResponseEntity.status(200)
                     .body(ArticleDetailResponse.of(article, new Vote(), redPercent, greenPercent));
         } else {
             return ResponseEntity.status(200)
-                    .body(ArticleDetailResponse.of(article, vote, redPercent, greenPercent));
+                    .body(ArticleDetailResponse.of(article, newVote, redPercent, greenPercent));
         }
     }
 
