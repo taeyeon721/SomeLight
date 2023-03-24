@@ -88,11 +88,11 @@ public class ArticleController {
                 return new ResponseEntity<>("수정할 권한이 없습니다.", HttpStatus.BAD_REQUEST);
             }
         }
-        if (req.isChanged() != article.getIsChanged() || req.isExposure() != article.getIsExposure()) {
+        if (req.getIsChanged() != article.getIsChanged() || req.getIsExposure() != article.getIsExposure()) {
             if (userId != article.getUserId()) {
                 return new ResponseEntity<>("수정할 권한이 없습니다.", HttpStatus.BAD_REQUEST);
             } else {
-                articleService.updateArticle(req.isChanged(), req.isExposure(), articleId);
+                articleService.updateArticle(req.getIsChanged(), req.getIsExposure(), articleId);
             }
         }
         if (req.getVoteResult() != 0) {

@@ -12,8 +12,8 @@ import org.springframework.lang.Nullable;
 @Builder
 public class ArticleUpdateRequest {
 
-    boolean isChanged;
-    boolean isExposure;
+    Boolean isChanged;
+    Boolean isExposure;
     @Nullable
     int voteResult;
 
