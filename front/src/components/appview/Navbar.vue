@@ -2,7 +2,7 @@
   <div id="navWrapper" class="font">
     <div id="logoWrapper">
       <span>S</span>
-      <img src="@/assets/img/nav/bulb2.png" alt="" />
+      <img src="@/assets/img/nav/heart.png" alt="" />
       <span>ME</span>
     </div>
     <div v-if="!isLogin" id="itemWrapper">
@@ -106,13 +106,13 @@ export default {
   white-space: nowrap;
 }
 #logoWrapper > span {
-  font-size: 3.9em;
+  font-size: 3.8em;
   color: rgba(121, 80, 63, 100%);
   font-weight: bold;
   height: 95%;
 }
 #logoWrapper > img {
-  height: 85%;
+  height: 69%;
 }
 
 #itemWrapper {

@@ -29,7 +29,23 @@
           text-overflow:ellipsis;">
             {{ article.content }}
           </div></td>
-          <td id="area3">{{ article.result }}</td>
+          <td id="area3" v-if="article.result===0">
+            <img 
+            src="../../../src/assets/img/community/redbulb.png" 
+            alt=""
+            >
+            </td>
+          <td id="area3" v-else-if="article.result===1">
+            <img 
+            src="../../../src/assets/img/community/navybulb.png"
+            alt=""
+           >
+          </td>
+          <td id="area3" v-else-if="article.result===2">
+            <img 
+            src="../../../src/assets/img/community/greenbulb.png" 
+            alt=""
+            ></td>
         </tr>
         </div>
       </tbody>
@@ -161,9 +177,15 @@ tbody{
   width:5vw;
   text-align: center;
 }
+
 #area2{
   width:400px;
   padding-left: 5%;
+}
+
+#area3 > img{
+  width: 1vw;  
+  object-fit:fill;
 }
 
 button{
