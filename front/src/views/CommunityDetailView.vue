@@ -1,41 +1,52 @@
 <template>
   <div id="detailpage">
     <community-content-comp v-bind:content="content" />
-    <half-comp />
+    <half-comp 
+    v-bind:detail="detail"
+    v-bind:loginflag="loginflag"/>
   </div>
 </template>
 
 <script>
 import CommunityContentComp from '@/components/communitydetailview/CommunityContentComp.vue'
 import HalfComp from '@/components/communitydetailview/HalfComp.vue'
-import axios from "axios";
 
 const BASE_URL = "http://localhost:8080"
 
 export default {
   data(){
     return{
-      content:"",
+      content:this.$store.state.article.content,
+      // loginflag:false,
+      detail:{
+        exposure:this.$store.state.article.exposure,
+        changed:this.$store.state.article.changed,
+        redPercent:this.$store.state.article.redPercent,
+        greenPercent:this.$store.state.article.greenPercent,
+        voteResult:this.$store.state.article.voteResult,
+      }
     }
   },
-  components: { CommunityContentComp, HalfComp},
+  components: { CommunityContentComp, HalfComp },
   methods:{
-    getDetail(){
-      axios({
-        method:"get",
-        url: `${BASE_URL}/article/${this.$route.params.story_id}`
-      })
-      .then((res)=>{
-        console.log(res.data)
-        this.content = res.data.content
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
-    }
-  },
+    },
   created(){
-    this.getDetail()
+    this.$store.dispatch("getDetail", this.$route.params.story_id)
+  },
+  computed:{
+    // get(){
+    //   console.log("실행")
+    //   return 
+    // },
+    loginflag(){
+      if (Number(sessionStorage.getItem("pk")) === this.$store.state.article.userId){
+        console.log("내글")
+        return true 
+      } else {
+        console.log("남글")
+        return false
+      }
+    }
   }
 
 

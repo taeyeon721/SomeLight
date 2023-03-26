@@ -8,9 +8,10 @@
       </thead>
       <br>
       <tbody>
+        <div v-for="article in articles" v-bind:key="article.articleId">
+        <!-- v-if="article.exposure" -->
         <tr 
-        v-for="article in articles" 
-        v-bind:key="article.articleId"
+ 
         style="
         line-height:25px;"
         >
@@ -29,6 +30,7 @@
           </div></td>
           <td id="area3">{{ article.result }}</td>
         </tr>
+        </div>
       </tbody>
     </table>
     <br>

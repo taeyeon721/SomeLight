@@ -71,6 +71,7 @@ export default {
   methods:{
     logout(){
       sessionStorage.removeItem("token")
+      sessionStorage.removeItem("pk")
       this.isLogin = null
     }
   },

@@ -75,7 +75,6 @@ export default {
         params:{
           "page":this.page,
         }
-
       })
       .then((res)=>{
         this.articles = []

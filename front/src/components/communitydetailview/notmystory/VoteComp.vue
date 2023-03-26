@@ -8,17 +8,21 @@
     </p>
     </div>
     <div id="greenbox">
-      <input type="radio" id="gchoice" name="vote" value="green">
+      <div style="display:flex;">
+      <input type="radio" id="gchoice" name="vote" v-model="result" value="1">
+        <p>그린라이트</p>
+      </div>
         <div id="greenbar"
         style="border: 2px solid #D4E384;">
-          그린라이트
         </div>
     </div>
     <div id="redbox">
-      <input type="radio" id="rchoice" name="vote" value="red">
+      <div style="display:flex;">
+      <input type="radio" id="rchoice" name="vote" v-model="result" value="2">
+        <p>레드라이트</p>
+      </div>
         <div id="redbar"
         style="border: 2px solid #F3998A">
-          레드라이트
         </div>
     </div>
     <div>
@@ -28,15 +32,39 @@
 </template>
 
 <script>
+import axios from "axios";
+
+const BASE_URL = "http://localhost:8080"
+
 export default {
   data(){
     return{
-
+      result:0,
     }
   },
   methods:{
     vote(){
-      
+      console.log("고구마")
+      axios({
+        method:"put",
+        url:`${BASE_URL}/article/${this.$route.params.story_id}`,
+        headers:{
+          Authorization:`Bearer ${sessionStorage.getItem("token")}`
+        },
+        data:{
+          "isChanged":this.$store.state.article.changed,
+          "isExposure":this.$store.state.article.exposure,
+          "voteResult":this.result,
+        }
+      })
+      .then((res)=>{
+        console.log("투표결과")
+        console.log(this.result)
+        console.log(res.data)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
     }
   }
 
@@ -67,17 +95,17 @@ export default {
 }
 #greenbox, #redbox{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   margin: 10px;
 }
 #greenbar, #redbar{
-  font-size: 20px;
+  font-size: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: white;
   width: 17vw;
-  height: 4vh;
+  height: 1vh;
   font-weight: bold;
   color: #4D455D;
   border-radius: 20px;
@@ -93,13 +121,13 @@ export default {
 }
 #greenbox > input[type=radio]{
   accent-color: #D4E384;
-  width: 15px;
+  width: 10px;
   margin: 5px;
 }
 
 #redbox > input[type=radio]{
   accent-color: #F3998A;
-  width: 15px;
+  width: 10px;
   margin: 5px;
 }
 
