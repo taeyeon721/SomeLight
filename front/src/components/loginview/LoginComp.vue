@@ -30,14 +30,27 @@
         id="kakaobtn" 
         v-on:click="kakaoLogin"
         >
-        <img src="src\assets\img\main\kakaoImg.png">
-        카카오톡 로그인
+        <img 
+        src="../../../src/assets/img/main/kakaoImg.png" 
+        width="30" 
+        height="30"
+        style="margin-right:10px">
+        <a 
+        href="https://kauth.kakao.com/oauth/authorize?client_id=8147c85395148371709b2199642f9108&redirect_uri=http://localhost:3000/login/kakao&state=kakao&response_type=code"
+        style="
+        text-decoration:none;
+        color:white;"
+        >카카오톡 로그인</a>
       </button>
+
     </div>
   </div>
 </template>
 
-<script lang="ts">
+<script >
+
+// const BASE_URL = "http://localhost:8080"
+
 export default {
     name: 'LoginComp',
     setup(){
@@ -47,9 +60,9 @@ export default {
         nonmemberLogin(){
 
         },
-        kakaoLogin(){
-
-        }
+    },
+    created(){
+      
     }
 }
 </script>
@@ -64,6 +77,9 @@ export default {
     font-size: 25px;
     font-weight: bold;
     border: 0px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
 #kakaobtn{
@@ -75,5 +91,8 @@ export default {
     font-size: 25px;
     font-weight: bold;
     border: 0px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>
