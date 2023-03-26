@@ -3,9 +3,7 @@
     <div id="mypageback">
       <my-info-comp />
       <my-story-comp />
-
     </div>
-
   </div>
 </template>
 
@@ -31,11 +29,15 @@ export default {
 #mypageback{
   width: 70vw;
   margin-top:10vh ;
-  height: 90vh;
+  height: 88vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url("../../src/assets/img/main/mypageback.jpg");
+  background: linear-gradient(
+    rgba(250,250,250,0.2), 
+    rgba(250,250,250,0.4)),
+    url("../../src/assets/img/mypage/mypageback.jpg");
+  /* background-image: url("../../src/assets/img/main/mypageback.jpg"); */
   background-repeat: no-repeat;
   background-size: cover;
 }

@@ -1,6 +1,7 @@
 <template>
   <div id="detailpage">
-    <community-content-comp v-bind:content="content" />
+    <community-content-comp 
+    v-bind:loginflag="loginflag" />
     <half-comp 
     v-bind:detail="detail"
     v-bind:loginflag="loginflag"/>
@@ -16,7 +17,7 @@ const BASE_URL = "http://localhost:8080"
 export default {
   data(){
     return{
-      content:this.$store.state.article.content,
+      // content:this.$store.state.article.content,
       // loginflag:false,
       detail:{
         exposure:this.$store.state.article.exposure,
@@ -29,15 +30,18 @@ export default {
   },
   components: { CommunityContentComp, HalfComp },
   methods:{
-    },
+    getDetail(){
+      const story_id = parseInt(this.$route.params.story_id)
+      const payload = {
+        story_id:story_id,
+      }
+      this.$store.dispatch("getDetail", payload)
+    }
+  },
   created(){
-    this.$store.dispatch("getDetail", this.$route.params.story_id)
+    this.getDetail()
   },
   computed:{
-    // get(){
-    //   console.log("실행")
-    //   return 
-    // },
     loginflag(){
       if (Number(sessionStorage.getItem("pk")) === this.$store.state.article.userId){
         console.log("내글")

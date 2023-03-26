@@ -25,7 +25,7 @@ export default {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  box-shadow: 3px 3px 3px rgb(175, 175, 175);
+  box-shadow: 2px 2px 2px rgb(216, 216, 216);
 }
 #mystorytitle{
   padding-top:10px;

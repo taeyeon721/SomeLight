@@ -1,21 +1,39 @@
 <template>
-  <div id="content">
-    <div id="contentdetail" v-bind:content="content">
-      {{ content }}
+  <div>
+    <div id="content">
+      <div id="contentdetail">
+        {{ content }}
+      </div>
     </div>
+    <delete-comp v-if="loginflag"/>
   </div>
 </template>
 
 <script>
+import DeleteComp from './mystory/DeleteComp.vue'
+
+
 export default {
   data(){
     return{
-      content:"" ,
+      
     }
   },
+  methods:{
+
+  },
   created(){
-    this.$store.dispatch("getDetail", this.$route.params.story_id)
-    this.content = this.$store.state.article.content
+  },
+  components:{
+    DeleteComp,
+  },
+  props:[
+    "loginflag",
+  ],
+  computed:{
+    content(){
+      return this.$store.state.article.content
+    }
   }
 }
 </script>
@@ -28,7 +46,8 @@ export default {
     background-color: #F5E9CF; 
     opacity: 0.8;
     margin-right: 30px;
-    box-shadow: 3px 3px 3px gray;
+    margin-top:10vh;
+    box-shadow: 3px 3px 3px rgb(216, 216, 216);
     display: flex;
     justify-content: center;
     align-items: center;

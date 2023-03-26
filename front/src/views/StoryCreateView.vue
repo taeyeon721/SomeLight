@@ -80,6 +80,7 @@ export default {
   width: 100vw;
   height: 100vh;
   display: flex;
+  align-items: center;
   flex-direction: column;
 }
 #mainWrapper > div:nth-child(1) {
@@ -88,7 +89,7 @@ export default {
 }
 
 .bgImg {
-  width: 100%;
+  width: 75%;
   height: 90vh;
   background-image: url("@/assets/img/story/bgLaptop.png");
   background-size: 100% 100%;
@@ -160,7 +161,7 @@ textarea {
   border-radius: 20px;
   border: 1px solid rgba(233, 217, 217, 100%);
   box-shadow: 8px 4px 4px rgba(0, 0, 0, 25%);
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 .btnRecord > h1 {

@@ -40,13 +40,13 @@ export default {
     width: 7vw;
     height: 5vh;
     border-radius: 30px;
-    margin:20px;
     background-color: #F3998A;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 3px 3px 3px gray;
-    margin-left: 24vw;
+    box-shadow:3px 3px 3px rgb(187, 187, 187);
+    margin-left: 12vw;
+    margin-top:7vh;
 }
 
 </style>

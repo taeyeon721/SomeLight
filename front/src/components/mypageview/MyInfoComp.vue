@@ -81,7 +81,7 @@ export default {
   align-items: center;
   flex-direction: column;
   justify-content: space-around;
-  box-shadow: 3px 3px 3px rgb(173, 173, 173);
+  box-shadow: 2px 2px 2px rgb(216, 216, 216);
 }
 #username{
   padding-top:60px;

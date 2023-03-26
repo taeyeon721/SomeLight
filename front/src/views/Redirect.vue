@@ -17,10 +17,10 @@ export default {
                 },
             })
             .then((res)=>{
-                console.log(res.data)
                 sessionStorage.setItem("pk", res.data.userId)
                 sessionStorage.setItem("token",res.data.token)
-                // console.log(res)
+                // console.log(res.data)
+                router.push({path:"/mypage"})
             })
             .catch((err)=>{
                 console.log(err)
@@ -29,11 +29,9 @@ export default {
     },
     created(){
         const code = this.$route.query.code
-        // console.log('code', code)
         if (code!= null) {
             this.getUser(code)
             console.log("로그인 성공")
-            router.push({path:"/mypage"})
         } else {
             router.push({path:"/login"})
         }
