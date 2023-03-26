@@ -1,6 +1,6 @@
 <template>
   <div id="communityWrapper">
-    <p id="commutitle">COMMUNITY</p>
+    <div id="commutitle">COMMUNITY</div>
     <community-list-comp />
   </div>
 </template>
@@ -15,16 +15,18 @@ export default {
 
 <style scoped>
 #communityWrapper{
-    margin-top: 10vh;
-    width: 100vw;
-    height: 90vh;
+    margin-top: 11vh;
+    width: 90vw;
+    height: 88vh;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    background-image: url("../../src/assets/img/main/communityback.jpg");
+    background-image: linear-gradient(
+      rgba(250,250,250,0.2), 
+      rgba(250,250,250,0.4)), 
+      url("../../src/assets/img/community/communityback.jpg");
     background-repeat: no-repeat;
-    opacity: 0.8;
     background-size: 75vw 90vh;
 
 }
@@ -32,7 +34,6 @@ export default {
     font-size:40px;
     font-weight: bold;
     color: #4D455D;
-    padding-bottom: 10px;
 }
 
 </style>

@@ -2,18 +2,19 @@
   <div id="commulist">
     <table id="commutable">
       <thead>
+        <div>
         <th id="area1">No.</th>
         <th id="area2">Content</th>
         <th id="area3">Light</th>
+        </div>
       </thead>
       <br>
       <tbody>
         <div v-for="article in articles" v-bind:key="article.articleId">
         <!-- v-if="article.exposure" -->
         <tr 
- 
         style="
-        line-height:25px;"
+        line-height:28px;"
         >
           <td id="area1">{{ article.articleId }}</td>
           <td 
@@ -37,7 +38,8 @@
   <div id="page" 
   style="
   position:absolute;
-  padding-top:29.5%;"
+  padding-left:6%;
+  padding-top:75%;"
   >
   <button v-on:click="prevPage">prev</button>
   <span v-for="p in totalpage" v-bind:key="p">
@@ -124,31 +126,35 @@ export default {
 
 <style scoped>
 #commulist{
+    position:absolute;
     width: 42vw;
     height: 70vh;
     background-color: white;
     color: #4D455D;
-    opacity: 0.4;
     border-radius: 20px;
-    box-shadow: 3px 3px 3px gray;
+    box-shadow: 3px 3px 3px rgb(205, 205, 205);
     display: flex;
     align-items: center;
     flex-direction: column;
+    opacity: 0.9;
 }
 
 #commutable{
+  position: absolute;
   width: 35vw;
-  height: 100wh;
+  height: 100vh;
   margin: 5%;
 }
 
 thead{
-  font-size: 25px;
+  position: absolute;
+  font-size: 24px;
   font-weight: bold;
   text-align: center;
 }
 tbody{
   font-size: 20px;
+  text-align: center;
 }
 
 #area1, #area3{
@@ -156,7 +162,7 @@ tbody{
   text-align: center;
 }
 #area2{
-  width: 30vw;
+  width:400px;
   padding-left: 5%;
 }
 

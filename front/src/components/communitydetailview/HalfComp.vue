@@ -1,6 +1,7 @@
 <template>
   <div id="half">
     <div v-if="loginflag">
+      <!-- <delete-comp /> -->
       <div v-if="exposure">
         <my-vote-result-comp />
       </div>
@@ -9,7 +10,6 @@
       </div>
       <feedback-comp v-if="changed===null" />
       <feedback-comp-result v-else/>
-      <delete-comp />
     </div>
     <div v-else>
       <div v-if="voteResult==0">
@@ -68,11 +68,14 @@ export default {
 
 <style scoped>
 #half{
-    margin-top: 10vh;
+    margin-top: 11vh;
     margin-left:30px;
     width: 40vw;
-    height: 90vh;
-    background-image: url("../../../src/assets/img/main/communitydetailback.jpg");
+    height: 89vh;
+    background-image:linear-gradient(
+      rgba(250,250,250,0.2), 
+      rgba(250,250,250,0.4)), 
+      url("../../../src/assets/img/community/communitydetailback.jpg");
     background-repeat:no-repeat ;
     background-size: 40vw 90vh;
     display: flex;

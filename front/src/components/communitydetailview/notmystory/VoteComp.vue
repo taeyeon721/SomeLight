@@ -8,7 +8,9 @@
     </p>
     </div>
     <div id="greenbox">
-      <div style="display:flex;">
+      <div style="
+      display:flex;
+      margin-bottom:10px;">
       <input type="radio" id="gchoice" name="vote" v-model="result" value="1">
         <p>그린라이트</p>
       </div>
@@ -17,7 +19,9 @@
         </div>
     </div>
     <div id="redbox">
-      <div style="display:flex;">
+      <div style="
+      display:flex;
+      margin-bottom:10px;">
       <input type="radio" id="rchoice" name="vote" v-model="result" value="2">
         <p>레드라이트</p>
       </div>
@@ -74,12 +78,11 @@ export default {
 <style scoped>
 #vote{
     width: 25vw;
-    height: 40vh;
+    height: 45vh;
     border-radius: 20px;  
     background-color: #F5E9CF;
     opacity: 0.9;
-    box-shadow: 3px 3px 3px gray;
-    margin: 10vh;
+    box-shadow: 3px 3px 3px rgb(216, 216, 216);
     display: flex;
     flex-direction: column;
     justify-content: center;

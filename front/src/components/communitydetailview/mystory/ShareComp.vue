@@ -53,7 +53,7 @@ export default {
     border-radius: 20px;  
     background-color: #F5E9CF;
     opacity: 0.9;
-    box-shadow: 3px 3px 3px gray;
+    box-shadow: 3px 3px 3px rgb(187, 187, 187);
     margin: 10vh;
     display: flex;
     flex-direction: column;
@@ -70,7 +70,7 @@ button{
     height: 7vh;
 }
 p{
-  font-size: 25px;
+  font-size: 23px;
   font-weight: bold;
   padding: 10px;
   line-height: 35px;

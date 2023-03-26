@@ -6,7 +6,11 @@
     </p>
     </div>
     <div id="greenbox">
-        <div v-bind:greenPercent="greenPercent">그린라이트 {{ greenPercent }}%</div>
+        <div 
+        v-bind:greenPercent="greenPercent"
+        style="padding-bottom:10px;">
+        그린라이트 {{ Math.round(greenPercent) }}%
+        </div>
         <div id="greenbar"
         style="border: 2px solid #D4E384;">
         <div id="greenlayer" v-bind:style="cssVariablegreen">
@@ -14,7 +18,11 @@
         </div>
     </div>
     <div id="redbox">
-        <div v-bind:redPercent="redPercent">레드라이트 {{ redPercent }}%</div>
+        <div 
+        v-bind:redPercent="redPercent"
+        style="padding-bottom:10px;">
+        레드라이트 {{ Math.round(redPercent) }}%
+        </div>
         <div id="redbar"
         style="border: 2px solid #F3998A">
         <div id="redlayer" v-bind:style="cssVariablered"></div>

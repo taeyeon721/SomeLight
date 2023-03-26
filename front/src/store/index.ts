@@ -29,17 +29,15 @@ export default createStore({
       state.article.redPercent = data.redPercent
       state.article.greenPercent = data.greenPercent
       state.article.voteResult = data.voteResult
-      console.log("뮤테이션")
     }
   },
   actions: {
     getDetail(context, payload){
       axios({
         method:"get",
-        url: `${BASE_URL}/article/${payload}`
+        url: `${BASE_URL}/article/${payload.story_id}`
       })
       .then((res)=>{
-        console.log("스토어")
         context.commit("GET_ARTICLE_DETAIL", res.data)
       })
       .catch((err)=>{

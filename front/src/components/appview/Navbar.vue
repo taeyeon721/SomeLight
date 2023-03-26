@@ -5,7 +5,7 @@
       <img src="@/assets/img/nav/bulb2.png" alt="" />
       <span>ME</span>
     </div>
-    <div v-if="isLogin==null" id="itemWrapper">
+    <div v-if="!isLogin" id="itemWrapper">
       <ul>
         <!-- 메인화면일경우 -->
         <li>
@@ -17,6 +17,7 @@
       </ul>
     </div>
     <div v-else id="itemWrapperLogin">
+      <!-- 카카오 로그인 이후 -->
       <ul>
         <li>
           <router-link 
@@ -34,16 +35,17 @@
         </li>
         <li>
           <router-link 
-          to="/"
-          style="
-          text-decoration:none;"
-          v-on:click="logout">LOGOUT</router-link></li>
-        <li>
-          <router-link 
           to="/mypage"
           style="
           text-decoration:none;
           "> MYPAGE</router-link>
+        </li>
+        <li>
+          <router-link 
+          to="/"
+          style="
+          text-decoration:none;"
+          v-on:click="logout">LOGOUT</router-link>
         </li>
       </ul>
     </div>
@@ -51,12 +53,11 @@
 </template>
 <script>
 // import router from "@/router"
-import { ref } from "vue";
 
 export default {
   data(){
-    return{
-      isLogin:null,
+    return {
+      isLogin: sessionStorage.getItem("token"),
     }
   },
   // setup() {
@@ -72,12 +73,12 @@ export default {
     logout(){
       sessionStorage.removeItem("token")
       sessionStorage.removeItem("pk")
-      this.isLogin = null
-    }
+      this.isLogin = false
+    },
   },
   created(){
-    this.isLogin = sessionStorage.getItem("token")
-    console.log(this.isLogin)
+  
+    
   },
   computed:{
 
@@ -94,23 +95,24 @@ export default {
   top: 0px;
   display: flex;
   background-color: rgba(255, 255, 255, 50%);
-  
+  margin-top:1vh;
+  margin-bottom:1vh;
 }
 
 #logoWrapper {
   /* width: 100%; */
-  height: 100%;
-  margin-left: 10vw;
+  height: 95%;
+  margin-left: 15vw;
   white-space: nowrap;
 }
 #logoWrapper > span {
-  font-size: 4em;
+  font-size: 3.9em;
   color: rgba(121, 80, 63, 100%);
   font-weight: bold;
-  height: 100%;
+  height: 95%;
 }
 #logoWrapper > img {
-  height: 90%;
+  height: 85%;
 }
 
 #itemWrapper {
@@ -127,6 +129,7 @@ ul {
 li {
   height: 100%;
   /* line-height: 100%; */
+  font-size: 0.8em;
   text-align: center;
   display: flex;
   align-items: center;
@@ -134,6 +137,6 @@ li {
 }
 #itemWrapperLogin{
   height: 100%;
-  margin-left: 17vw;
+  margin-left: 11vw;
 }
 </style>

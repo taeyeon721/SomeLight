@@ -23,7 +23,7 @@ export default {
     align-items: center;
     background-color: #F5E9CF;
     opacity: 0.9;
-    box-shadow: 3px 3px 3px gray;
+    box-shadow: 3px 3px 3px rgb(187, 187, 187);
 }
 #feedbacktitle{
     color: #4D455D;
