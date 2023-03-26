@@ -16,10 +16,14 @@ export default {
 <style>
 @import "@/assets/css/reset.css";
 /* 너비 체크용 */
-/* div {
+div {
   box-shadow: 0 0 0 1px #f00 inset;
-} */
+}
 
+body,
+html {
+  height: 100%;
+}
 .font {
   font-family: "DM Sans", sans-serif;
 }

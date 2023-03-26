@@ -18,6 +18,12 @@ const routes = [
   },
 
   {
+    path: "/story/result",
+    name: "storyResult",
+    component: () => import("../views/StoryResultView.vue"),
+  },
+  
+  {
     path:"/mypage",
     name:"mypage",
     component: () => import("../views/MypageView.vue"),
@@ -44,6 +50,7 @@ const routes = [
   {
     path:"/login/kakao",
     component:()=>import("../views/Redirect.vue")
+
   },
 ];
 
