@@ -14,6 +14,8 @@
                 id=""
                 cols="30"
                 rows="150"
+                v-model="content"
+                placeholder="여러분의 사연을 입력해주세요"
               ></textarea>
             </div>
           </div>
@@ -29,7 +31,7 @@
         </div>
         <div class="side">
           <div>
-            <div class="btnSend">SEND</div>
+            <div class="btnSend" v-on:click="createStory">SEND</div>
           </div>
         </div>
       </div>
@@ -37,16 +39,39 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
+import axios from 'axios';
+
+const BASE_URL = 'http://localhost:8080'
+
 export default {
   components: {},
   data() {
-    return {};
+    return {
+      content:"",
+    };
   },
   setup() {},
   created() {},
   mounted() {},
-  methods: {},
+  methods: {
+    createStory(){
+      axios({
+        method:"post",
+        url: `${BASE_URL}/result`,
+        data:{
+          "content":this.content,
+        }
+      })
+      .then(function(res){
+        console.log(res)
+        //라우터로 결과 페이지 넘어가게 
+      })
+      .catch(function(err){
+        console.log(err)
+      })
+    }
+  },
 };
 </script>
 

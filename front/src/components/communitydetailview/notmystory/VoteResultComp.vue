@@ -2,33 +2,69 @@
   <div id="vote">
     <div id="votetext">
     <p>
-      사연에 대해</p> 
-      <p>여러분의 생각을</p>
-      <p> 투표해주세요.
+     투표결과
     </p>
     </div>
-    <div id="greenbox">
-      <input type="radio" value="green">
+   <div id="greenbox">
+      <div style="display:flex;">
+      <input type="radio" id="gchoice" name="vote" v-model="result" value="1">
         <div id="greenbar"
         style="border: 2px solid #D4E384;">
-          그린라이트
+        <div id="greenlayer" v-bind:style="cssVariablegreen">
+        </div>
         </div>
     </div>
+   </div>
     <div id="redbox">
-      <input type="radio" value="red">
+      <div style="display:flex;">
+      <input type="radio" id="rchoice" name="vote" v-model="result" value="2">
+        <div v-bind:redPercent="redPercent">레드라이트 {{ redPercent }}%</div>
         <div id="redbar"
         style="border: 2px solid #F3998A">
-          레드라이트
+        <div id="redlayer" v-bind:style="cssVariablered"></div>
         </div>
     </div>
+    </div>
     <div>
-      <button id="votesubmit">투표하기</button>
+      <button id="votesubmit" v-on:click="vote">투표하기</button>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
+const BASE_URL = "http://localhost:8080"
+
 export default {
+  data(){
+    return{
+      result:this.$store.state.article.voteResult,
+    }
+  },
+  methods:{
+    vote(){
+      axios({
+        method:"put",
+        url:`${BASE_URL}/article/${this.$route.params.story_id}`,
+        headers:{
+          Authorization:`Bearer ${sessionStorage.getItem("token")}`
+        },
+        data:{
+          "changed":this.$store.state.article.changed,
+          "exposure":this.$store.state.article.exposure,
+          "voteResult":this.result,
+        }
+      })
+      .then((res)=>{
+        console.log(this.result)
+        console.log(res.data)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    }
+  }
 
 }
 </script>
@@ -57,17 +93,17 @@ export default {
 }
 #greenbox, #redbox{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   margin: 10px;
 }
 #greenbar, #redbar{
-  font-size: 20px;
+  font-size: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: white;
   width: 17vw;
-  height: 4vh;
+  height: 1vh;
   font-weight: bold;
   color: #4D455D;
   border-radius: 20px;
@@ -80,6 +116,17 @@ export default {
     border-radius: 30px;
     width: 7vw;
     margin-left: 11vw;
+}
+#greenbox > input[type=radio]{
+  accent-color: #D4E384;
+  width: 10px;
+  margin: 5px;
+}
+
+#redbox > input[type=radio]{
+  accent-color: #F3998A;
+  width: 10px;
+  margin: 5px;
 }
 
 </style>

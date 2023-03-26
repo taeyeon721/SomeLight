@@ -1,6 +1,6 @@
 <template>
   <div id="content">
-    <div id="contentdetail">
+    <div id="contentdetail" v-bind:content="content">
       {{ content }}
     </div>
   </div>
@@ -8,7 +8,15 @@
 
 <script>
 export default {
-  props:["content",],
+  data(){
+    return{
+      content:"" ,
+    }
+  },
+  created(){
+    this.$store.dispatch("getDetail", this.$route.params.story_id)
+    this.content = this.$store.state.article.content
+  }
 }
 </script>
 

@@ -2,34 +2,55 @@
   <div id="vote">
     <div id="votetext">
     <p>
-      사연에 대해</p> 
-      <p>여러분의 생각을</p>
-      <p> 투표해주세요.
+      투표 결과
     </p>
     </div>
     <div id="greenbox">
-      <input type="radio" value="green">
+        <div v-bind:greenPercent="greenPercent">그린라이트 {{ greenPercent }}%</div>
         <div id="greenbar"
         style="border: 2px solid #D4E384;">
-          그린라이트
+        <div id="greenlayer" v-bind:style="cssVariablegreen">
+        </div>
         </div>
     </div>
     <div id="redbox">
-      <input type="radio" value="red">
+        <div v-bind:redPercent="redPercent">레드라이트 {{ redPercent }}%</div>
         <div id="redbar"
         style="border: 2px solid #F3998A">
-          레드라이트
+        <div id="redlayer" v-bind:style="cssVariablered"></div>
         </div>
     </div>
-    <div>
-      <button id="votesubmit">투표하기</button>
-    </div>
+  
   </div>
 </template>
 
 <script>
 export default {
+  data(){
+    return{
 
+    }
+  },
+  created(){
+  },
+  computed:{
+    redPercent(){
+      return this.$store.state.article.redPercent
+    },
+    greenPercent(){
+      return this.$store.state.article.greenPercent
+    },
+    cssVariablegreen(){
+      return{
+        width:`${this.greenPercent}%`,
+      }
+    },
+    cssVariablered(){
+      return{
+        width: `${this.redPercent}%`
+      }
+    }
+  }
 }
 </script>
 
@@ -57,29 +78,62 @@ export default {
 }
 #greenbox, #redbox{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   margin: 10px;
 }
 #greenbar, #redbar{
   font-size: 20px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  background-color: white;
+  background-color:white;
   width: 17vw;
-  height: 4vh;
+  height: 1vh;
   font-weight: bold;
   color: #4D455D;
   border-radius: 20px;
 }
-#votesubmit{
-    background-color: #4D455D;
-    color: white;
-    font-size: 18px;
-    font-weight:bold;
-    border-radius: 30px;
-    width: 7vw;
-    margin-left: 11vw;
+#greenlayer{
+  background-color: #D4E384;
+  border-radius: 20px;
+  height: 1vh;
+  animation-name: voteslidegreen;
+  animation-duration :1s;
+  animation-iteration-count:1,
 }
 
+#redlayer{
+  background-color: #F3998A;
+  border-radius: 20px;
+  height: 1vh;
+  animation-name: voteslidered;
+  animation-duration :1s;
+  animation-iteration-count:1,
+}
+
+@keyframes voteslidegreen{
+  from{
+    width: 0%;
+    height: 1vh;
+    background-color: #D4E384;
+  }
+
+  to{
+    height: 1vh;
+    background-color: #D4E384;
+  }
+}
+
+@keyframes voteslidered{
+  from{
+    width: 0%;
+    height: 1vh;
+    background-color: #F3998A;
+  }
+
+  to{
+    height: 1vh;
+    background-color: #F3998A;
+  }
+}
 </style>

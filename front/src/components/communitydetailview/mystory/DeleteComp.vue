@@ -1,5 +1,5 @@
 <template>
-  <div id="deletebtn"> 
+  <div id="deletebtn" v-on:click="deleteArticle"> 
     <p style="
     font-size:20px; 
     color:white; 
@@ -8,7 +8,29 @@
 </template>
 
 <script>
+import axios from 'axios'
+
+const BASE_URL = "http://localhost:8080"
+
 export default {
+  methods:{
+    deleteArticle(){
+      axios({
+        method:"delete",
+        url:`${BASE_URL}/article/${this.$route.params.story_id}`,
+        headers:{
+          Authorization:`Bearer ${sessionStorage.getItem("token")}`
+        }
+      })
+      .then((res)=>{
+        console.log(res.data)
+        this.$router.go(-1)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    }
+  }
 
 }
 </script>
