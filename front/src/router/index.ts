@@ -16,6 +16,11 @@ const routes = [
     name: "storyCreate",
     component: () => import("../views/StoryCreateView.vue"),
   },
+  {
+    path: "/story/result",
+    name: "storyResult",
+    component: () => import("../views/StoryResultView.vue"),
+  },
 ];
 
 const router = createRouter({
