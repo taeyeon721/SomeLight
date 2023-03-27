@@ -2,18 +2,26 @@
   <div id="mainWrapper">
     <div class="center">
       <div id="resultWrapper">
-        <div id="bulbWrapper">
-
+        <div id="bulbWrapper" v-if="results.article.result===2">
+          <img src="@/assets/img/result/fix_green.png" alt="" />
+        </div>
+        <div id="bulbWrapper" v-else-if="results.article.result===1">
           <img src="@/assets/img/result/fix_black.png" alt="" />
         </div>
-        <div id="textWrapper"></div>
+        <div id="bulbWrapper" v-else-if="results.article.result===0">
+          <img src="@/assets/img/result/fix_red.png" alt="" />
+        </div>
+        <div id="textWrapper">{{ results.article.content }}</div>
       </div>
-      <div id="btnShare">공유하기</div>
+      <div id="btnShare" v-on:click="share">공유하기</div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
+<script>
+import axios from 'axios';
+
+const BASE_URL = "http://localhost:8080"
 
 export default {
   components: {},
@@ -21,28 +29,50 @@ export default {
     return {
       results:{
       article:{
-        articleId:null,
-        userId:null,
-        content:"",
-        result:null,
-        createdDate:null,
-        redCount:null,
-        greenCount:null,
-        isChanged:null,
-        isExposure:false,
+        articleId:this.$store.state.results.articleId,
+        userId:this.$store.state.results.userId,
+        content:this.$store.state.results.content,
+        result:this.$store.state.results.result,
+        createdDate:this.$store.state.results.createdDate,
+        redCount:this.$store.state.results.redCount,
+        greenCount:this.$store.state.results.greenCount,
+        isChanged:this.$store.state.results.isChanged,
+        isExposure:this.$store.state.results.isExposure,
       },
-      keyword:[],
-      movie:"",
-      movieImage:"",
-      book:"",
-      bookImage:"",
+      keyword:this.$store.state.results.keyword,
+      movie:this.$store.state.results.movie,
+      movieImage:this.$store.state.results.movieImage,
+      book:this.$store.state.results.book,
+      bookImage:this.$store.state.results.bookImage,
     }
     };
   },
   setup() {},
   created() {},
   mounted() {},
-  methods: {},
+  methods: {
+    share(){
+      axios({
+        method:"put",
+        url:`${BASE_URL}/article/${this.results.article.articleId}`,
+        headers:{
+          Authorization:`Bearer ${sessionStorage.getItem("token")}`
+        },
+        data:{
+          "isChanged":this.$store.state.article.changed,
+          "isExposure":true,
+          "voteResult":this.$store.state.article.voteResult,
+        }
+      })
+      .then((res)=>{
+        console.log(res.data)
+        this.$router.push("/community")
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    }
+  },
 };
 </script>
 
