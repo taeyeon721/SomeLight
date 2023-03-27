@@ -68,8 +68,8 @@ export default {
           Authorization:`Bearer ${sessionStorage.getItem("token")}`
         },
         data:{
-          "changed":this.$store.state.article.changed,
-          "exposure":this.$store.state.article.exposure,
+          "isChanged":this.$store.state.article.changed,
+          "isExposure":this.$store.state.article.exposure,
           "voteResult":this.result,
         }
       })
