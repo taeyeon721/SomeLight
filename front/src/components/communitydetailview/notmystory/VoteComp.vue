@@ -43,12 +43,16 @@ const BASE_URL = "http://localhost:8080"
 export default {
   data(){
     return{
-      result:0,
+      result:this.$store.state.article.voteResult,
     }
   },
   methods:{
+    
     vote(){
-      console.log("고구마")
+      // const story_id = this.$route.params.story_id
+      // const payload = {
+      //   story_id:story_id
+      // }
       axios({
         method:"put",
         url:`${BASE_URL}/article/${this.$route.params.story_id}`,
@@ -62,9 +66,8 @@ export default {
         }
       })
       .then((res)=>{
-        console.log("투표결과")
-        console.log(this.result)
-        console.log(res.data)
+        this.$store.commit("GET_ARTICLE_DETAIL", res.data)
+        // this.$store.dispatch("getDetail", payload)
       })
       .catch((err)=>{
         console.log(err)

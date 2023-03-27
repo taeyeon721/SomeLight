@@ -8,14 +8,14 @@
       <div v-else>
         <share-comp />
       </div>
-      <feedback-comp v-if="changed===null" />
+      <feedback-comp v-if="changed===null"/>
       <feedback-comp-result v-else/>
     </div>
     <div v-else>
-      <div v-if="voteResult==0">
+      <div v-if="voteResult===0">
         <vote-comp />
       </div>
-      <div v-else>
+      <div v-else-if="voteResult===1|2">
         <vote-result-comp />
       </div>
     </div>
@@ -31,11 +31,16 @@ import ShareComp from './mystory/ShareComp.vue'
 import VoteComp from './notmystory/VoteComp.vue'
 import VoteResultComp from './notmystory/VoteResultComp.vue'
 
+
+
 export default {
   data(){
     return{
-
+      // getVote:this.$store.state.article.voteResult,
     }
+  },
+  methods:{
+  
   },
   components: { 
     FeedbackComp, 
@@ -47,11 +52,14 @@ export default {
     VoteResultComp },
   props:[
     "loginflag",
+    // "getVote",
   ],
   computed:{
-    get(){
-      return this.$store.dispatch("getDetail", this.$route.params.story_id)
-    },
+    // get(){
+    //   console.log(this.getVote)
+    //   console.log("바인딩 테스트 in half")
+    //   return this.$store.dispatch("getDetail", this.$route.params.story_id)
+    // },
     exposure(){
       return this.$store.state.article.exposure
     },
@@ -61,6 +69,8 @@ export default {
     voteResult(){
       return this.$store.state.article.voteResult
     },
+  },
+  created(){
   }
 
 }

@@ -3,6 +3,7 @@
     <div class="center">
       <div id="resultWrapper">
         <div id="bulbWrapper">
+
           <img src="@/assets/img/result/fix_black.png" alt="" />
         </div>
         <div id="textWrapper"></div>
@@ -13,10 +14,30 @@
 </template>
 
 <script lang="ts">
+
 export default {
   components: {},
   data() {
-    return {};
+    return {
+      results:{
+      article:{
+        articleId:null,
+        userId:null,
+        content:"",
+        result:null,
+        createdDate:null,
+        redCount:null,
+        greenCount:null,
+        isChanged:null,
+        isExposure:false,
+      },
+      keyword:[],
+      movie:"",
+      movieImage:"",
+      book:"",
+      bookImage:"",
+    }
+    };
   },
   setup() {},
   created() {},

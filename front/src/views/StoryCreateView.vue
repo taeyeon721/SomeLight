@@ -40,7 +40,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 
 const BASE_URL = 'http://localhost:8080'
 
@@ -56,20 +55,18 @@ export default {
   mounted() {},
   methods: {
     createStory(){
-      axios({
-        method:"post",
-        url: `${BASE_URL}/result`,
-        data:{
-          "content":this.content,
-        }
-      })
-      .then(function(res){
-        console.log(res)
-        //라우터로 결과 페이지 넘어가게 
-      })
-      .catch(function(err){
-        console.log(err)
-      })
+      const content = this.content
+      // const result = 
+      // const keyword = 
+      // keyword type -> list
+
+      const payload = {
+        content: content,
+        // result: result,
+        // keyword:keyword,
+      }
+      
+      this.$store.dispatch("createStory", payload)
     }
   },
 };
