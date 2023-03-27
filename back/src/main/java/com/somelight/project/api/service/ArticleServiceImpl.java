@@ -55,7 +55,10 @@ public class ArticleServiceImpl implements ArticleService {
         Article article = articleRepository.findByArticleId(articleId).orElseThrow();
         article.setIsChanged(isChanged);
         article.setIsExposure(isExposure);
-
+        if (!isExposure){
+            article.setGreenCount(0);
+            article.setRedCount(0);
+        }
         articleRepository.save(article);
         return article;
     }

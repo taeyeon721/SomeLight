@@ -83,6 +83,13 @@ public class ArticleController {
         int userId = userService.getUserId(email);
         Article article = articleService.getArticleByArticleId(articleId);
         Vote vote = voteService.getVoteByArticleIdAndUserId(articleId, userId);
+        int voteResult;
+        if (vote == null) {
+            voteResult = 0;
+        } else {
+            voteResult = vote.getVoteResult();
+        }
+
         if (userId == article.getUserId()){
             if (req.getVoteResult() != 0) {
                 return new ResponseEntity<>("수정할 권한이 없습니다.", HttpStatus.BAD_REQUEST);
@@ -93,9 +100,12 @@ public class ArticleController {
                 return new ResponseEntity<>("수정할 권한이 없습니다.", HttpStatus.BAD_REQUEST);
             } else {
                 articleService.updateArticle(req.getIsChanged(), req.getIsExposure(), articleId);
+                if (!req.getIsExposure()) {
+                    voteService.deleteVoteList(articleId);
+                }
             }
         }
-        if (req.getVoteResult() != 0) {
+        if (req.getVoteResult() != 0 && req.getVoteResult() != voteResult) {
             voteService.updateVote(userId, articleId, req.getVoteResult());
             articleService.updateVote(articleId, req.getVoteResult(), vote);
         }
