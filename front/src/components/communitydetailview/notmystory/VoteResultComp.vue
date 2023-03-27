@@ -6,8 +6,17 @@
     </p>
     </div>
    <div id="greenbox">
+      <div style="
+      display:flex;
+      flex-direction:column;">
       <div style="display:flex;">
       <input type="radio" id="gchoice" name="vote" v-model="result" value="1">
+        <div 
+        v-bind:greenPercent="greenPercent"
+        style="padding-bottom:10px;">
+        그린라이트 {{ Math.round(greenPercent) }}%
+        </div>
+        </div>
         <div id="greenbar"
         style="border: 2px solid #D4E384;">
         <div id="greenlayer" v-bind:style="cssVariablegreen">
@@ -16,9 +25,17 @@
     </div>
    </div>
     <div id="redbox">
+      <div style="
+      display:flex;
+      flex-direction:column;">
       <div style="display:flex;">
       <input type="radio" id="rchoice" name="vote" v-model="result" value="2">
-        <div v-bind:redPercent="redPercent">레드라이트 {{ redPercent }}%</div>
+        <div 
+        v-bind:redPercent="redPercent"
+        style="padding-bottom:10px;">
+        레드라이트 {{ Math.round(redPercent) }}%
+        </div>
+      </div>
         <div id="redbar"
         style="border: 2px solid #F3998A">
         <div id="redlayer" v-bind:style="cssVariablered"></div>
@@ -57,15 +74,35 @@ export default {
         }
       })
       .then((res)=>{
-        console.log(this.result)
-        console.log(res.data)
+        this.$store.commit("GET_ARTICLE_DETAIL", res.data)
+        // console.log(res.data)
       })
       .catch((err)=>{
         console.log(err)
       })
     }
-  }
+  },
+  created(){
 
+  },
+  computed:{
+    redPercent(){
+      return this.$store.state.article.redPercent
+    },
+    greenPercent(){
+      return this.$store.state.article.greenPercent
+    },
+    cssVariablegreen(){
+      return{
+        width:`${this.greenPercent}%`,
+      }
+    },
+    cssVariablered(){
+      return{
+        width: `${this.redPercent}%`
+      }
+    },
+  }
 }
 </script>
 
@@ -129,4 +166,47 @@ export default {
   margin: 5px;
 }
 
+#greenlayer{
+  background-color: #D4E384;
+  border-radius: 20px;
+  height: 1vh;
+  animation-name: voteslidegreen;
+  animation-duration :1s;
+  animation-iteration-count:1,
+}
+
+#redlayer{
+  background-color: #F3998A;
+  border-radius: 20px;
+  height: 1vh;
+  animation-name: voteslidered;
+  animation-duration :1s;
+  animation-iteration-count:1,
+}
+
+@keyframes voteslidegreen{
+  from{
+    width: 0%;
+    height: 1vh;
+    background-color: #D4E384;
+  }
+
+  to{
+    height: 1vh;
+    background-color: #D4E384;
+  }
+}
+
+@keyframes voteslidered{
+  from{
+    width: 0%;
+    height: 1vh;
+    background-color: #F3998A;
+  }
+
+  to{
+    height: 1vh;
+    background-color: #F3998A;
+  }
+}
 </style>
