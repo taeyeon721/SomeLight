@@ -1,13 +1,70 @@
 <template>
   <div id="feedback">
     <p id="feedbacktitle">정확했나요?</p>
-    <button id="feedbackbtn">YES</button>
-    <button id="feedbackbtn">NO</button>
+    <button 
+    id="feedbackbtn" 
+    v-on:click="putFeedbackY">YES</button>
+    <button 
+    id="feedbackbtn" 
+    v-on:click="putFeedbackN">NO</button>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
+const BASE_URL = "http://localhost:8080"
+
 export default {
+  data(){
+    return{
+   
+    }
+  },
+  methods:{
+    putFeedbackY(){
+      axios({
+        method:"put",
+        url: `${BASE_URL}/article/${this.$route.params.story_id}`,
+        headers:{
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+        data:{
+          "isChanged":true,
+          "isExposure":this.$store.state.article.exposure,
+          "voteResult":this.$store.state.article.voteResult,
+        }
+      })
+      .then((res)=>{
+        console.log(res.data)
+        this.$store.commit("GET_ARTICLE_DETAIL", res.data)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    },
+    putFeedbackN(){
+      axios({
+        method:"put",
+        url: `${BASE_URL}/article/${this.$route.params.story_id}`,
+        headers:{
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+        data:{
+          "isChanged":false,
+          "isExposure":this.$store.state.article.exposure,
+          "voteResult":this.$store.state.article.voteResult,
+        }
+      })
+      .then((res)=>{
+        console.log(res.data)
+        this.$store.commit("GET_ARTICLE_DETAIL", res.data)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    }
+  }
 
 }
 </script>

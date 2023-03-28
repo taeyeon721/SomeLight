@@ -1,13 +1,18 @@
 <template>
   <div id="feedback">
     <p id="feedbacktitle">정확했나요?</p>
-    <button id="feedbackbtn">YES</button>
-    <button id="feedbackbtn">NO</button>
+    <button id="feedbackbtn" v-bind:disabled="fbResult===true">YES</button>
+    <button id="feedbackbtn" v-bind:disabled="fbResult===false">NO</button>
   </div>
 </template>
 
 <script>
 export default {
+  data(){
+    return{
+      fbResult: this.$store.state.article.changed,
+    }
+  },
 
 }
 </script>
@@ -37,7 +42,11 @@ export default {
     font-weight:bold;
     border-radius: 30px;
     width: 5vw;
+}
 
+#feedbackbtn:disabled{
+  background-color:white ;
+  color:#4D455D;
 }
 
 </style>
