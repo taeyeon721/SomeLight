@@ -2,9 +2,9 @@
   <div id="mystorylist">
     <table id="commutable">
       <thead>
-        <th id="area1">No.</th>
-        <th id="area2">Content</th>
-        <th id="area3">Light</th>
+        <!-- <th id="area1">No.</th> -->
+        <th id="area2">사연</th>
+        <th id="area3">결과</th>
       </thead>
       <br>
       <tbody>
@@ -14,7 +14,7 @@
         style="
         line-height:25px;"
         >
-          <td id="area1">{{ article.articleId }}</td>
+          <!-- <td id="area1">{{ article.articleId }}</td> -->
           <td 
           id="area2"
           ><div
@@ -53,7 +53,7 @@
   position:absolute;
   padding-top:29%;"
   >
-  <button v-on:click="prevPage">prev</button>
+  <button v-on:click="prevPage">이전</button>
   <span v-for="p in totalpage" v-bind:key="p">
     <button v-if="p==page" style="text-decoration:underline;" v-on:click="changePage(p)" >
       {{ p }}
@@ -62,7 +62,7 @@
       {{ p }}
     </button>
   </span>
-  <button v-on:click="nextPage">next</button>
+  <button v-on:click="nextPage">다음</button>
   </div>
   </div>
 </template>
@@ -145,6 +145,7 @@ export default {
 
 <style scoped>
 #mystorylist{
+   font-family: "Dovemayo_gothic";
     width: 30vw;
     height: 70vh;
     display: flex;
@@ -184,6 +185,7 @@ tbody{
 }
 
 button{
+  font-family: "Dovemayo_gothic";
   font-size: 20px;
   border: 0px solid black;
   background-color:transparent ;

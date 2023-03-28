@@ -1,8 +1,8 @@
 <template>
   <div id="feedback">
     <p id="feedbacktitle">정확했나요?</p>
-    <button id="feedbackbtn" v-bind:disabled="fbResult===true">YES</button>
-    <button id="feedbackbtn" v-bind:disabled="fbResult===false">NO</button>
+    <button id="feedbackbtn" v-bind:disabled="fbResult===true">네</button>
+    <button id="feedbackbtn" v-bind:disabled="fbResult===false">아니오</button>
   </div>
 </template>
 
@@ -36,6 +36,7 @@ export default {
     font-weight: bold;
 }
 #feedbackbtn{
+     font-family: "Dovemayo_gothic";
     background-color: #4D455D;
     color: white;
     font-size: 20px;

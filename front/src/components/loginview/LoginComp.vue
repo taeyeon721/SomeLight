@@ -4,7 +4,7 @@
   display:flex;
   align-items:center;">
     <h1 style=
-    "font-size:64px;
+    "font-size:50px;
     font-weight:bold;
     color:#4D455D;
     ">LOGIN</h1>
@@ -48,6 +48,7 @@
 </template>
 
 <script >
+import router from '@/router'
 
 // const BASE_URL = "http://localhost:8080"
 
@@ -58,7 +59,9 @@ export default {
     },
     methods:{
         nonmemberLogin(){
-
+          sessionStorage.setItem("pk", 0)
+          sessionStorage.setItem("token", null)
+          router.push({name:"storyCreate"})
         },
     },
     created(){
@@ -74,6 +77,7 @@ export default {
     background-color: rgb(189, 189, 189);
     border-radius: 25px;
     color: white;
+    font-family: "Dovemayo_gothic";
     font-size: 25px;
     font-weight: bold;
     border: 0px solid white;
@@ -85,6 +89,7 @@ export default {
 #kakaobtn{
     width: 20vw;
     height: 7vh;
+    font-family: "Dovemayo_gothic";
     background-color: #4D455D;
     border-radius: 25px;
     color: white;
@@ -94,5 +99,8 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+h1{
+   font-family: "Dovemayo_gothic";
 }
 </style>

@@ -61,6 +61,7 @@ export default {
     align-items: center;
 }
 button{
+    font-family: "Dovemayo_gothic";
     background-color: #4D455D;
     color: white;
     font-size: 23px;

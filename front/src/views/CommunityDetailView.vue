@@ -69,6 +69,7 @@ export default {
 
 <style scoped>
 #detailpage{
+  font-family: "Dovemayo_gothic";
   width: 100vw;
   height: 100vh;
   display: flex;

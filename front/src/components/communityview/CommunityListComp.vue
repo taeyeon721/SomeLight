@@ -3,9 +3,9 @@
     <table id="commutable">
       <thead>
         <div>
-        <th id="area1">No.</th>
-        <th id="area2">Content</th>
-        <th id="area3">Light</th>
+        <!-- <th id="area1">No.</th> -->
+        <th id="area2">사연</th>
+        <th id="area3">결과</th>
         </div>
       </thead>
       <br>
@@ -16,7 +16,7 @@
         style="
         line-height:28px;"
         >
-          <td id="area1">{{ article.articleId }}</td>
+          <!-- <td id="area1">{{ article.articleId }}</td> -->
           <td 
           id="area2"
           ><div
@@ -57,7 +57,7 @@
   padding-left:6%;
   padding-top:75%;"
   >
-  <button v-on:click="prevPage">prev</button>
+  <button v-on:click="prevPage">이전</button>
   <span v-for="p in totalpage" v-bind:key="p">
     <button v-if="p==page" style="text-decoration:underline;" v-on:click="changePage(p)" >
       {{ p }}
@@ -66,7 +66,7 @@
       {{ p }}
     </button>
   </span>
-  <button v-on:click="nextPage">next</button>
+  <button v-on:click="nextPage">다음</button>
   </div>
   </div>
 </template>
@@ -142,6 +142,7 @@ export default {
 
 <style scoped>
 #commulist{
+    font-family: "Dovemayo_gothic";
     position:absolute;
     width: 42vw;
     height: 70vh;
@@ -189,6 +190,7 @@ tbody{
 }
 
 button{
+  font-family: "Dovemayo_gothic";
   font-size: 23px;
   border: 0px solid black;
   background-color:transparent ;

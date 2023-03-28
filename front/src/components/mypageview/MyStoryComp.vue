@@ -16,6 +16,7 @@ export default {
 
 <style scoped>
 #mystory{
+  font-family: "Dovemayo_gothic";
   width: 40vw;
   height: 70vh;
   border-radius: 20px;

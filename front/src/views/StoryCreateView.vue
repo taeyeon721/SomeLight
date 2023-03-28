@@ -117,6 +117,7 @@ export default {
 
 <style scoped>
 #mainWrapper {
+  font-family: "Dovemayo_gothic";
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -178,6 +179,7 @@ export default {
   height: 75%;
 }
 textarea {
+  font-family: "Dovemayo_gothic";
   width: 100%;
   height: 100%;
   box-sizing: border-box;
