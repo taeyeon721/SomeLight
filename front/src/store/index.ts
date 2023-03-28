@@ -11,7 +11,7 @@ export default createStore({
         content:"",
         result:0,
         exposure:false,
-        changed:false,
+        changed:null,
         redPercent:0,
         greenPercent:0,
         voteResult:0,

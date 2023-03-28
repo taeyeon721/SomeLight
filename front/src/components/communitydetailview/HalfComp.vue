@@ -64,6 +64,7 @@ export default {
       return this.$store.state.article.exposure
     },
     changed(){
+      console.log(this.$store.state.article.changed)
       return this.$store.state.article.changed
     },
     voteResult(){
