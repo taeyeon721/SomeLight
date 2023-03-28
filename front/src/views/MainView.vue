@@ -76,6 +76,7 @@ export default {
   height: calc(100vh - (100vh - 100%));
 }
 .font {
+  font-family: "Dovemayo_gothic";
   color: rgba(77, 69, 93, 100%);
 }
 h1 {

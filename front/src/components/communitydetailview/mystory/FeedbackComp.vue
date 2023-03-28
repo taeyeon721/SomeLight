@@ -3,10 +3,10 @@
     <p id="feedbacktitle">정확했나요?</p>
     <button 
     id="feedbackbtn" 
-    v-on:click="putFeedbackY">YES</button>
+    v-on:click="putFeedbackY">네</button>
     <button 
     id="feedbackbtn" 
-    v-on:click="putFeedbackN">NO</button>
+    v-on:click="putFeedbackN">아니오</button>
   </div>
 </template>
 
@@ -88,6 +88,7 @@ export default {
     font-weight: bold;
 }
 #feedbackbtn{
+    font-family: "Dovemayo_gothic";
     background-color: #4D455D;
     color: white;
     font-size: 20px;

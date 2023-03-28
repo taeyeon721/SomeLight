@@ -70,6 +70,7 @@ export default {
 
 <style scoped>
 #myinfo{
+  font-family: "Dovemayo_gothic";
   width: 200px;
   height: 200px;
   margin-right: 50px;

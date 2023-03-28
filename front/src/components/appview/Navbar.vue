@@ -13,7 +13,7 @@
           to="/login"
           style="
           text-decoration:none;
-          ">START</router-link></li>
+          ">시작하기</router-link></li>
       </ul>
     </div>
     <div v-else id="itemWrapperLogin">
@@ -24,28 +24,28 @@
           to="/story/create"
           style="
           text-decoration:none;
-          ">STORY</router-link>
+          ">AI</router-link>
         </li>
         <li>
           <router-link 
           to="/community"
           style="
           text-decoration:none;
-          "> COMMUNITY</router-link>
+          ">커뮤니티</router-link>
         </li>
         <li>
           <router-link 
           to="/mypage"
           style="
           text-decoration:none;
-          "> MYPAGE</router-link>
+          ">마이페이지</router-link>
         </li>
         <li>
           <router-link 
           to="/"
           style="
           text-decoration:none;"
-          v-on:click="logout">LOGOUT</router-link>
+          v-on:click="logout">로그아웃</router-link>
         </li>
       </ul>
     </div>
@@ -92,6 +92,7 @@ export default {
   width: 100vw;
   height: 10vh;
   position: fixed;
+  font-family:"Dovemayo_gothic";
   top: 0px;
   display: flex;
   background-color: rgba(255, 255, 255, 50%);
@@ -138,5 +139,12 @@ li {
 #itemWrapperLogin{
   height: 100%;
   margin-left: 11vw;
+}
+
+@font-face {
+    font-family: 'Dovemayo_gothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
 }
 </style>

@@ -81,6 +81,7 @@ export default {
   width: 100vw;
   height: 100%;
   display: flex;
+  font-family: "Dovemayo_gothic";
   flex-direction: column;
   align-items: center;
   position: fixed;
