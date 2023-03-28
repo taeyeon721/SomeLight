@@ -1,6 +1,7 @@
 <template>
   <div>
     <button id="backbtn" v-on:click="$router.go(-1)">back</button>
+    <div id="content">
     <div id="resultWrapper">
       <div id="bulbWrapper" v-if="articleId===2">
           <img src="@/assets/img/result/fix_green.png" alt="" />
@@ -12,7 +13,6 @@
           <img src="@/assets/img/result/fix_red.png" alt="" />
         </div>
     </div>
-    <div id="content">
       <div id="contentdetail">
         {{ content }}
       </div>
@@ -55,7 +55,8 @@ export default {
     width: 30vw;
     height: 50vh;
     border-radius: 20px;
-    background-color: #F5E9CF; 
+    /* background-color: #F5E9CF;  */
+    background-color: white;
     opacity: 0.8;
     margin-right: 30px;
     margin-top:5vh;
@@ -87,12 +88,13 @@ export default {
   width: 25%;
   min-height: 50%;
   /* height: auto; */
-  margin-left: 4%;
+  margin-left: 3%;
   margin-top: 3%;
-  background-color: rgba(255, 251, 251, 100%);
+  margin-bottom: 3%;
+  /* background-color: rgba(255, 251, 251, 100%); */
   border-radius: 20px;
-  border: 1px solid rgba(233, 217, 217, 100%);
-  box-shadow: 8px 4px 4px rgba(0, 0, 0, 25%);
+  /* border: 1px solid rgba(233, 217, 217, 100%); */
+  /* box-shadow: 8px 4px 4px rgba(0, 0, 0, 25%); */
   position: absolute;
   z-index: 0;
   display: flex;
@@ -124,11 +126,11 @@ export default {
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
-  border: 1px solid rgba(190, 176, 176, 100%);
+  border: 0px solid rgba(190, 176, 176, 100%);
   background-color: rgba(255, 251, 251, 100%);
   border-radius: 100%;
   border: 1px solid rgba(233, 217, 217, 100%);
-  box-shadow: 8px 4px 4px rgba(0, 0, 0, 25%);
+  box-shadow: 2px 2px 2px rgb(187, 187, 187);
 }
 
 #bulbWrapper > img {
