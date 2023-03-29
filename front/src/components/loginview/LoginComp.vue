@@ -9,40 +9,34 @@
     color:#4D455D;
     ">LOGIN</h1>
   </div>
-  <div style=
-  "height:20vh;
-  display:flex;
-  flex-direction: column;
-  justify-content:space-around;
-  align-items:center;">
+  <div
+    style="
+      height: 20vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+    "
+  >
     <div>
-      <button 
-        type="button"
-        id="nonmemberbtn" 
-        v-on:click="nonmemberLogin"
-        >
+      <button type="button" id="nonmemberbtn" v-on:click="nonmemberLogin">
         비로그인 이용
       </button>
     </div>
     <div>
-      <button 
-        type="button"
-        id="kakaobtn" 
-        v-on:click="kakaoLogin"
+      <button type="button" id="kakaobtn" v-on:click="kakaoLogin">
+        <img
+          src="../../../src/assets/img/main/kakaoImg.png"
+          width="30"
+          height="30"
+          style="margin-right: 10px"
+        />
+        <a
+          href="https://kauth.kakao.com/oauth/authorize?client_id=8147c85395148371709b2199642f9108&redirect_uri=http://localhost:3000/login/kakao&state=kakao&response_type=code"
+          style="text-decoration: none; color: white"
+          >카카오톡 로그인</a
         >
-        <img 
-        src="../../../src/assets/img/main/kakaoImg.png" 
-        width="30" 
-        height="30"
-        style="margin-right:10px">
-        <a 
-        href="https://kauth.kakao.com/oauth/authorize?client_id=8147c85395148371709b2199642f9108&redirect_uri=http://localhost:3000/login/kakao&state=kakao&response_type=code"
-        style="
-        text-decoration:none;
-        color:white;"
-        >카카오톡 로그인</a>
       </button>
-
     </div>
   </div>
 </template>

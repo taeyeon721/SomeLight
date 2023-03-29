@@ -13,79 +13,77 @@
 <script>
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080"
+// const BASE_URL = "http://localhost:8080"
+// const BASE_URL = this.$store.state.BASE_URL;
 
 export default {
-  data(){
-    return{
-   
-    }
+  data() {
+    return {};
   },
-  methods:{
-    putFeedbackY(){
+  methods: {
+    putFeedbackY() {
       axios({
-        method:"put",
-        url: `${BASE_URL}/article/${this.$route.params.story_id}`,
-        headers:{
+        method: "put",
+        url: `${this.$store.state.BASE_URL}/article/${this.$route.params.story_id}`,
+        headers: {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },
-        data:{
-          "isChanged":true,
-          "isExposure":this.$store.state.article.exposure,
-          "voteResult":this.$store.state.article.voteResult,
-        }
+        data: {
+          isChanged: true,
+          isExposure: this.$store.state.article.exposure,
+          voteResult: this.$store.state.article.voteResult,
+        },
       })
-      .then((res)=>{
-        console.log(res.data)
-        this.$store.commit("GET_ARTICLE_DETAIL", res.data)
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
+        .then((res) => {
+          console.log(res.data);
+          this.$store.commit("GET_ARTICLE_DETAIL", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
-    putFeedbackN(){
+    putFeedbackN() {
       axios({
-        method:"put",
-        url: `${BASE_URL}/article/${this.$route.params.story_id}`,
-        headers:{
+        method: "put",
+        url: `${this.$store.state.BASE_URL}/article/${this.$route.params.story_id}`,
+        headers: {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },
-        data:{
-          "isChanged":false,
-          "isExposure":this.$store.state.article.exposure,
-          "voteResult":this.$store.state.article.voteResult,
-        }
+        data: {
+          isChanged: false,
+          isExposure: this.$store.state.article.exposure,
+          voteResult: this.$store.state.article.voteResult,
+        },
       })
-      .then((res)=>{
-        console.log(res.data)
-        this.$store.commit("GET_ARTICLE_DETAIL", res.data)
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
-    }
-  }
-
-}
+        .then((res) => {
+          console.log(res.data);
+          this.$store.commit("GET_ARTICLE_DETAIL", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+};
 </script>
 
 <style scoped>
-#feedback{
-    width: 30vw;
-    height: 7vh;
-    margin: 20px;
-    border-radius: 30px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: #F5E9CF;
-    opacity: 0.9;
-    box-shadow: 3px 3px 3px gray;
+#feedback {
+  width: 30vw;
+  height: 7vh;
+  margin: 20px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #f5e9cf;
+  opacity: 0.9;
+  box-shadow: 3px 3px 3px gray;
 }
-#feedbacktitle{
-    color: #4D455D;
-    font-size: 25px;
-    font-weight: bold;
+#feedbacktitle {
+  color: #4d455d;
+  font-size: 25px;
+  font-weight: bold;
 }
 #feedbackbtn{
     font-family: "Dovemayo_gothic";
@@ -97,5 +95,4 @@ export default {
     width: 5vw;
 
 }
-
 </style>
