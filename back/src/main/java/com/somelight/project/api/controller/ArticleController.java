@@ -55,7 +55,6 @@ public class ArticleController {
         } else {
             redPercent = (double)redCnt/ (greenCnt + redCnt) * 100;
             greenPercent = (double)greenCnt / (greenCnt + redCnt) * 100;
-
         }
 
         int userId = 0;

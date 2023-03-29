@@ -6,6 +6,7 @@ import com.somelight.project.db.enitity.Book;
 import com.somelight.project.db.enitity.Movie;
 import com.somelight.project.db.repository.BookRepository;
 import com.somelight.project.db.repository.MovieRepository;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -78,7 +80,7 @@ public class ApiServiceImpl implements ApiService{
         return movie;
     }
 
-    public Book requestBook(int result, String content) {
+    public Book requestBook(int result, String content){
         Book book = new Book();
         double check = 0;
         List<Book> bookList = bookRepository.findAllByResult(result);
@@ -91,7 +93,6 @@ public class ApiServiceImpl implements ApiService{
                 check = similar;
             }
         }
-        System.out.println(book);
         return book;
     }
 

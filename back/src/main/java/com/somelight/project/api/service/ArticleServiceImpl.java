@@ -21,7 +21,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     public Page<Article> findArticles(Boolean isExposure, Pageable pageable) {
         Page<Article> articles = null;
-        articles = articleRepository.findAllByIsExposure(isExposure, pageable);
+        articles = articleRepository.findAllByIsExposureOrderByArticleIdDesc(isExposure, pageable);
         return articles;
     }
     @Override
