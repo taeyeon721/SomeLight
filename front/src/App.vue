@@ -25,12 +25,13 @@ html {
   height: 100%;
 }
 .font {
-  font-family: "DM Sans", sans-serif,'Dovemayo_gothic';
+  font-family: "DM Sans", sans-serif, "Dovemayo_gothic";
 }
 @font-face {
-    font-family: 'Dovemayo_gothic';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "Dovemayo_gothic";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
 }
 </style>

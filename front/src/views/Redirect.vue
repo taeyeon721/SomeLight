@@ -4,7 +4,10 @@
 
 <script>
 import router from "@/router";
-import axios from 'axios';
+import axios from "axios";
+
+// const BASE_URL = "http://localhost:8080"
+// const BASE_URL = this.$store.state.BASE_URL;
 
 export default {
     methods:{
@@ -28,18 +31,17 @@ export default {
             })
         }
     },
-    created(){
-        const code = this.$route.query.code
-        if (code!= null) {
-            this.getUser(code)
-            console.log("로그인 성공")
-        } else {
-            router.push({path:"/login"})
-        }
+  },
+  created() {
+    const code = this.$route.query.code;
+    if (code != null) {
+      this.getUser(code);
+      console.log("로그인 성공");
+    } else {
+      router.push({ path: "/login" });
     }
-}
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

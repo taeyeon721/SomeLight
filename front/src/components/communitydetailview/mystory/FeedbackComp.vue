@@ -13,60 +13,58 @@
 <script>
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080"
+// const BASE_URL = "http://localhost:8080"
+// const BASE_URL = this.$store.state.BASE_URL;
 
 export default {
-  data(){
-    return{
-   
-    }
+  data() {
+    return {};
   },
-  methods:{
-    putFeedbackY(){
+  methods: {
+    putFeedbackY() {
       axios({
-        method:"put",
-        url: `${BASE_URL}/article/${this.$route.params.story_id}`,
-        headers:{
+        method: "put",
+        url: `${this.$store.state.BASE_URL}/article/${this.$route.params.story_id}`,
+        headers: {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },
-        data:{
-          "isChanged":true,
-          "isExposure":this.$store.state.article.exposure,
-          "voteResult":this.$store.state.article.voteResult,
-        }
+        data: {
+          isChanged: true,
+          isExposure: this.$store.state.article.exposure,
+          voteResult: this.$store.state.article.voteResult,
+        },
       })
-      .then((res)=>{
-        console.log(res.data)
-        this.$store.commit("GET_ARTICLE_DETAIL", res.data)
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
+        .then((res) => {
+          console.log(res.data);
+          this.$store.commit("GET_ARTICLE_DETAIL", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
-    putFeedbackN(){
+    putFeedbackN() {
       axios({
-        method:"put",
-        url: `${BASE_URL}/article/${this.$route.params.story_id}`,
-        headers:{
+        method: "put",
+        url: `${this.$store.state.BASE_URL}/article/${this.$route.params.story_id}`,
+        headers: {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },
-        data:{
-          "isChanged":false,
-          "isExposure":this.$store.state.article.exposure,
-          "voteResult":this.$store.state.article.voteResult,
-        }
+        data: {
+          isChanged: false,
+          isExposure: this.$store.state.article.exposure,
+          voteResult: this.$store.state.article.voteResult,
+        },
       })
-      .then((res)=>{
-        console.log(res.data)
-        this.$store.commit("GET_ARTICLE_DETAIL", res.data)
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
-    }
-  }
-
-}
+        .then((res) => {
+          console.log(res.data);
+          this.$store.commit("GET_ARTICLE_DETAIL", res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -97,5 +95,4 @@ export default {
     width: 5vw;
 
 }
-
 </style>
