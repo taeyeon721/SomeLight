@@ -3,7 +3,7 @@ package com.somelight.project.api.service;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.somelight.project.db.repository.UserRepository;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,20 +14,16 @@ import java.util.Base64;
 import java.util.HashMap;
 
 @Service
-@AllArgsConstructor
 public class KakaoUserServiceImpl implements KakaoUserService {
-
-    @Autowired
-    private UserRepository userRepository;
-
-
-    /*
-     * 인가코드(code)를 받으면 AccessToken + ID Token을 발급
-     * */
+    @Value("${clientId}")
+    private String clientId;
+    @Value("${clientSecret}")
+    private String clientSecret;
+    @Value("${redirectUri}")
+    private String redirectUri;
 
     public HashMap<String, Object> getKakaoAccessToken(String code) {
-        String access_Token = "";
-        String refresh_Token = "";
+        String access_token = "";
         String id_Token = "";
         String reqURL = "https://kauth.kakao.com/oauth/token";
 
@@ -41,22 +37,18 @@ public class KakaoUserServiceImpl implements KakaoUserService {
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
 
-            //Content-Type 헤더 설정
-            //conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-
             //POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
-            sb.append("&client_id=8147c85395148371709b2199642f9108"); // TODO REST_API_KEY 입력
-//            sb.append("&redirect_uri=http://localhost:8080/login/kakao");
-//            sb.append("&redirect_uri=http://localhost:8081/kakao");
-            sb.append("&redirect_uri=https://j8a109.p.ssafy.io/kakao");
+            sb.append("&client_id=" + clientId); // TODO REST_API_KEY 입력
+            sb.append("&redirect_uri=" + redirectUri);
             sb.append("&code=" + code);
-            sb.append("&client_secret=hGt8M3JgE0sKlFwhJ8TfeDDmBvUqXYl8");
+            sb.append("&client_secret=" + clientSecret);
             bw.write(sb.toString());
             bw.flush();
 
+            System.out.println(sb);
             //결과 코드가 200이라면 성공
             int responseCode = conn.getResponseCode();
             System.out.println("responseCode : " + responseCode);
@@ -71,17 +63,14 @@ public class KakaoUserServiceImpl implements KakaoUserService {
             }
 
             System.out.println("response body : " + result);
-
             //Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result);
 
-            access_Token = element.getAsJsonObject().get("access_token").getAsString();
-            refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
+            access_token = element.getAsJsonObject().get("access_token").getAsString();
             id_Token = element.getAsJsonObject().get("id_token").getAsString();
 
-            tokenInfo.put(("access_token"), access_Token);
-            tokenInfo.put(("refresh_token"),refresh_Token);
+            tokenInfo.put(("access_token"), access_token);
             tokenInfo.put(("id_token"), id_Token);
 
             br.close();

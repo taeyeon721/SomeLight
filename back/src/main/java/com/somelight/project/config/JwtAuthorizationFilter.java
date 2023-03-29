@@ -31,7 +31,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             "https://kauth.kakao.com").cached(10, 7, TimeUnit.DAYS) // 7일간 최대 10개 캐시
             .build();
 
-
     private UserService userService;
 
     public JwtAuthorizationFilter(AuthenticationManager authenticationManager,
@@ -85,7 +84,9 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             // 3. 검증 및 디코딩
             Algorithm algorithm = Algorithm.RSA256((RSAPublicKey) jwk.getPublicKey(), null);
 
-            JWTVerifier verifier = JWT.require(algorithm).build();
+            // JWTVerifier verifier = JWT.require(algorithm).build();
+            JWTVerifier verifier = JWT.require(algorithm).acceptLeeway(3).build();
+
             DecodedJWT jwt = verifier.verify(idToken);
 
             String nickname = String.valueOf(jwt.getClaims().get("nickname")).replace("\"", "");

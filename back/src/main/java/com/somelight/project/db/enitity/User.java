@@ -1,12 +1,10 @@
 package com.somelight.project.db.enitity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import javax.management.relation.Role;
 import javax.persistence.*;
 
 @Data
@@ -30,5 +28,4 @@ public class User {
         this.email = email;
         this.nickname = nickname;
     }
-
 }

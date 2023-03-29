@@ -16,7 +16,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration //메모리에 그냥 떠야하니까
 @EnableWebSecurity // 스프링 시큐리티 필터가 스프링 필터체인에 등록
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+    @Autowired
     private UserService userService;
 
     @Autowired

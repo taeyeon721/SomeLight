@@ -11,7 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Base64;
 import java.util.HashMap;
-
+@Service
 public interface KakaoUserService {
 
     HashMap<String, Object> getKakaoAccessToken(String code);

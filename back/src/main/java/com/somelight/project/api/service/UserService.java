@@ -10,5 +10,5 @@ import java.util.List;
 @Service
 public interface UserService {
     int getUserId(String email);
-    List<Article> getUserArticles(int userId, Pageable pageable);
+    Page<Article> getUserArticles(int userId, Pageable pageable);
 }
