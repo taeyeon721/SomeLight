@@ -1,7 +1,7 @@
 <template>
   <div id="deletebtn" v-on:click="deleteArticle"> 
     <p style="
-    font-size:20px; 
+    font-size:1.3rem; 
     color:white; 
     font-weight:bold">삭제</p>
   </div>

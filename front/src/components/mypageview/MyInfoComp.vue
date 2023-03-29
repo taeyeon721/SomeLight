@@ -71,10 +71,10 @@ export default {
 <style scoped>
 #myinfo{
   font-family: "Dovemayo_gothic";
-  width: 200px;
-  height: 200px;
-  margin-right: 50px;
-  margin-bottom: 260px;
+  width: 20%;
+  height: 30%;
+  margin-right: 10%;
+  margin-bottom: 30%;
   border-radius: 20px;
   background-color: #F5E9CF;
   opacity: 0.85;
@@ -85,8 +85,8 @@ export default {
   box-shadow: 2px 2px 2px rgb(216, 216, 216);
 }
 #username{
-  padding-top:60px;
-  font-size:30px;
+  padding-top:30%;
+  font-size:2.3rem;
   font-weight: bold;
   color: #4D455D;
 }

@@ -19,6 +19,7 @@ export default {
             .then((res)=>{
                 sessionStorage.setItem("pk", res.data.userId)
                 sessionStorage.setItem("token",res.data.token)
+                console.log(res.data)
                 // console.log(res.data)
                 router.push({path:"/mypage"})
             })

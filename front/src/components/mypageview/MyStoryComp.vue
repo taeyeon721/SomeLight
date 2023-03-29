@@ -29,8 +29,9 @@ export default {
   box-shadow: 2px 2px 2px rgb(216, 216, 216);
 }
 #mystorytitle{
-  padding-top:10px;
-  font-size:30px;
+  margin-top:1%;
+  padding-top:1%;
+  font-size:3rem;
   font-weight: bold;
   color: #4D455D;
   text-align: center;

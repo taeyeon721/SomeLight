@@ -4,7 +4,7 @@
   display:flex;
   align-items:center;">
     <h1 style=
-    "font-size:50px;
+    "font-size:3.5rem;
     font-weight:bold;
     color:#4D455D;
     ">LOGIN</h1>
@@ -34,7 +34,7 @@
         src="../../../src/assets/img/main/kakaoImg.png" 
         width="30" 
         height="30"
-        style="margin-right:10px">
+        style="margin-right:2%">
         <a 
         href="https://kauth.kakao.com/oauth/authorize?client_id=8147c85395148371709b2199642f9108&redirect_uri=http://localhost:3000/login/kakao&state=kakao&response_type=code"
         style="
@@ -78,7 +78,7 @@ export default {
     border-radius: 25px;
     color: white;
     font-family: "Dovemayo_gothic";
-    font-size: 25px;
+    font-size: 1.7rem;
     font-weight: bold;
     border: 0px solid white;
     display: flex;
@@ -93,7 +93,7 @@ export default {
     background-color: #4D455D;
     border-radius: 25px;
     color: white;
-    font-size: 25px;
+    font-size: 1.7rem;
     font-weight: bold;
     border: 0px solid white;
     display: flex;
