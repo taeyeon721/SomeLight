@@ -36,7 +36,6 @@ public class VoteServiceImpl implements VoteService{
             vote.setVoteResult(voteResult);
             voteRepository.save(vote);
         }
-
     }
 
     @Override
