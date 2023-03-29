@@ -40,7 +40,8 @@
 </template>
 
 <script>
-const BASE_URL = "http://localhost:8080";
+// const BASE_URL = "http://localhost:8080"
+// const BASE_URL = this.$store.state.BASE_URL;
 
 export default {
   components: {},
@@ -53,6 +54,7 @@ export default {
   setup() {},
   created() {},
   mounted() {
+    //Web Speech API: https://triplexblog.kr/167
     if (!("webkitSpeechRecognition" in window)) {
       alert("이 브라우저에서는 지원되지 않습니다.");
       return;

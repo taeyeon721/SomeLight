@@ -3,199 +3,202 @@
     <table id="commutable">
       <thead>
         <div>
-        <th id="area1">No.</th>
-        <th id="area2">Content</th>
-        <th id="area3">Light</th>
+          <th id="area1">No.</th>
+          <th id="area2">Content</th>
+          <th id="area3">Light</th>
         </div>
       </thead>
-      <br>
+      <br />
       <tbody>
         <div v-for="article in articles" v-bind:key="article.articleId">
-        <!-- v-if="article.exposure" -->
-        <tr 
-        style="
-        line-height:28px;"
-        >
-          <td id="area1">{{ article.articleId }}</td>
-          <td 
-          id="area2"
-          ><div
-          id="articletitle"
-          v-on:click="goDetail(article.articleId)"
-          style="
-          width:380px;
-          white-space:nowrap;
-          overflow:hidden;
-          text-overflow:ellipsis;">
-            {{ article.content }}
-          </div></td>
-          <td id="area3" v-if="article.result===0">
-            <img 
-            src="../../../src/assets/img/community/redbulb.png" 
-            alt=""
-            >
+          <!-- v-if="article.exposure" -->
+          <tr style="line-height: 28px">
+            <td id="area1">{{ article.articleId }}</td>
+            <td id="area2">
+              <div
+                id="articletitle"
+                v-on:click="goDetail(article.articleId)"
+                style="
+                  width: 380px;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                "
+              >
+                {{ article.content }}
+              </div>
             </td>
-          <td id="area3" v-else-if="article.result===1">
-            <img 
-            src="../../../src/assets/img/community/navybulb.png"
-            alt=""
-           >
-          </td>
-          <td id="area3" v-else-if="article.result===2">
-            <img 
-            src="../../../src/assets/img/community/greenbulb.png" 
-            alt=""
-            ></td>
-        </tr>
+            <td id="area3" v-if="article.result === 0">
+              <img src="../../../src/assets/img/community/redbulb.png" alt="" />
+            </td>
+            <td id="area3" v-else-if="article.result === 1">
+              <img
+                src="../../../src/assets/img/community/navybulb.png"
+                alt=""
+              />
+            </td>
+            <td id="area3" v-else-if="article.result === 2">
+              <img
+                src="../../../src/assets/img/community/greenbulb.png"
+                alt=""
+              />
+            </td>
+          </tr>
         </div>
       </tbody>
     </table>
-    <br>
-  <div id="page" 
-  style="
-  position:absolute;
-  padding-left:6%;
-  padding-top:75%;"
-  >
-  <button v-on:click="prevPage">prev</button>
-  <span v-for="p in totalpage" v-bind:key="p">
-    <button v-if="p==page" style="text-decoration:underline;" v-on:click="changePage(p)" >
-      {{ p }}
-    </button>
-    <button v-else v-on:click="changePage(p)" >
-      {{ p }}
-    </button>
-  </span>
-  <button v-on:click="nextPage">next</button>
-  </div>
+    <br />
+    <div
+      id="page"
+      style="position: absolute; padding-left: 6%; padding-top: 75%"
+    >
+      <button v-on:click="prevPage">prev</button>
+      <span v-for="p in totalpage" v-bind:key="p">
+        <button
+          v-if="p == page"
+          style="text-decoration: underline"
+          v-on:click="changePage(p)"
+        >
+          {{ p }}
+        </button>
+        <button v-else v-on:click="changePage(p)">
+          {{ p }}
+        </button>
+      </span>
+      <button v-on:click="nextPage">next</button>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080"
+// const BASE_URL = "http://localhost:8080"
+// const BASE_URL = this.$store.state.BASE_URL;
 
 export default {
-  data(){
-    return{
-      page:1, // 페이지네이션 초기값
-      articles:[],
-      totalpage:1,
-    }
+  data() {
+    return {
+      page: 1, // 페이지네이션 초기값
+      articles: [],
+      totalpage: 1,
+    };
   },
-  methods:{
-    getAllArticle(){
+  methods: {
+    getAllArticle() {
       axios({
-        method:"get",
-        url: `${BASE_URL}/article`,
-        params:{
-          "page":this.page,
-        }
+        method: "get",
+        url: `${this.$store.state.BASE_URL}/article`,
+        params: {
+          page: this.page,
+        },
       })
-      .then((res)=>{
-        this.articles = []
-        for (let i = 0 ; i<res.data.numberOfElements; i++){
-          this.articles.push(res.data.content[i])
-        }
-        this.totalpage = res.data.totalPages
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
+        .then((res) => {
+          this.articles = [];
+          for (let i = 0; i < res.data.numberOfElements; i++) {
+            this.articles.push(res.data.content[i]);
+          }
+          this.totalpage = res.data.totalPages;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
-    prevPage(){
-      if (this.page >= 1){
-        this.page -= 1
-        this.getAllArticle()
+    prevPage() {
+      if (this.page >= 1) {
+        this.page -= 1;
+        this.getAllArticle();
       }
     },
-    nextPage(){
-      if (this.page < this.totalpage){
-        this.page += 1
-        this.getAllArticle()
+    nextPage() {
+      if (this.page < this.totalpage) {
+        this.page += 1;
+        this.getAllArticle();
       }
     },
-    changePage(p){
-      this.page = p
-      this.getAllArticle()
+    changePage(p) {
+      this.page = p;
+      this.getAllArticle();
     },
-    goDetail(pk){
+    goDetail(pk) {
       axios({
-        method:"get",
-        url:`${BASE_URL}/article/${pk}`,
+        method: "get",
+        url: `${this.$store.state.BASE_URL}/article/${pk}`,
       })
-      .then((res)=>{
-        this.$router.push({name:"communitydetail", params:{ story_id:pk }})
-        console.log(res)
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
-    }
+        .then((res) => {
+          this.$router.push({
+            name: "communitydetail",
+            params: { story_id: pk },
+          });
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
-  created(){
-    this.getAllArticle()
-  }
-}
+  created() {
+    this.getAllArticle();
+  },
+};
 </script>
 
 <style scoped>
-#commulist{
-    position:absolute;
-    width: 42vw;
-    height: 70vh;
-    background-color: white;
-    color: #4D455D;
-    border-radius: 20px;
-    box-shadow: 3px 3px 3px rgb(205, 205, 205);
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    opacity: 0.9;
+#commulist {
+  position: absolute;
+  width: 42vw;
+  height: 70vh;
+  background-color: white;
+  color: #4d455d;
+  border-radius: 20px;
+  box-shadow: 3px 3px 3px rgb(205, 205, 205);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  opacity: 0.9;
 }
 
-#commutable{
+#commutable {
   position: absolute;
   width: 35vw;
   height: 100vh;
   margin: 5%;
 }
 
-thead{
+thead {
   position: absolute;
   font-size: 24px;
   font-weight: bold;
   text-align: center;
 }
-tbody{
+tbody {
   font-size: 20px;
   text-align: center;
 }
 
-#area1, #area3{
-  width:5vw;
+#area1,
+#area3 {
+  width: 5vw;
   text-align: center;
 }
 
-#area2{
-  width:400px;
+#area2 {
+  width: 400px;
   padding-left: 5%;
 }
 
-#area3 > img{
-  width: 1vw;  
-  object-fit:fill;
+#area3 > img {
+  width: 1vw;
+  object-fit: fill;
 }
 
-button{
+button {
   font-size: 23px;
   border: 0px solid black;
-  background-color:transparent ;
+  background-color: transparent;
 }
 
-#articletitle:hover{
+#articletitle:hover {
   color: red;
 }
-
 </style>
