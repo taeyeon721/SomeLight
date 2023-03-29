@@ -2,9 +2,9 @@
   <div id="mystorylist">
     <table id="commutable">
       <thead>
-        <th id="area1">No.</th>
-        <th id="area2">Content</th>
-        <th id="area3">Light</th>
+        <!-- <th id="area1">No.</th> -->
+        <th id="area2">사연</th>
+        <th id="area3">결과</th>
       </thead>
       <br />
       <tbody>
@@ -13,17 +13,23 @@
           v-bind:key="article.articleId"
           style="line-height: 25px"
         >
-          <td id="area1">{{ article.articleId }}</td>
-          <td id="area2">
-            <div
-              id="articletitle"
-              v-on:click="goDetail(article.articleId)"
-              style="
-                width: 380px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-              "
+          <!-- <td id="area1">{{ article.articleId }}</td> -->
+          <td 
+          id="area2"
+          ><div
+          id="articletitle"
+          v-on:click="goDetail(article.articleId)"
+          style="
+          width:380px;
+          white-space:nowrap;
+          overflow:hidden;
+          text-overflow:ellipsis;">
+            {{ article.content }}
+          </div></td>
+          <td id="area3" v-if="article.result===0">
+            <img 
+            src="../../../src/assets/img/community/redbulb.png" 
+            alt=""
             >
               {{ article.content }}
             </div>
@@ -40,23 +46,23 @@
         </tr>
       </tbody>
     </table>
-    <br />
-    <div id="page" style="position: absolute; padding-top: 29%">
-      <button v-on:click="prevPage">prev</button>
-      <span v-for="p in totalpage" v-bind:key="p">
-        <button
-          v-if="p == page"
-          style="text-decoration: underline"
-          v-on:click="changePage(p)"
-        >
-          {{ p }}
-        </button>
-        <button v-else v-on:click="changePage(p)">
-          {{ p }}
-        </button>
-      </span>
-      <button v-on:click="nextPage">next</button>
-    </div>
+    <br>
+  <div id="page" 
+  style="
+  position:absolute;
+  padding-top:29%;"
+  >
+  <button v-on:click="prevPage">이전</button>
+  <span v-for="p in totalpage" v-bind:key="p">
+    <button v-if="p==page" style="text-decoration:underline;" v-on:click="changePage(p)" >
+      {{ p }}
+    </button>
+    <button v-else v-on:click="changePage(p)" >
+      {{ p }}
+    </button>
+  </span>
+  <button v-on:click="nextPage">다음</button>
+  </div>
   </div>
 </template>
 
@@ -139,14 +145,15 @@ export default {
 </script>
 
 <style scoped>
-#mystorylist {
-  width: 30vw;
-  height: 70vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-  margin-left: 5vw;
+#mystorylist{
+   font-family: "Dovemayo_gothic";
+    width: 30vw;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-left: 5vw;
 }
 
 #commutable {
@@ -179,7 +186,8 @@ tbody {
   object-fit: fill;
 }
 
-button {
+button{
+  font-family: "Dovemayo_gothic";
   font-size: 20px;
   border: 0px solid black;
   background-color: transparent;

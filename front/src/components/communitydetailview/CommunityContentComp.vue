@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button id="backbtn" v-on:click="$router.go(-1)">back</button>
+    <button id="backbtn" v-on:click="$router.go(-1)">뒤로</button>
     <div id="content">
     <div id="resultWrapper">
       <div id="bulbWrapper" v-if="articleId===2">
@@ -102,6 +102,7 @@ export default {
   /* align-items: center; */
 }
 #backbtn{
+  font-family: "Dovemayo_gothic";
   width: 5vw;
   color: white;
   font-weight: bold;

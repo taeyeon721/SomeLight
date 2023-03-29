@@ -3,70 +3,60 @@
     <table id="commutable">
       <thead>
         <div>
-          <th id="area1">No.</th>
-          <th id="area2">Content</th>
-          <th id="area3">Light</th>
+        <!-- <th id="area1">No.</th> -->
+        <th id="area2">사연</th>
+        <th id="area3">결과</th>
         </div>
       </thead>
       <br />
       <tbody>
         <div v-for="article in articles" v-bind:key="article.articleId">
-          <!-- v-if="article.exposure" -->
-          <tr style="line-height: 28px">
-            <td id="area1">{{ article.articleId }}</td>
-            <td id="area2">
-              <div
-                id="articletitle"
-                v-on:click="goDetail(article.articleId)"
-                style="
-                  width: 380px;
-                  white-space: nowrap;
-                  overflow: hidden;
-                  text-overflow: ellipsis;
-                "
-              >
-                {{ article.content }}
-              </div>
-            </td>
-            <td id="area3" v-if="article.result === 0">
-              <img src="../../../src/assets/img/community/redbulb.png" alt="" />
-            </td>
-            <td id="area3" v-else-if="article.result === 1">
-              <img
-                src="../../../src/assets/img/community/navybulb.png"
-                alt=""
-              />
-            </td>
-            <td id="area3" v-else-if="article.result === 2">
-              <img
-                src="../../../src/assets/img/community/greenbulb.png"
-                alt=""
-              />
+        <!-- v-if="article.exposure" -->
+        <tr 
+        style="
+        line-height:28px;"
+        >
+          <!-- <td id="area1">{{ article.articleId }}</td> -->
+          <td 
+          id="area2"
+          ><div
+          id="articletitle"
+          v-on:click="goDetail(article.articleId)"
+          style="
+          width:380px;
+          white-space:nowrap;
+          overflow:hidden;
+          text-overflow:ellipsis;">
+            {{ article.content }}
+          </div></td>
+          <td id="area3" v-if="article.result===0">
+            <img 
+            src="../../../src/assets/img/community/redbulb.png" 
+            alt=""
+            >
             </td>
           </tr>
         </div>
       </tbody>
     </table>
-    <br />
-    <div
-      id="page"
-      style="position: absolute; padding-left: 6%; padding-top: 75%"
-    >
-      <button v-on:click="prevPage">prev</button>
-      <span v-for="p in totalpage" v-bind:key="p">
-        <button
-          v-if="p == page"
-          style="text-decoration: underline"
-          v-on:click="changePage(p)"
-        >
-          {{ p }}
-        </button>
-        <button v-else v-on:click="changePage(p)">
-          {{ p }}
-        </button>
-      </span>
-      <button v-on:click="nextPage">next</button>
-    </div>
+    <br>
+  <div id="page" 
+  style="
+  position:absolute;
+  padding-left:6%;
+  padding-top:75%;"
+  >
+  <button v-on:click="prevPage">이전</button>
+  <span v-for="p in totalpage" v-bind:key="p">
+    <button v-if="p==page" style="text-decoration:underline;" v-on:click="changePage(p)" >
+      {{ p }}
+    </button>
+    <button v-else v-on:click="changePage(p)" >
+      {{ p }}
+    </button>
+  </span>
+  <button v-on:click="nextPage">다음</button>
+  </div>
   </div>
 </template>
 
@@ -144,18 +134,19 @@ export default {
 </script>
 
 <style scoped>
-#commulist {
-  position: absolute;
-  width: 42vw;
-  height: 70vh;
-  background-color: white;
-  color: #4d455d;
-  border-radius: 20px;
-  box-shadow: 3px 3px 3px rgb(205, 205, 205);
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  opacity: 0.9;
+#commulist{
+    font-family: "Dovemayo_gothic";
+    position:absolute;
+    width: 42vw;
+    height: 70vh;
+    background-color: white;
+    color: #4D455D;
+    border-radius: 20px;
+    box-shadow: 3px 3px 3px rgb(205, 205, 205);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0.9;
 }
 
 #commutable {
@@ -192,7 +183,8 @@ tbody {
   object-fit: fill;
 }
 
-button {
+button{
+  font-family: "Dovemayo_gothic";
   font-size: 23px;
   border: 0px solid black;
   background-color: transparent;

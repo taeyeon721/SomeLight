@@ -1,8 +1,12 @@
 <template>
   <div id="feedback">
     <p id="feedbacktitle">정확했나요?</p>
-    <button id="feedbackbtn" v-on:click="putFeedbackY">YES</button>
-    <button id="feedbackbtn" v-on:click="putFeedbackN">NO</button>
+    <button 
+    id="feedbackbtn" 
+    v-on:click="putFeedbackY">네</button>
+    <button 
+    id="feedbackbtn" 
+    v-on:click="putFeedbackN">아니오</button>
   </div>
 </template>
 
@@ -81,12 +85,14 @@ export default {
   font-size: 25px;
   font-weight: bold;
 }
-#feedbackbtn {
-  background-color: #4d455d;
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
-  border-radius: 30px;
-  width: 5vw;
+#feedbackbtn{
+    font-family: "Dovemayo_gothic";
+    background-color: #4D455D;
+    color: white;
+    font-size: 20px;
+    font-weight:bold;
+    border-radius: 30px;
+    width: 5vw;
+
 }
 </style>

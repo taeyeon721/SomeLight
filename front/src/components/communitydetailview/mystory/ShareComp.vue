@@ -56,14 +56,15 @@ export default {
   justify-content: center;
   align-items: center;
 }
-button {
-  background-color: #4d455d;
-  color: white;
-  font-size: 23px;
-  font-weight: bold;
-  border-radius: 30px;
-  width: 10vw;
-  height: 7vh;
+button{
+    font-family: "Dovemayo_gothic";
+    background-color: #4D455D;
+    color: white;
+    font-size: 23px;
+    font-weight:bold;
+    border-radius: 30px;
+    width: 10vw;
+    height: 7vh;
 }
 p {
   font-size: 23px;
