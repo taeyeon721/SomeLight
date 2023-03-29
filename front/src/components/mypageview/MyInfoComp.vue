@@ -61,14 +61,17 @@ export default {
         });
     },
   },
-  created() {
+  // created() {
+  //   this.info();
+  // },
+  mounted() {
     this.info();
   },
 };
 </script>
 
 <style scoped>
-#myinfo{
+#myinfo {
   font-family: "Dovemayo_gothic";
   width: 200px;
   height: 200px;

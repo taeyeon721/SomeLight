@@ -14,22 +14,16 @@
           style="line-height: 25px"
         >
           <!-- <td id="area1">{{ article.articleId }}</td> -->
-          <td 
-          id="area2"
-          ><div
-          id="articletitle"
-          v-on:click="goDetail(article.articleId)"
-          style="
-          width:380px;
-          white-space:nowrap;
-          overflow:hidden;
-          text-overflow:ellipsis;">
-            {{ article.content }}
-          </div></td>
-          <td id="area3" v-if="article.result===0">
-            <img 
-            src="../../../src/assets/img/community/redbulb.png" 
-            alt=""
+          <td id="area2">
+            <div
+              id="articletitle"
+              v-on:click="goDetail(article.articleId)"
+              style="
+                width: 380px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              "
             >
               {{ article.content }}
             </div>
@@ -46,23 +40,23 @@
         </tr>
       </tbody>
     </table>
-    <br>
-  <div id="page" 
-  style="
-  position:absolute;
-  padding-top:29%;"
-  >
-  <button v-on:click="prevPage">이전</button>
-  <span v-for="p in totalpage" v-bind:key="p">
-    <button v-if="p==page" style="text-decoration:underline;" v-on:click="changePage(p)" >
-      {{ p }}
-    </button>
-    <button v-else v-on:click="changePage(p)" >
-      {{ p }}
-    </button>
-  </span>
-  <button v-on:click="nextPage">다음</button>
-  </div>
+    <br />
+    <div id="page" style="position: absolute; padding-top: 29%">
+      <button v-on:click="prevPage">이전</button>
+      <span v-for="p in totalpage" v-bind:key="p">
+        <button
+          v-if="p == page"
+          style="text-decoration: underline"
+          v-on:click="changePage(p)"
+        >
+          {{ p }}
+        </button>
+        <button v-else v-on:click="changePage(p)">
+          {{ p }}
+        </button>
+      </span>
+      <button v-on:click="nextPage">다음</button>
+    </div>
   </div>
 </template>
 
@@ -145,15 +139,15 @@ export default {
 </script>
 
 <style scoped>
-#mystorylist{
-   font-family: "Dovemayo_gothic";
-    width: 30vw;
-    height: 70vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
-    margin-left: 5vw;
+#mystorylist {
+  font-family: "Dovemayo_gothic";
+  width: 30vw;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-left: 5vw;
 }
 
 #commutable {
@@ -186,7 +180,7 @@ tbody {
   object-fit: fill;
 }
 
-button{
+button {
   font-family: "Dovemayo_gothic";
   font-size: 20px;
   border: 0px solid black;

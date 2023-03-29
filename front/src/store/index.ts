@@ -36,6 +36,7 @@ export default createStore({
       bookImage: "",
     },
     BASE_URL: BASE_URL,
+    isLogin: false,
   },
   getters: {
     // voteR:(state) => {
@@ -43,6 +44,9 @@ export default createStore({
     // }
   },
   mutations: {
+    IS_LOGIN(state, data) {
+      state.isLogin = data;
+    },
     GET_ARTICLE_DETAIL(state, data) {
       state.article.userId = data.userId;
       state.article.content = data.content;

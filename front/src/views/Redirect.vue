@@ -22,6 +22,7 @@ export default {
         .then((res) => {
           sessionStorage.setItem("pk", res.data.userId);
           sessionStorage.setItem("token", res.data.token);
+          this.$store.commit("IS_LOGIN", true);
           // console.log(res.data)
           router.push({ path: "/mypage" });
         })
