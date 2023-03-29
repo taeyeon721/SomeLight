@@ -1,51 +1,41 @@
 <template>
   <div id="commulist">
     <table id="commutable">
-      <thead>
-        <div>
-        <!-- <th id="area1">No.</th> -->
+      <div>
+      <tr>
         <th id="area2">사연</th>
         <th id="area3">결과</th>
-        </div>
-      </thead>
-      <br />
-      <tbody>
+      </tr>
+      </div>
         <div v-for="article in articles" v-bind:key="article.articleId">
-        <!-- v-if="article.exposure" -->
-        <tr 
-        style="
-        line-height:28px;"
-        >
-          <!-- <td id="area1">{{ article.articleId }}</td> -->
-          <td 
-          id="area2"
-          ><div
-          id="articletitle"
-          v-on:click="goDetail(article.articleId)"
-          style="
-          width:380px;
-          white-space:nowrap;
-          overflow:hidden;
-          text-overflow:ellipsis;">
+        <tr>
+          <td id="area2">
+          <div id="articletitle" v-on:click="goDetail(article.articleId)">
             {{ article.content }}
-          </div></td>
+          </div>
+          </td>
           <td id="area3" v-if="article.result===0">
             <img 
-            src="../../../src/assets/img/community/redbulb.png" 
+            src="../../../src/assets/img/result/redheart.png" 
             alt=""
             >
             </td>
-          </tr>
+            <td id="area3" v-else-if="article.result===1">
+            <img 
+            src="../../../src/assets/img/result/navyheart.png"
+            alt=""
+           >
+          </td>
+          <td id="area3" v-else-if="article.result===2">
+            <img 
+            src="../../../src/assets/img/result/greenheart.png" 
+            alt=""
+            ></td>
+        </tr>
         </div>
-      </tbody>
     </table>
     <br>
-  <div id="page" 
-  style="
-  position:absolute;
-  padding-left:6%;
-  padding-top:75%;"
-  >
+  <div id="page">
   <button v-on:click="prevPage">이전</button>
   <span v-for="p in totalpage" v-bind:key="p">
     <button v-if="p==page" style="text-decoration:underline;" v-on:click="changePage(p)" >
@@ -152,45 +142,62 @@ export default {
 #commutable {
   position: absolute;
   width: 35vw;
+  font-size: 1.7rem;
+  line-height: 170%;
   height: 100vh;
   margin: 5%;
 }
 
-thead {
-  position: absolute;
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-}
-tbody {
-  font-size: 20px;
-  text-align: center;
+tr{
+  display: flex;
+  align-items: center;
 }
 
-#area1,
-#area3 {
-  width: 5vw;
+#area3{
+  width:10%;
   text-align: center;
 }
 
-#area2 {
-  width: 400px;
-  padding-left: 5%;
+#area2{
+  width:60%;
+  padding-left: 15%;
 }
 
-#area3 > img {
-  width: 1vw;
-  object-fit: fill;
+#area3 > img{
+  margin-top:1vh;
+  width: 40%;  
+  object-fit:fill;
 }
 
 button{
   font-family: "Dovemayo_gothic";
-  font-size: 23px;
-  border: 0px solid black;
-  background-color: transparent;
+  font-size: 1.5rem;
+  background-color:transparent ;
 }
 
-#articletitle:hover {
-  color: red;
+#articletitle{
+  width:90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#articletitle:hover{
+  /* color: red; */
+  /* border-bottom: 2px solid #4D455D ; */
+  text-decoration: underline;
+}
+
+#page{
+  position: absolute;
+  margin-top: 70%;
+}
+
+
+button{
+  font-family: "Dovemayo_gothic";
+  font-size: 1.5rem;
+  border: 0px solid black;
+  background-color:transparent ;
 }
 </style>

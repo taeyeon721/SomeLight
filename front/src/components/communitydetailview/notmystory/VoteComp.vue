@@ -6,27 +6,19 @@
       <p>투표해주세요.</p>
     </div>
     <div id="greenbox">
-      <div style="display: flex; margin-bottom: 10px">
-        <input
-          type="radio"
-          id="gchoice"
-          name="vote"
-          v-model="result"
-          value="1"
-        />
+      <div style="
+      display:flex;
+      margin-bottom:5%;">
+      <input type="radio" id="gchoice" name="vote" v-model="result" value="1">
         <p>그린라이트</p>
       </div>
       <div id="greenbar" style="border: 2px solid #d4e384"></div>
     </div>
     <div id="redbox">
-      <div style="display: flex; margin-bottom: 10px">
-        <input
-          type="radio"
-          id="rchoice"
-          name="vote"
-          v-model="result"
-          value="2"
-        />
+      <div style="
+      display:flex;
+      margin-bottom:5%;">
+      <input type="radio" id="rchoice" name="vote" v-model="result" value="2">
         <p>레드라이트</p>
       </div>
       <div id="redbar" style="border: 2px solid #f3998a"></div>
@@ -92,11 +84,11 @@ export default {
   justify-content: center;
   align-items: center;
 }
-#votetext {
-  font-size: 25px;
+#votetext{
+  font-size: 2rem;
   font-weight: bold;
-  padding: 10px;
-  line-height: 35px;
+  padding: 3%;
+  line-height: 2.5rem;
   text-align: center;
   color: #4d455d;
 }
@@ -104,11 +96,10 @@ export default {
 #redbox {
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  margin: 2%;
 }
-#greenbar,
-#redbar {
-  font-size: 10px;
+#greenbar, #redbar{
+  font-size: 0.7rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -119,24 +110,25 @@ export default {
   color: #4d455d;
   border-radius: 20px;
 }
-#votesubmit {
-  background-color: #4d455d;
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-  border-radius: 30px;
-  width: 7vw;
-  margin-left: 11vw;
+#votesubmit{
+    background-color: #4D455D;
+    color: white;
+    font-family: "Dovemayo_gothic";
+    font-size: 1.5rem;
+    font-weight:bold;
+    border-radius: 30px;
+    width: 7vw;
+    margin-left: 11vw;
 }
-#greenbox > input[type="radio"] {
-  accent-color: #d4e384;
-  width: 10px;
-  margin: 5px;
+#greenbox > input[type=radio]{
+  accent-color: #D4E384;
+  width: 2%;
+  margin: 1%;
 }
 
-#redbox > input[type="radio"] {
-  accent-color: #f3998a;
-  width: 10px;
-  margin: 5px;
+#redbox > input[type=radio]{
+  accent-color: #F3998A;
+  width: 2%;
+  margin: 1%;
 }
 </style>

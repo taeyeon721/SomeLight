@@ -1,9 +1,9 @@
 <template>
   <div id="minaWrapper">
-    <div class="section">
+    <div class="section1">
       <div id="contentsWrapper">
         <div id="imgWrapper">
-          <img src="@/assets/img/main/item1.png" alt="" />
+          <img src="@/assets/img/main/item1.jpg" alt="" />
         </div>
         <div id="textWrapper">
           <h1 class="font">AI가 판별해주는 <Br />나의 썸 이야기</h1>
@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-    <div class="section">
+    <div class="section2">
       <div class="article">
         <div class="imgWrapper">
           <img src="@/assets/img/main/item2.png" alt="" />
@@ -27,7 +27,7 @@
         </div>
       </div>
     </div>
-    <div class="section">
+    <div class="section3">
       <div class="article">
         <div class="imgWrapper addImg">
           <img src="@/assets/img/main/item3.png" alt="" />
@@ -40,7 +40,7 @@
         </div>
       </div>
     </div>
-    <div class="section">
+    <div class="section4">
       <div class="article">
         <div class="imgWrapper">
           <img src="@/assets/img/main/item4.png" alt="" />
@@ -72,6 +72,8 @@ export default {
   /* width: 100vw;
   height: 100vh; */
   /* 마우스 휠때문에 가로 휠이 생긴다. */
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
   width: calc(100vw - (100vw - 100%));
   height: calc(100vh - (100vh - 100%));
 }
@@ -89,7 +91,29 @@ h2 {
   font-size: 1.5rem;
   line-height: 3.5rem;
 }
-.section {
+.section1 {
+  scroll-snap-align: start;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.section2 {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.section3 {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.section4 {
   width: 100%;
   height: 100vh;
   display: flex;

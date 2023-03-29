@@ -60,17 +60,17 @@ button{
     font-family: "Dovemayo_gothic";
     background-color: #4D455D;
     color: white;
-    font-size: 23px;
+    font-size: 1.5rem;
     font-weight:bold;
     border-radius: 30px;
-    width: 10vw;
-    height: 7vh;
+    width: 9vw;
+    height: 5vh;
 }
-p {
-  font-size: 23px;
+p{
+  font-size: 1.7rem;
   font-weight: bold;
-  padding: 10px;
-  line-height: 35px;
+  padding: 3%;
+  line-height: 2rem;
   text-align: center;
   color: #4d455d;
 }

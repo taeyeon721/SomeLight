@@ -31,7 +31,7 @@ export default {
 
 }
 #commutitle{
-    font-size:40px;
+    font-size:2rem;
     font-weight: bold;
     color: #4D455D;
 }

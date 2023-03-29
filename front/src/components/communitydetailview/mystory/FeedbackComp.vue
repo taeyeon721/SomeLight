@@ -68,28 +68,28 @@ export default {
 </script>
 
 <style scoped>
-#feedback {
-  width: 30vw;
-  height: 7vh;
-  margin: 20px;
-  border-radius: 30px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  background-color: #f5e9cf;
-  opacity: 0.9;
-  box-shadow: 3px 3px 3px gray;
+#feedback{
+    width: 30vw;
+    height: 7vh;
+    margin: 5%;
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #F5E9CF;
+    opacity: 0.9;
+    box-shadow: 3px 3px 3px gray;
 }
-#feedbacktitle {
-  color: #4d455d;
-  font-size: 25px;
-  font-weight: bold;
+#feedbacktitle{
+    color: #4D455D;
+    font-size: 1.7rem;
+    font-weight: bold;
 }
 #feedbackbtn{
     font-family: "Dovemayo_gothic";
     background-color: #4D455D;
     color: white;
-    font-size: 20px;
+    font-size: 1.4rem;
     font-weight:bold;
     border-radius: 30px;
     width: 5vw;

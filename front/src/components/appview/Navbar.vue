@@ -2,7 +2,7 @@
   <div id="navWrapper" class="font">
     <div id="logoWrapper">
       <span>S</span>
-      <img src="@/assets/img/nav/heart.png" alt="" />
+      <img src="@/assets/img/nav/banban.png" alt="" />
       <span>ME</span>
     </div>
     <div v-if="!isLogin" id="itemWrapper">
@@ -133,7 +133,7 @@ li {
 }
 #itemWrapperLogin {
   height: 100%;
-  margin-left: 11vw;
+  margin-left: 28vw;
 }
 
 @font-face {

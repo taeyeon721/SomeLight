@@ -31,14 +31,14 @@ const routes = [
     path: "/mypage",
     name: "mypage",
     component: () => import("../views/MypageView.vue"),
-    beforeEnter(to:any, next:any){
-      if (sessionStorage.getItem("token")==null){
-        alert("로그인하세요")
-        return next({name:"login"})
-      } else {
-        return 
-      }
-    }
+    // beforeEnter(to:any, next:any){
+    //   if (sessionStorage.getItem("token")==null){
+    //     alert("로그인하세요")
+    //     return next({name:"login"})
+    //   } else {
+    //     return 
+    //   }
+    // }
     
   },
   {

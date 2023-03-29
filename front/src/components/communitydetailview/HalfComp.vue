@@ -80,7 +80,7 @@ export default {
 <style scoped>
 #half{
     margin-top: 11vh;
-    margin-left:30px;
+    margin-left:5vw;
     width: 40vw;
     height: 89vh;
     background-image:linear-gradient(

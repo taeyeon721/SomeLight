@@ -27,9 +27,10 @@ export default {
   flex-direction: column;
   box-shadow: 2px 2px 2px rgb(216, 216, 216);
 }
-#mystorytitle {
-  padding-top: 10px;
-  font-size: 30px;
+#mystorytitle{
+  margin-top:1%;
+  padding-top:1%;
+  font-size:3rem;
   font-weight: bold;
   color: #4d455d;
   text-align: center;

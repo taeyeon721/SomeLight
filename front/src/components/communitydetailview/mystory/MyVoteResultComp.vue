@@ -8,7 +8,7 @@
     <div id="greenbox">
         <div 
         v-bind:greenPercent="greenPercent"
-        style="padding-bottom:10px;">
+        style="padding-bottom:5%;">
         그린라이트 {{ Math.round(greenPercent) }}%
         </div>
         <div id="greenbar"
@@ -20,7 +20,7 @@
     <div id="redbox">
         <div 
         v-bind:redPercent="redPercent"
-        style="padding-bottom:10px;">
+        style="padding-bottom:5%;">
         레드라이트 {{ Math.round(redPercent) }}%
         </div>
         <div id="redbar"
@@ -77,20 +77,20 @@ export default {
     align-items: center;
 }
 #votetext{
-  font-size: 25px;
+  font-size: 2rem;
   font-weight: bold;
-  padding: 10px;
-  line-height: 35px;
+  padding: 3%;
+  line-height: 2.5rem;
   text-align: center;
   color: #4D455D;
 }
 #greenbox, #redbox{
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  margin: 2%;
 }
 #greenbar, #redbar{
-  font-size: 20px;
+  font-size: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;

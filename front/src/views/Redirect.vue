@@ -10,25 +10,26 @@ import axios from "axios";
 // const BASE_URL = this.$store.state.BASE_URL;
 
 export default {
-  methods: {
-    getUser(code) {
-      axios({
-        method: "get",
-        url: `${this.$store.state.BASE_URL}/login/kakao`,
-        params: {
-          code: code,
-        },
-      })
-        .then((res) => {
-          sessionStorage.setItem("pk", res.data.userId);
-          sessionStorage.setItem("token", res.data.token);
-          this.$store.commit("IS_LOGIN", true);
-          // console.log(res.data)
-          router.push({ path: "/mypage" });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    methods:{
+        getUser(code){
+            axios({
+                method:"get",
+                url: "http://localhost:8080/login/kakao",
+                params:{
+                    "code":code,
+                },
+            })
+            .then((res)=>{
+                sessionStorage.setItem("pk", res.data.userId)
+                sessionStorage.setItem("token",res.data.token)
+                console.log(res.data)
+                // console.log(res.data)
+                router.push({path:"/mypage"})
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+        }
     },
   },
   created() {
