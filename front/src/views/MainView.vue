@@ -1,54 +1,54 @@
 <template>
   <div id="minaWrapper">
-    <div class="section">
+    <div class="section" ref="section1">
       <div id="contentsWrapper">
         <div id="imgWrapper">
           <img src="@/assets/img/main/item1.jpg" alt="" />
         </div>
         <div id="textWrapper">
-          <h1 class="font">AI가 판별해주는 <Br />나의 썸 이야기</h1>
+          <h1 class="font">AI가 판별해주는 <br />나의 썸 이야기</h1>
           <h2 class="font fixMargin">
-            요즘따라 내꺼 인듯 내꺼 아닌 너 <Br />썸인지 아닌지 AI가 구분해준다.
+            요즘따라 내꺼 인듯 내꺼 아닌 너 <br />썸인지 아닌지 AI가 구분해준다.
           </h2>
         </div>
       </div>
     </div>
-    <div class="section">
+    <div class="section" ref="section2">
       <div class="article">
         <div class="imgWrapper">
           <img src="@/assets/img/main/item2.png" alt="" />
         </div>
         <div class="textWrapper">
-          <h1 class="font">나만의 프라이빗한<Br />연애상담소</h1>
+          <h1 class="font">나만의 프라이빗한<br />연애상담소</h1>
           <h2 class="font">
-            그 사람의 마음이 뭘까? <Br />허심탄회하게 말하거나 <Br />
+            그 사람의 마음이 뭘까? <br />허심탄회하게 말하거나 <br />
             글로 써보세요.
           </h2>
         </div>
       </div>
     </div>
-    <div class="section">
+    <div class="section" ref="section3">
       <div class="article">
         <div class="imgWrapper addImg">
           <img src="@/assets/img/main/item3.png" alt="" />
         </div>
         <div class="textWrapper">
-          <h1 class="font">RED?<Br />GREEN?</h1>
+          <h1 class="font">RED?<br />GREEN?</h1>
           <h2 class="font">
-            총 3가지 결과로 <Br />당신의 썸을 판별해 드립니다.
+            총 3가지 결과로 <br />당신의 썸을 판별해 드립니다.
           </h2>
         </div>
       </div>
     </div>
-    <div class="section">
+    <div class="section" ref="section4">
       <div class="article">
         <div class="imgWrapper">
           <img src="@/assets/img/main/item4.png" alt="" />
         </div>
         <div class="textWrapper">
-          <h1 class="font">다른 사람이 봐도 <Br />썸일까?</h1>
+          <h1 class="font">다른 사람이 봐도 <br />썸일까?</h1>
           <h2 class="font">
-            커뮤니티 투표로 <Br />다른 사람의 생각을 들어보세요.
+            커뮤니티 투표로 <br />다른 사람의 생각을 들어보세요.
           </h2>
         </div>
       </div>
@@ -61,9 +61,58 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 export default {
   setup() {},
+  mounted() {
+    // 스크롤 section마다 이동
+    const elm = this.$refs;
+    const elmCount = Object.keys(elm).length;
+    Object.keys(elm).forEach((key, index) => {
+      const item = elm[key];
+      item.addEventListener("wheel", function (event) {
+        event.preventDefault();
+        let delta = 0;
+
+        if (!event) event = window.event;
+        if (event.wheelDelta) {
+          delta = event.wheelDelta / 120;
+          if (window.opera) delta = -delta;
+        } else if (event.detail) delta = -event.detail / 3;
+
+        let moveTop = window.scrollY;
+        let elmSelector = elm[key];
+
+        // wheel down : move to next section
+        if (delta < 0) {
+          if (elmSelector !== elmCount - 1) {
+            try {
+              moveTop =
+                window.pageYOffset +
+                elmSelector.nextElementSibling.getBoundingClientRect().top;
+            } catch (e) {
+              console.log(e);
+            }
+          }
+        }
+        // wheel up : move to previous section
+        else {
+          if (elmSelector !== 0) {
+            try {
+              moveTop =
+                window.pageYOffset +
+                elmSelector.previousElementSibling.getBoundingClientRect().top;
+            } catch (e) {
+              console.log(e);
+            }
+          }
+        }
+
+        const body = document.querySelector("html");
+        window.scrollTo({ top: moveTop, left: 0, behavior: "smooth" });
+      });
+    });
+  },
 };
 </script>
 
@@ -185,4 +234,5 @@ h2 {
   font-size: 1rem;
   margin-left: 0px;
 }
+/* -------- */
 </style>
