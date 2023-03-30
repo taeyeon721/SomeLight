@@ -14,19 +14,44 @@
                 id=""
                 cols="30"
                 rows="150"
-                v-model="content"
+                v-model="texts"
                 placeholder="여러분의 사연을 입력해주세요"
               ></textarea>
             </div>
           </div>
           <div>
-            <div class="btnRecord">녹음시작</div>
-            <!-- <div class="btnRecord">
-              <h1>
-                녹음중 <br />
-                30
-              </h1>
-            </div> -->
+            <div class="frame">
+              <input
+                type="checkbox"
+                id="cb-1"
+                name="cb"
+                class="checkbox"
+                v-model="isChecked"
+              />
+              <label
+                for="cb-1"
+                class="label"
+                :class="{ on: !isRecognizing }"
+                @click="toggleRecognition"
+              ></label>
+              <div class="microphone">
+                <svg width="100px" height="100px" viewBox="0 0 100 100">
+                  <circle class="circle" cx="50" cy="50" r="47" />
+                </svg>
+                <div class="icon">
+                  <div class="body">
+                    <div class="fill"></div>
+                  </div>
+                  <div class="foot_v"></div>
+                  <div class="foot_h"></div>
+                </div>
+                <div class="dots">
+                  <div class="dot dot-1"></div>
+                  <div class="dot dot-2"></div>
+                  <div class="dot dot-3"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="side">
@@ -40,39 +65,85 @@
 </template>
 
 <script>
-
-const BASE_URL = 'http://localhost:8080'
+// const BASE_URL = "http://localhost:8080"
+// const BASE_URL = this.$store.state.BASE_URL;
 
 export default {
   components: {},
   data() {
     return {
-      content:"",
+      texts: "",
+      isRecognizing: true,
+      isChecked: false,
     };
   },
   setup() {},
   created() {},
-  mounted() {},
+  mounted() {
+    //Web Speech API: https://triplexblog.kr/167
+    if (!("webkitSpeechRecognition" in window)) {
+      alert("이 브라우저에서는 지원되지 않습니다.");
+      return;
+    }
+
+    const recognition = new window.webkitSpeechRecognition();
+    recognition.interimResults = true;
+    recognition.lang = "ko-KR";
+    recognition.continuous = false;
+    recognition.maxAlternatives = 20000;
+
+    recognition.onspeechend = () => {
+      recognition.stop();
+      this.isRecognizing = true;
+      this.isChecked = false;
+    };
+
+    recognition.onresult = (e) => {
+      this.texts = Array.from(e.results)
+        .map((results) => results[0].transcript)
+        .join("");
+      console.log(this.texts);
+    };
+    this.recognition = recognition;
+  },
   methods: {
-    createStory(){
-      const content = this.content
-      // const result = 
-      // const keyword = 
+    createStory() {
+      const content = this.texts;
+      // const result =
+      // const keyword =
       // keyword type -> list
 
       const payload = {
         content: content,
         // result: result,
         // keyword:keyword,
+      };
+
+      this.$store.dispatch("createStory", payload);
+    },
+    // STT관련(1)
+    toggleRecognition() {
+      if (this.isRecognizing && !this.isChecked) {
+        this.startRecognition();
+      } else {
+        this.stopRecognition();
       }
-      
-      this.$store.dispatch("createStory", payload)
-    }
+    },
+    // STT관련(2)
+    startRecognition() {
+      this.recognition.start();
+    },
+    // STT관련(3)
+    stopRecognition() {
+      this.recognition.stop();
+    },
   },
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import "@/assets/css/recording.scss";
+
 #mainWrapper {
   font-family: "Dovemayo_gothic";
   width: 100vw;
@@ -83,7 +154,7 @@ export default {
 }
 #mainWrapper > div:nth-child(1) {
   width: 100%;
-  height: 10vh;
+  height: 12vh;
 }
 
 .bgImg {
@@ -178,4 +249,5 @@ textarea {
   font-weight: bold;
   font-size: 2rem;
 }
+/* ----------------------- */
 </style>

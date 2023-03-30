@@ -2,13 +2,13 @@
   <div id="mainWrapper">
     <div class="center">
       <div id="resultWrapper">
-        <div id="bulbWrapper" v-if="results.article.result===2">
+        <div id="bulbWrapper" v-if="results.article.result === 2">
           <img src="@/assets/img/result/fix_green.png" alt="" />
         </div>
-        <div id="bulbWrapper" v-else-if="results.article.result===1">
+        <div id="bulbWrapper" v-else-if="results.article.result === 1">
           <img src="@/assets/img/result/fix_black.png" alt="" />
         </div>
-        <div id="bulbWrapper" v-else-if="results.article.result===0">
+        <div id="bulbWrapper" v-else-if="results.article.result === 0">
           <img src="@/assets/img/result/fix_red.png" alt="" />
         </div>
         <div id="textWrapper">{{ results.article.content }}</div>
@@ -19,59 +19,57 @@
 </template>
 
 <script>
-import axios from 'axios';
-
-const BASE_URL = "http://localhost:8080"
+import axios from "axios";
 
 export default {
   components: {},
   data() {
     return {
-      results:{
-      article:{
-        articleId:this.$store.state.results.articleId,
-        userId:this.$store.state.results.userId,
-        content:this.$store.state.results.content,
-        result:this.$store.state.results.result,
-        createdDate:this.$store.state.results.createdDate,
-        redCount:this.$store.state.results.redCount,
-        greenCount:this.$store.state.results.greenCount,
-        isChanged:this.$store.state.results.isChanged,
-        isExposure:this.$store.state.results.isExposure,
+      results: {
+        article: {
+          articleId: this.$store.state.results.articleId,
+          userId: this.$store.state.results.userId,
+          content: this.$store.state.results.content,
+          result: this.$store.state.results.result,
+          createdDate: this.$store.state.results.createdDate,
+          redCount: this.$store.state.results.redCount,
+          greenCount: this.$store.state.results.greenCount,
+          isChanged: this.$store.state.results.isChanged,
+          isExposure: this.$store.state.results.isExposure,
+        },
+        keyword: this.$store.state.results.keyword,
+        movie: this.$store.state.results.movie,
+        movieImage: this.$store.state.results.movieImage,
+        book: this.$store.state.results.book,
+        bookImage: this.$store.state.results.bookImage,
       },
-      keyword:this.$store.state.results.keyword,
-      movie:this.$store.state.results.movie,
-      movieImage:this.$store.state.results.movieImage,
-      book:this.$store.state.results.book,
-      bookImage:this.$store.state.results.bookImage,
-    }
     };
   },
   setup() {},
   created() {},
   mounted() {},
   methods: {
-    share(){
+    share() {
       axios({
-        method:"put",
-        url:`${BASE_URL}/article/${this.results.article.articleId}`,
-        headers:{
-          Authorization:`Bearer ${sessionStorage.getItem("token")}`
+        method: "put",
+        url: `${this.$store.state.BASE_URL}/article/${this.results.article.articleId}`,
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },
-        data:{
-          "isChanged":this.$store.state.article.changed,
-          "isExposure":true,
-          "voteResult":this.$store.state.article.voteResult,
-        }
+        data: {
+          isChanged: this.$store.state.article.changed,
+          isExposure: true,
+          voteResult: this.$store.state.article.voteResult,
+        },
       })
-      .then((res)=>{
-        console.log(res.data)
-        this.$router.push("/community")
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
-    }
+        .then((res) => {
+          console.log(res.data);
+          this.$router.push("/community");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
 };
 </script>
