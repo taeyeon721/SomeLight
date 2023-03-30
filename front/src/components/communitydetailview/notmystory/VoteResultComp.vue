@@ -1,7 +1,9 @@
 <template>
   <div id="vote">
     <div id="votetext">
-      <p>투표결과</p>
+    <p>
+     투표결과
+    </p>
     </div>
    <div id="greenbox">
       <div style="
@@ -19,11 +21,9 @@
         style="border: 2px solid #D4E384;">
         <div id="greenlayer" v-bind:style="cssVariablegreen">
         </div>
-        <div id="greenbar" style="border: 2px solid #d4e384">
-          <div id="greenlayer" v-bind:style="cssVariablegreen"></div>
         </div>
-      </div>
     </div>
+   </div>
     <div id="redbox">
       <div style="
       display:flex;
@@ -35,10 +35,12 @@
         style="padding-bottom:5%;">
         레드라이트 {{ Math.round(redPercent) }}%
         </div>
-        <div id="redbar" style="border: 2px solid #f3998a">
-          <div id="redlayer" v-bind:style="cssVariablered"></div>
-        </div>
       </div>
+        <div id="redbar"
+        style="border: 2px solid #F3998A">
+        <div id="redlayer" v-bind:style="cssVariablered"></div>
+        </div>
+    </div>
     </div>
     <div>
       <button id="votesubmit" v-on:click="vote">투표하기</button>
@@ -49,73 +51,74 @@
 <script>
 import axios from "axios";
 
-// const BASE_URL = "http://localhost:8080"
-// const BASE_URL = this.$store.state.BASE_URL;
+const BASE_URL = "http://localhost:8080"
 
 export default {
-  data() {
-    return {
-      result: this.$store.state.article.voteResult,
-    };
+  data(){
+    return{
+      result:this.$store.state.article.voteResult,
+    }
   },
-  methods: {
-    vote() {
+  methods:{
+    vote(){
       axios({
-        method: "put",
-        url: `${this.$store.state.BASE_URL}/article/${this.$route.params.story_id}`,
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        method:"put",
+        url:`${BASE_URL}/article/${this.$route.params.story_id}`,
+        headers:{
+          Authorization:`Bearer ${sessionStorage.getItem("token")}`
         },
-        data: {
-          isChanged: this.$store.state.article.changed,
-          isExposure: this.$store.state.article.exposure,
-          voteResult: this.result,
-        },
+        data:{
+          "isChanged":this.$store.state.article.changed,
+          "isExposure":this.$store.state.article.exposure,
+          "voteResult":this.result,
+        }
       })
-        .then((res) => {
-          this.$store.commit("GET_ARTICLE_DETAIL", res.data);
-          // console.log(res.data)
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
+      .then((res)=>{
+        this.$store.commit("GET_ARTICLE_DETAIL", res.data)
+        // console.log(res.data)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    }
   },
-  created() {},
-  computed: {
-    redPercent() {
-      return this.$store.state.article.redPercent;
-    },
-    greenPercent() {
-      return this.$store.state.article.greenPercent;
-    },
-    cssVariablegreen() {
-      return {
-        width: `${this.greenPercent}%`,
-      };
-    },
-    cssVariablered() {
-      return {
-        width: `${this.redPercent}%`,
-      };
-    },
+  created(){
+
   },
-};
+  computed:{
+    redPercent(){
+      return this.$store.state.article.redPercent
+    },
+    greenPercent(){
+      return this.$store.state.article.greenPercent
+    },
+    cssVariablegreen(){
+      return{
+        width:`${this.greenPercent}%`,
+      }
+    },
+    cssVariablered(){
+      return{
+        width: `${this.redPercent}%`
+      }
+    },
+  }
+}
 </script>
 
 <style scoped>
-#vote {
-  width: 25vw;
-  height: 40vh;
-  border-radius: 20px;
-  background-color: #f5e9cf;
-  opacity: 0.9;
-  box-shadow: 3px 3px 3px rgb(187, 187, 187);
-  margin: 10vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+#vote{
+    width: 25vw;
+    height: 40vh;
+    border-radius: 20px;  
+    background-color: #F5E9CF;
+    opacity: 0.9;
+    box-shadow: 3px 3px 3px rgb(187, 187, 187);
+    margin: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 #votetext{
   font-size: 2rem;
@@ -123,10 +126,9 @@ export default {
   padding: 3%;
   line-height:2.5rem;
   text-align: center;
-  color: #4d455d;
+  color: #4D455D;
 }
-#greenbox,
-#redbox {
+#greenbox, #redbox{
   display: flex;
   flex-direction: column;
   margin: 2%;
@@ -140,7 +142,7 @@ export default {
   width: 17vw;
   height: 1vh;
   font-weight: bold;
-  color: #4d455d;
+  color: #4D455D;
   border-radius: 20px;
 }
 #votesubmit{
@@ -165,47 +167,47 @@ export default {
   margin: 1%;
 }
 
-#greenlayer {
-  background-color: #d4e384;
+#greenlayer{
+  background-color: #D4E384;
   border-radius: 20px;
   height: 1vh;
   animation-name: voteslidegreen;
-  animation-duration: 1s;
-  animation-iteration-count: 1;
+  animation-duration :1s;
+  animation-iteration-count:1,
 }
 
-#redlayer {
-  background-color: #f3998a;
+#redlayer{
+  background-color: #F3998A;
   border-radius: 20px;
   height: 1vh;
   animation-name: voteslidered;
-  animation-duration: 1s;
-  animation-iteration-count: 1;
+  animation-duration :1s;
+  animation-iteration-count:1,
 }
 
-@keyframes voteslidegreen {
-  from {
+@keyframes voteslidegreen{
+  from{
     width: 0%;
     height: 1vh;
-    background-color: #d4e384;
+    background-color: #D4E384;
   }
 
-  to {
+  to{
     height: 1vh;
-    background-color: #d4e384;
+    background-color: #D4E384;
   }
 }
 
-@keyframes voteslidered {
-  from {
+@keyframes voteslidered{
+  from{
     width: 0%;
     height: 1vh;
-    background-color: #f3998a;
+    background-color: #F3998A;
   }
 
-  to {
+  to{
     height: 1vh;
-    background-color: #f3998a;
+    background-color: #F3998A;
   }
 }
 </style>

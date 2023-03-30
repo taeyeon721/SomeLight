@@ -53,74 +53,70 @@
 <script>
 import axios from "axios";
 
-// const BASE_URL = "http://localhost:8080"
-// const BASE_URL = this.$store.state.BASE_URL;
+const BASE_URL = "http://localhost:8080"
 
 export default {
-  data() {
-    return {
-      page: 1, // 페이지네이션 초기값
-      articles: [],
-      totalpage: 1,
-    };
+  data(){
+    return{
+      page:1, // 페이지네이션 초기값
+      articles:[],
+      totalpage:1,
+    }
   },
-  methods: {
-    getAllArticle() {
+  methods:{
+    getAllArticle(){
       axios({
-        method: "get",
-        url: `${this.$store.state.BASE_URL}/article`,
-        params: {
-          page: this.page,
-        },
+        method:"get",
+        url: `${BASE_URL}/article`,
+        params:{
+          "page":this.page,
+        }
       })
-        .then((res) => {
-          this.articles = [];
-          for (let i = 0; i < res.data.numberOfElements; i++) {
-            this.articles.push(res.data.content[i]);
-          }
-          this.totalpage = res.data.totalPages;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      .then((res)=>{
+        this.articles = []
+        for (let i = 0 ; i<res.data.numberOfElements; i++){
+          this.articles.push(res.data.content[i])
+        }
+        this.totalpage = res.data.totalPages
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
     },
-    prevPage() {
-      if (this.page >= 1) {
-        this.page -= 1;
-        this.getAllArticle();
+    prevPage(){
+      if (this.page >= 1){
+        this.page -= 1
+        this.getAllArticle()
       }
     },
-    nextPage() {
-      if (this.page < this.totalpage) {
-        this.page += 1;
-        this.getAllArticle();
+    nextPage(){
+      if (this.page < this.totalpage){
+        this.page += 1
+        this.getAllArticle()
       }
     },
-    changePage(p) {
-      this.page = p;
-      this.getAllArticle();
+    changePage(p){
+      this.page = p
+      this.getAllArticle()
     },
-    goDetail(pk) {
+    goDetail(pk){
       axios({
-        method: "get",
-        url: `${this.$store.state.BASE_URL}/article/${pk}`,
+        method:"get",
+        url:`${BASE_URL}/article/${pk}`,
       })
-        .then((res) => {
-          this.$router.push({
-            name: "communitydetail",
-            params: { story_id: pk },
-          });
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
+      .then((res)=>{
+        this.$router.push({name:"communitydetail", params:{ story_id:pk }})
+        console.log(res)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    }
   },
-  created() {
-    this.getAllArticle();
-  },
-};
+  created(){
+    this.getAllArticle()
+  }
+}
 </script>
 
 <style scoped>
@@ -136,10 +132,10 @@ export default {
     display: flex;
     align-items: center;
     flex-direction: column;
-    opacity: 0.9;
+    opacity: 0.75;
 }
 
-#commutable {
+#commutable{
   position: absolute;
   width: 35vw;
   font-size: 1.7rem;
@@ -200,4 +196,5 @@ button{
   border: 0px solid black;
   background-color:transparent ;
 }
+
 </style>

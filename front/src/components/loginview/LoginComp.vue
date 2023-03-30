@@ -1,23 +1,8 @@
 <template>
-  <div style=
-  "height:30vh;
-  display:flex;
-  align-items:center;">
-    <h1 style=
-    "font-size:3.5rem;
-    font-weight:bold;
-    color:#4D455D;
-    ">LOGIN</h1>
+  <div id="loginwrapper">
+    <h1 id="logintitle">로그인</h1>
   </div>
-  <div
-    style="
-      height: 20vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      align-items: center;
-    "
-  >
+  <div class="btnwrapper">
     <div>
       <button type="button" id="nonmemberbtn" v-on:click="nonmemberLogin">
         비로그인 이용
@@ -25,17 +10,6 @@
     </div>
     <div>
       <button type="button" id="kakaobtn" v-on:click="kakaoLogin">
-        <img
-          src="../../../src/assets/img/main/kakaoImg.png"
-          width="30"
-          height="30"
-          style="margin-right: 10px"
-        />
-        <a
-          href="https://kauth.kakao.com/oauth/authorize?client_id=8147c85395148371709b2199642f9108&redirect_uri=http://localhost:3000/login/kakao&state=kakao&response_type=code"
-          style="text-decoration: none; color: white"
-          >카카오톡 로그인</a
-        >
         <img 
         src="../../../src/assets/img/main/kakaoImg.png" 
         width="30" 
@@ -76,6 +50,30 @@ export default {
 </script>
 
 <style scoped>
+#loginwrapper{
+  height:30vh;
+  display:flex;
+  align-items:center;
+}
+
+
+#logintitle{
+  font-family: "Dovemayo_gothic";
+  font-size:3.5rem;
+  font-weight:bold;
+  color:#4D455D;
+
+}
+
+.btnwrapper{
+  height:20vh;
+  display:flex;
+  flex-direction: column;
+  justify-content:space-around;
+  align-items:center;
+
+}
+
 #nonmemberbtn{
     width: 20vw;
     height: 7vh;
@@ -105,7 +103,9 @@ export default {
     justify-content: center;
     align-items: center;
 }
-h1{
-   font-family: "Dovemayo_gothic";
-}
+
+/* #nonmeberbtn:hover{
+  background-color:#F3998A;
+} */
+
 </style>

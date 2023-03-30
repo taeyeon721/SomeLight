@@ -79,16 +79,16 @@ export default {
 
 <style scoped>
 #half{
-    margin-top: 11vh;
+    margin-top: 10vh;
     margin-left:5vw;
     width: 40vw;
-    height: 89vh;
+    height: 87vh;
     background-image:linear-gradient(
       rgba(250,250,250,0.2), 
       rgba(250,250,250,0.4)), 
       url("../../../src/assets/img/community/communitydetailback.jpg");
     background-repeat:no-repeat ;
-    background-size: 40vw 90vh;
+    background-size: 40vw 88vh;
     display: flex;
     align-items: center;
     justify-content: center;

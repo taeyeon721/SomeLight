@@ -28,7 +28,7 @@ export default {
 }
 #mypageback{
   width: 70vw;
-  margin-top:10vh ;
+  margin-top:12vh ;
   height: 88vh;
   display: flex;
   align-items: center;

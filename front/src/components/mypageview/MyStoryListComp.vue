@@ -53,73 +53,69 @@
 <script>
 import axios from "axios";
 
-// const BASE_URL = "http://localhost:8080"
-// const BASE_URL = this.$store.state.BASE_URL;
+const BASE_URL ="http://localhost:8080"
 
 export default {
-  data() {
-    return {
-      articles: [],
-      totalpage: 1,
-      page: 1,
-    };
+    data(){
+    return{
+      articles:[],
+      totalpage:1,
+      page:1,
+    }
   },
-  methods: {
-    getArticle() {
+  methods:{
+    getArticle(){
       axios({
-        method: "get",
-        url: `${this.$store.state.BASE_URL}/user`,
-        headers: {
-          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        method:"get",
+        url:`${BASE_URL}/user`,
+        headers:{
+          Authorization:`Bearer ${sessionStorage.getItem("token")}`
         },
-        params: {
-          page: this.page,
-        },
+        params:{
+          "page":this.page,
+        }
       })
-        .then((res) => {
-          this.articles = [];
-          console.log(res.data);
-          console.log(this.page);
-          for (let i = 0; i < res.data.numberOfElements; i++) {
-            this.articles.push(res.data.content[i]);
-          }
-          this.totalpage = res.data.totalPages;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      .then((res)=>{
+        this.articles = []
+        console.log(res.data)
+        console.log(this.page)
+        for (let i = 0 ; i<res.data.numberOfElements; i++){
+          this.articles.push(res.data.content[i])
+        }
+        this.totalpage = res.data.totalPages
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
     },
-    prevPage() {
-      if (this.page >= 1) {
-        this.page -= 1;
-        this.getArticle();
+    prevPage(){
+      if (this.page >= 1){
+        this.page -= 1
+        this.getArticle()
       }
     },
-    nextPage() {
-      if (this.page < this.totalpage) {
-        this.page += 1;
-        this.getArticle();
+    nextPage(){
+      if (this.page < this.totalpage){
+        this.page += 1
+        this.getArticle()
       }
     },
-    changePage(p) {
-      this.page = p;
-      this.getArticle();
+    changePage(p){
+      this.page = p
+      this.getArticle()
     },
-    goDetail(pk) {
+    goDetail(pk){
       axios({
-        method: "get",
-        url: `${this.$store.state.BASE_URL}/article/${pk}`,
+        method:"get",
+        url:`${BASE_URL}/article/${pk}`,
       })
-        .then((res) => {
-          this.$router.push({
-            name: "communitydetail",
-            params: { story_id: pk },
-          });
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      .then((res)=>{
+        this.$router.push({name:"communitydetail", params:{ story_id:pk }})
+        console.log(res)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
     },
   },
   created(){
@@ -138,7 +134,7 @@ export default {
     flex-direction: column;
 }
 
-#commutable {
+#commutable{
   width: 35vw;
   height: 50vh;
   margin: 3%;
@@ -168,11 +164,11 @@ tr{
   object-fit:fill;
 }
 
-button {
+button{
   font-family: "Dovemayo_gothic";
   font-size: 1.5rem;
   border: 0px solid black;
-  background-color: transparent;
+  background-color:transparent ;
 }
 
 #articletitle{
@@ -190,4 +186,5 @@ button {
   position: absolute;
   margin-top: 27%;
 }
+
 </style>
