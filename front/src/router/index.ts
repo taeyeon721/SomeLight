@@ -48,6 +48,11 @@ const routes = [
     path: "/login/kakao",
     component: () => import("../views/Redirect.vue"),
   },
+  {
+    path:"/loading",
+    name:"loading",
+    component:() => import("../views/LoadingView.vue")
+  },
 ];
 
 const router = createRouter({

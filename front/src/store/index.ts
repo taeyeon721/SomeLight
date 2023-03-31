@@ -29,7 +29,7 @@ export default createStore({
         isChanged: null,
         isExposure: false,
       },
-      keyword: [],
+      keyword: null,
       movie: "",
       movieImage: "",
       book: "",
