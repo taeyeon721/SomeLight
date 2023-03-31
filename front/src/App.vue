@@ -19,10 +19,10 @@ export default {
 div {
   box-shadow: 0 0 0 1px #f00 inset;
 }
-
 body,
 html {
   height: 100%;
+  cursor: url("./assets/img/main/cursor.png"), auto;
 }
 .font {
   font-family: "DM Sans", sans-serif,'Dovemayo_gothic';
