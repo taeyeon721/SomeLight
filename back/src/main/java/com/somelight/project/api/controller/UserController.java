@@ -41,11 +41,9 @@ public class UserController {
     }
     @CrossOrigin("*")
     @GetMapping("/info")
-    public ResponseEntity<User> getUserInfo (Authentication authentication) {
+    public ResponseEntity<User> getUserInfo(Authentication authentication) {
         String email = (String) authentication.getCredentials();
-        String nickname = (String) authentication.getPrincipal();
-
-        User res = new User(email,nickname);
+        User res = userService.getUser(email);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }

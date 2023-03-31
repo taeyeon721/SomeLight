@@ -1,6 +1,5 @@
 package com.somelight.project.api.controller;
 
-import com.somelight.project.api.request.KeywordRequest;
 import com.somelight.project.api.request.ResultRequest;
 import com.somelight.project.api.response.ResultResponse;
 import com.somelight.project.api.service.ApiService;
@@ -9,7 +8,6 @@ import com.somelight.project.api.service.UserService;
 import com.somelight.project.db.enitity.Article;
 import com.somelight.project.db.enitity.Book;
 import com.somelight.project.db.enitity.Movie;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.lang.Nullable;
@@ -17,10 +15,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/result")
@@ -34,17 +30,18 @@ public class ResultController {
     @CrossOrigin("*")
     @PostMapping()
     public ResponseEntity<ResultResponse> registerArticle(@Nullable Authentication authentication,
-                                                          @RequestBody String content) {
+                                                          @RequestBody Map<String, String> contentMap) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(new MediaType("application", "json"));
 
-        HttpEntity entity = new HttpEntity(content, httpHeaders);
+        String content = contentMap.get("content");
+        HttpEntity entity = new HttpEntity(contentMap, httpHeaders);
 
         RestTemplate restTemplate = new RestTemplate();
-        ResultRequest resultRequest = restTemplate.exchange("http://localhost:5000", HttpMethod.POST, entity, ResultRequest.class).getBody();
+        ResultRequest resultRequest = restTemplate.exchange("http://localhost:5000/predict", HttpMethod.POST, entity, ResultRequest.class).getBody();
 
         int result = resultRequest.getResult();
-        List<KeywordRequest> keywordRequestList = resultRequest.getKeyword();
+        List<String> keywordRequestList = resultRequest.getKeyword();
 
         int userId = 0;
         if (authentication != null) {
@@ -54,7 +51,7 @@ public class ResultController {
         Article article = articleService.createArticle(userId, content, result);
         ResultResponse res = ResultResponse.of(article, keywordRequestList, null, null, null, null);
 
-        String keyword = keywordRequestList.get(0).getKeyword();
+        String keyword = keywordRequestList.get(0);
 
         if (article.getResult() != 1) {
             Movie movie = apiService.requestMovie(result, keyword, content);
@@ -67,5 +64,4 @@ public class ResultController {
         }
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
-
 }

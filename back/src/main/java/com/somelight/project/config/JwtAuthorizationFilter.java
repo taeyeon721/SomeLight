@@ -80,6 +80,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
             // 2. 공개키 프로바이더 준비
             Jwk jwk = provider.get(jwtOrigin.getKeyId());
+            System.out.println(jwk);
 
             // 3. 검증 및 디코딩
             Algorithm algorithm = Algorithm.RSA256((RSAPublicKey) jwk.getPublicKey(), null);
