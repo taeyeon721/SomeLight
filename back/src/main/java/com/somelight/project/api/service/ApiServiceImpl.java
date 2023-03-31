@@ -72,7 +72,12 @@ public class ApiServiceImpl implements ApiService{
             return movie;
         }
 
-        MovieOneResponse movieOneResponse = movieResultResponse.getItems()[0];
+        MovieOneResponse movieOneResponse = new MovieOneResponse();
+        for (MovieOneResponse res : movieOneResponseList) {
+            if (res.getImage() == null) continue;
+            if (movieOneResponse.getUserRating() < res.getUserRating()) movieOneResponse = res;
+        }
+
         String title = movieOneResponse.getTitle();
         String imgUrl = movieOneResponse.getImage();
         movie.setTitle(title);
@@ -131,33 +136,8 @@ public class ApiServiceImpl implements ApiService{
                     }
                 }
             }
-
             if (i > 0) costs[s2.length()] = lastValue;
         }
-
         return costs[s2.length()];
     }
-
-    //    public MovieOneResponse requestMovie(int result, List<KeywordRequest> keywordlist, String content) {
-//
-//        //String movieUrl = "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=N&listCount=500&ServiceKey=" + movieKey;
-//        String searchWord = null;
-//        int genre = 0;
-//        Comparator<KeywordRequest> comparator = new Comparator<KeywordRequest>() {
-//            @Override
-//            public int compare(KeywordRequest A, KeywordRequest B) {
-//                return B.getCnt() - A.getCnt();
-//            }
-//        };
-//        if (keywordlist != null) {
-//            Collections.sort(keywordlist, comparator);
-//            searchWord = keywordlist.get(0).getKeyword();
-//        }
-//        else {
-//            if (result == 2) searchWord = "썸";
-//            else searchWord = "솔로";
-//        }
-//
-//        return null;
-//    }
 }
