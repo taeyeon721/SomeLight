@@ -29,7 +29,7 @@ public class ResultController {
     private ApiService apiService;
     @CrossOrigin("*")
     @PostMapping()
-    public ResponseEntity<ResultResponse> registerArticle(@Nullable Authentication authentication,
+    public ResponseEntity<?> registerArticle(@Nullable Authentication authentication,
                                                           @RequestBody Map<String, String> contentMap) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(new MediaType("application", "json"));
@@ -41,12 +41,14 @@ public class ResultController {
         ResultRequest resultRequest = restTemplate.exchange("http://localhost:5000/predict", HttpMethod.POST, entity, ResultRequest.class).getBody();
 
         int result = resultRequest.getResult();
+        if (result == 1) return new ResponseEntity<>("정보를 더 입력해 주세요", HttpStatus.BAD_REQUEST);
         List<String> keywordRequestList = resultRequest.getKeyword();
 
         int userId = 0;
         if (authentication != null) {
-            String email = (String) authentication.getCredentials();
-            userId = userService.getUserId(email);
+            userId = userService.getUserId((String) authentication.getCredentials());
+            System.out.println(userId);
+            if (userId == 0) return new ResponseEntity<>("expired token", HttpStatus.BAD_REQUEST);
         }
         Article article = articleService.createArticle(userId, content, result);
         ResultResponse res = ResultResponse.of(article, keywordRequestList, null, null, null, null);

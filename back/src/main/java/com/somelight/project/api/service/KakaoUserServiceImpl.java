@@ -133,32 +133,32 @@ public class KakaoUserServiceImpl implements KakaoUserService {
         return kakaoUserInfo;
     }
 
-//    public Boolean validationIdToken(String id_token){
-//        String reqURL = "https://kapi.kakao.com/oauth/tokeninfo";
-//        String kakaoRestapiKey = "8147c85395148371709b2199642f9108";
-//        String certification = "https://kauth.kakao.com";
-//
-//        // 1. base64로 디코딩
-//        String payloadJWT  = id_token.split("[.]")[1];
-//        Base64.Decoder decoder = Base64.getUrlDecoder();
-//
-//        String result = new String(decoder.decode(payloadJWT));
-//        JsonParser parser = new JsonParser();
-//        JsonElement element = parser.parse(result);
-//
-//        // 2. 페이로드의 iss 값이 https://kauth.kakao.com와 일치하는지 확인
-//        String iss = element.getAsJsonObject().get("iss").getAsString();
-//
-//        // 3. 페이로드의 aud(REST API 키값) 값이 서비스 앱 키와 일치하는지 확인
-//        String aud = element.getAsJsonObject().get("aud").getAsString();
-//
-//        if (iss.equals(certification) && aud.equals(kakaoRestapiKey)){
-//            System.out.println("===============유효성 검사 통과!!!==================");
-//            return true;
-//        }
-//        System.out.println("********************************************************************");
-//
-//        return false;
-//    }
+    public Boolean validationIdToken(String id_token){
+        String reqURL = "https://kapi.kakao.com/oauth/tokeninfo";
+        String kakaoRestapiKey = "8147c85395148371709b2199642f9108";
+        String certification = "https://kauth.kakao.com";
+
+        // 1. base64로 디코딩
+        String payloadJWT  = id_token.split("[.]")[1];
+        Base64.Decoder decoder = Base64.getUrlDecoder();
+
+        String result = new String(decoder.decode(payloadJWT));
+        JsonParser parser = new JsonParser();
+        JsonElement element = parser.parse(result);
+
+        // 2. 페이로드의 iss 값이 https://kauth.kakao.com와 일치하는지 확인
+        String iss = element.getAsJsonObject().get("iss").getAsString();
+
+        // 3. 페이로드의 aud(REST API 키값) 값이 서비스 앱 키와 일치하는지 확인
+        String aud = element.getAsJsonObject().get("aud").getAsString();
+
+        if (iss.equals(certification) && aud.equals(kakaoRestapiKey)){
+            System.out.println("===============유효성 검사 통과!!!==================");
+            return true;
+        }
+        System.out.println("********************************************************************");
+
+        return false;
+    }
 
 }

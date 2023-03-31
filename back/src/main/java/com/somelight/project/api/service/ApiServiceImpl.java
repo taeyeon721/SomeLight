@@ -24,12 +24,6 @@ public class ApiServiceImpl implements ApiService{
 
     //@Value("${KMDB.movieKey}")
    // private String movieKey;
-    @Value("${naver.clientId}")
-    private String clientId;
-    @Value("${naver.clientSecret}")
-    private String clientSecret;
-    @Value("${naver.movieUrl}")
-    private String movieUrl;
     @Autowired
     private MovieRepository movieRepository;
     @Autowired
@@ -42,46 +36,9 @@ public class ApiServiceImpl implements ApiService{
             movie = movieList.get((int) (Math.random() * (movieList.size() - 1)));
             return movie;
         }
-        int genre = 0;
-        if (result == 2) genre = 5;
-        else genre = 11;
 
-        URI uri = UriComponentsBuilder
-                .fromUriString(movieUrl)
-                .path("/movie.json")
-                .queryParam("query", keyword)
-                .queryParam("genre", genre)
-                .queryParam("display", 100)
-                .encode(StandardCharsets.UTF_8)
-                .build()
-                .toUri();
-
-        RestTemplate restTemplate = new RestTemplate();
-        RequestEntity<Void> requestEntity = RequestEntity
-                .get(uri)
-                .header("X-Naver-Client-Id", clientId)
-                .header("X-Naver-Client-Secret", clientSecret)
-                .build();
-
-        MovieResultResponse movieResultResponse = restTemplate.exchange(requestEntity, MovieResultResponse.class).getBody();
-        List<MovieOneResponse> movieOneResponseList = List.of(movieResultResponse.getItems());
-
-        if (movieOneResponseList.size() == 0) {
-            List<Movie> movieList = movieRepository.findAllByResult(result);
-            movie = movieList.get((int) (Math.random() * (movieList.size() - 1)));
-            return movie;
-        }
-
-        MovieOneResponse movieOneResponse = new MovieOneResponse();
-        for (MovieOneResponse res : movieOneResponseList) {
-            if (res.getImage() == null) continue;
-            if (movieOneResponse.getUserRating() < res.getUserRating()) movieOneResponse = res;
-        }
-
-        String title = movieOneResponse.getTitle();
-        String imgUrl = movieOneResponse.getImage();
-        movie.setTitle(title);
-        movie.setMovieImage(imgUrl);
+        List<Movie> movieList = movieRepository.findAllByResult(result);
+        movie = movieList.get((int) (Math.random() * (movieList.size() - 1)));
         return movie;
     }
 
