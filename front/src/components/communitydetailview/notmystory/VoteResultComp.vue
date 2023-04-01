@@ -143,7 +143,7 @@ export default {
   border-radius: 20px;
 }
 #votesubmit {
-  background-color: #4d455d;
+  background-color: rgba(77, 69, 93, 100%);
   color: white;
   font-family: "Dovemayo_gothic";
   font-size: 1.5rem;
