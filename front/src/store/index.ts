@@ -94,20 +94,23 @@ export default createStore({
       axios({
         method: "post",
         url: `${BASE_URL}/result`,
+        headers: {
+          Authorization: sessionStorage.getItem("token") ? `Bearer ${sessionStorage.getItem("token")}` : null,
+        },
         data: {
           content: payload.content,
-          // "result":payload.result,
-          // "keyword":payload.keyword,
         },
       })
         .then(function (res) {
-          // console.log(res.data)
           context.commit("POST_RESULT", res.data);
-
+          console.log(res.data)
           //라우터로 결과 페이지 넘어가게
           router.push("/story/result");
         })
         .catch(function (err) {
+          if (err.response.status == 500){
+            alert("충분한 키워드가 입력되지 않았습니다.")
+          }
           console.log(err);
         });
     },

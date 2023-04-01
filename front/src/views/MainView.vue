@@ -3,7 +3,8 @@
     <div class="section" ref="section1">
       <div id="contentsWrapper">
         <div id="imgWrapper">
-          <img src="@/assets/img/main/item1.jpg" alt="" />
+          <!-- <img src="@/assets/img/main/item1.jpg" alt="" /> -->
+          <video muted autoplay loop src="@/assets/img/main/main.mp4" type="video/mp4"></video>
         </div>
         <div id="textWrapper">
           <h1 class="font">AI가 판별해주는 <br />나의 썸 이야기</h1>
@@ -187,6 +188,10 @@ h2 {
 .imgWrapper > img {
   width: 100%;
   height: auto;
+}
+#imgWrapper > video{
+  width: 100%;
+  height: 120%;
 }
 .textWrapper {
   width: 40%;

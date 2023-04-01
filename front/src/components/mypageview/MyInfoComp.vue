@@ -76,7 +76,9 @@ export default {
   margin-right: 10%;
   margin-bottom: 30%;
   border-radius: 20px;
-  background-color: #F5E9CF;
+  background-color:linear-gradient(
+    rgb(158, 158, 158,0.2), 
+    rgba(250,250,250,0.9)) #F5E9CF;
   opacity: 0.85;
   display: flex;
   align-items: center;
