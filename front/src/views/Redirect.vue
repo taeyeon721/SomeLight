@@ -2,21 +2,22 @@
   <div></div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, ComponentPublicInstance } from "vue";
 import router from "@/router";
 import axios from "axios";
 
-export default {
+export default defineComponent({
   methods: {
-    getUser(code) {
+    getUser(this:ComponentPublicInstance<{}, any>, code:string) {
       axios({
         method: "get",
         url: "http://localhost:8080/login/kakao",
         params: {
-          code: code,
+          code,
         },
       })
-        .then((res) => {
+        .then((res)=>{
           sessionStorage.setItem("pk", res.data.userId);
           sessionStorage.setItem("token", res.data.token);
           console.log(res.data);
@@ -24,13 +25,13 @@ export default {
           // console.log(res.data)
           router.push({ path: "/mypage" });
         })
-        .catch((err) => {
+        .catch((err)=>{
           console.log(err);
         });
     },
   },
-  created() {
-    const code = this.$route.query.code;
+  created(this:ComponentPublicInstance<{}, any>) {
+    const code: string | null = this.$route.query.code as string | null;
     if (code != null) {
       this.getUser(code);
       console.log("로그인 성공");
@@ -38,7 +39,7 @@ export default {
       router.push({ path: "/login" });
     }
   },
-};
+});
 </script>
 
 <style></style>

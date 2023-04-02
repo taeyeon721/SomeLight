@@ -7,7 +7,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import MyInfoComp from '@/components/mypageview/MyInfoComp.vue'
 import MyStoryComp from '@/components/mypageview/MyStoryComp.vue'
 
