@@ -9,15 +9,15 @@ import axios from "axios";
 
 export default defineComponent({
   methods: {
-    getUser(this:ComponentPublicInstance<{}, any>, code:string) {
+    getUser(this: ComponentPublicInstance<{}, any>, code: string) {
       axios({
         method: "get",
-        url: "http://localhost:8080/login/kakao",
+        url: `${this.$store.state.BASE_URL}/login/kakao`,
         params: {
           code,
         },
       })
-        .then((res)=>{
+        .then((res) => {
           sessionStorage.setItem("pk", res.data.userId);
           sessionStorage.setItem("token", res.data.token);
           console.log(res.data);
@@ -25,12 +25,12 @@ export default defineComponent({
           // console.log(res.data)
           router.push({ path: "/mypage" });
         })
-        .catch((err)=>{
+        .catch((err) => {
           console.log(err);
         });
     },
   },
-  created(this:ComponentPublicInstance<{}, any>) {
+  created(this: ComponentPublicInstance<{}, any>) {
     const code: string | null = this.$route.query.code as string | null;
     if (code != null) {
       this.getUser(code);

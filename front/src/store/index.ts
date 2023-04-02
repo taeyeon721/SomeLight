@@ -37,6 +37,7 @@ export default createStore({
     },
     isLogin: false,
     BASE_URL: BASE_URL,
+    isLoading: false,
   },
   getters: {
     // voteR:(state) => {
@@ -73,12 +74,15 @@ export default createStore({
       state.results.book = data.book;
       state.results.bookImage = data.bookImage;
     },
+    SET_LOADING(state, data) {
+      state.isLoading = data;
+    },
   },
   actions: {
     getDetail(context, payload) {
       axios({
         method: "get",
-        url: `${BASE_URL}/article/${payload.story_id}`,
+        url: `${this.$store.state.BASE_URL}/article/${payload.story_id}`,
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },
@@ -91,11 +95,15 @@ export default createStore({
         });
     },
     createStory(context, payload) {
+      context.commit("SET_LOADING", true);
+      console.log("감자");
       axios({
         method: "post",
-        url: `${BASE_URL}/result`,
+        url: `${this.$store.state.BASE_URL}/result`,
         headers: {
-          Authorization: sessionStorage.getItem("token") ? `Bearer ${sessionStorage.getItem("token")}` : null,
+          Authorization: sessionStorage.getItem("token")
+            ? `Bearer ${sessionStorage.getItem("token")}`
+            : null,
         },
         data: {
           content: payload.content,
@@ -103,15 +111,18 @@ export default createStore({
       })
         .then(function (res) {
           context.commit("POST_RESULT", res.data);
-          console.log(res.data)
+          console.log(res.data);
           //라우터로 결과 페이지 넘어가게
           router.push("/story/result");
         })
         .catch(function (err) {
-          if (err.response.status == 500){
-            alert("충분한 키워드가 입력되지 않았습니다.")
+          if (err.response.status == 500) {
+            alert("충분한 키워드가 입력되지 않았습니다.");
           }
           console.log(err);
+        })
+        .finally(() => {
+          context.commit("SET_LOADING", false);
         });
     },
   },
