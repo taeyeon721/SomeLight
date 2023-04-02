@@ -82,7 +82,7 @@ export default createStore({
     getDetail(context, payload) {
       axios({
         method: "get",
-        url: `${this.$store.state.BASE_URL}/article/${payload.story_id}`,
+        url: `${BASE_URL}/article/${payload.story_id}`,
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },
@@ -99,7 +99,7 @@ export default createStore({
       console.log("감자");
       axios({
         method: "post",
-        url: `${this.$store.state.BASE_URL}/result`,
+        url: `${BASE_URL}/result`,
         headers: {
           Authorization: sessionStorage.getItem("token")
             ? `Bearer ${sessionStorage.getItem("token")}`
