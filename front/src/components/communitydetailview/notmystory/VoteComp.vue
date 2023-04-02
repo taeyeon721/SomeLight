@@ -6,7 +6,7 @@
       <p>투표해주세요.</p>
     </div>
     <div id="greenbox">
-      <div style="display: flex; margin-bottom: 10px">
+      <div style="display: flex; margin-bottom: 5%">
         <input
           type="radio"
           id="gchoice"
@@ -19,7 +19,7 @@
       <div id="greenbar" style="border: 2px solid #d4e384"></div>
     </div>
     <div id="redbox">
-      <div style="display: flex; margin-bottom: 10px">
+      <div style="display: flex; margin-bottom: 5%">
         <input
           type="radio"
           id="rchoice"
@@ -39,9 +39,6 @@
 
 <script>
 import axios from "axios";
-
-// const BASE_URL = "http://localhost:8080"
-// const BASE_URL = this.$store.state.BASE_URL;
 
 export default {
   data() {
@@ -93,10 +90,10 @@ export default {
   align-items: center;
 }
 #votetext {
-  font-size: 25px;
+  font-size: 2rem;
   font-weight: bold;
-  padding: 10px;
-  line-height: 35px;
+  padding: 3%;
+  line-height: 2.5rem;
   text-align: center;
   color: #4d455d;
 }
@@ -104,11 +101,11 @@ export default {
 #redbox {
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  margin: 2%;
 }
 #greenbar,
 #redbar {
-  font-size: 10px;
+  font-size: 0.7rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -120,9 +117,10 @@ export default {
   border-radius: 20px;
 }
 #votesubmit {
-  background-color: #4d455d;
+  background-color: rgba(77, 69, 93, 100%);
   color: white;
-  font-size: 18px;
+  font-family: "Dovemayo_gothic";
+  font-size: 1.5rem;
   font-weight: bold;
   border-radius: 30px;
   width: 7vw;
@@ -130,13 +128,13 @@ export default {
 }
 #greenbox > input[type="radio"] {
   accent-color: #d4e384;
-  width: 10px;
-  margin: 5px;
+  width: 2%;
+  margin: 1%;
 }
 
 #redbox > input[type="radio"] {
   accent-color: #f3998a;
-  width: 10px;
-  margin: 5px;
+  width: 2%;
+  margin: 1%;
 }
 </style>

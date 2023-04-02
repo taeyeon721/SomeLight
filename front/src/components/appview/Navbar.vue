@@ -2,7 +2,7 @@
   <div id="navWrapper" class="font">
     <div id="logoWrapper">
       <span>S</span>
-      <img src="@/assets/img/nav/heart.png" alt="" />
+      <img src="@/assets/img/nav/banban.png" alt="" />
       <span>ME</span>
     </div>
     <div v-if="!isLogin" id="itemWrapper">
@@ -65,17 +65,16 @@ export default {
       sessionStorage.removeItem("token");
       sessionStorage.removeItem("pk");
       this.$store.commit("IS_LOGIN", false);
-      this.isLogin = false;
     },
   },
   created() {},
   computed: {
-    isChecked() {
+    isFlag() {
       return this.$store.state.isLogin;
     },
   },
   watch: {
-    isChecked(newVal) {
+    isFlag(newVal) {
       this.isLogin = newVal;
     },
   },
@@ -88,11 +87,9 @@ export default {
   height: 10vh;
   position: fixed;
   font-family: "Dovemayo_gothic";
-  top: 0px;
   display: flex;
   background-color: rgba(255, 255, 255, 50%);
-  margin-top: 1vh;
-  margin-bottom: 1vh;
+  padding-top: 2vh;
 }
 
 #logoWrapper {
@@ -133,7 +130,7 @@ li {
 }
 #itemWrapperLogin {
   height: 100%;
-  margin-left: 11vw;
+  margin-left: 28vw;
 }
 
 @font-face {

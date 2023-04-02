@@ -26,12 +26,12 @@ export default {
   justify-content: center;
 }
 #loginComp {
-  width: 30vw;
-  height: 70vh;
+  width: 28vw;
+  height: 65vh;
   display: flex;
-  border: 1px solid rgb(198, 198, 198);
+  border: 1px solid rgb(242, 242, 242);
   border-radius: 20px;
-  box-shadow: 3px 3px 3px gray;
+  box-shadow: 3px 3px 10px rgb(223, 222, 222);
   align-items: center;
   flex-direction: column;
   justify-content: center;

@@ -15,11 +15,11 @@ import java.util.HashMap;
 
 @Service
 public class KakaoUserServiceImpl implements KakaoUserService {
-    @Value("${clientId}")
+    @Value("${kakao.clientId}")
     private String clientId;
-    @Value("${clientSecret}")
+    @Value("${kakao.clientSecret}")
     private String clientSecret;
-    @Value("${redirectUri}")
+    @Value("${kakao.redirectUri}")
     private String redirectUri;
 
     public HashMap<String, Object> getKakaoAccessToken(String code) {
@@ -48,11 +48,8 @@ public class KakaoUserServiceImpl implements KakaoUserService {
             bw.write(sb.toString());
             bw.flush();
 
-            System.out.println(sb);
             //결과 코드가 200이라면 성공
             int responseCode = conn.getResponseCode();
-            System.out.println("responseCode : " + responseCode);
-
             //요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String line = "";
@@ -62,7 +59,6 @@ public class KakaoUserServiceImpl implements KakaoUserService {
                 result += line;
             }
 
-            System.out.println("response body : " + result);
             //Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result);
@@ -142,7 +138,6 @@ public class KakaoUserServiceImpl implements KakaoUserService {
         String kakaoRestapiKey = "8147c85395148371709b2199642f9108";
         String certification = "https://kauth.kakao.com";
 
-
         // 1. base64로 디코딩
         String payloadJWT  = id_token.split("[.]")[1];
         Base64.Decoder decoder = Base64.getUrlDecoder();
@@ -156,9 +151,6 @@ public class KakaoUserServiceImpl implements KakaoUserService {
 
         // 3. 페이로드의 aud(REST API 키값) 값이 서비스 앱 키와 일치하는지 확인
         String aud = element.getAsJsonObject().get("aud").getAsString();
-
-
-        System.out.println(iss+ " "+aud);
 
         if (iss.equals(certification) && aud.equals(kakaoRestapiKey)){
             System.out.println("===============유효성 검사 통과!!!==================");

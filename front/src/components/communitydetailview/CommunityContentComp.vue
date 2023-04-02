@@ -58,7 +58,7 @@ export default {
     /* background-color: #F5E9CF;  */
     background-color: white;
     opacity: 0.8;
-    margin-right: 30px;
+    margin-right: 1vw;
     margin-top:5vh;
     box-shadow: 3px 3px 3px rgb(216, 216, 216);
     display: flex;
@@ -76,10 +76,10 @@ export default {
   margin-top:20vh ;
   width: 30vw;
   height:50vh;
-  margin-left:25px;
-  margin-right:10px;
-  line-height: 30px;
-  font-size:25px;
+  margin-left:2vw;
+  margin-right:2vw;
+  line-height: 2rem;
+  font-size:1.5rem;
   display: -webkit-box;
   word-break: break-all;
   resize: none;
@@ -106,7 +106,7 @@ export default {
   width: 5vw;
   color: white;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 1.2rem;
   height: 5vh;
   border-radius: 30px;
   border: 0px solid black;

@@ -19,10 +19,21 @@ export default {
 /* div {
   box-shadow: 0 0 0 1px #f00 inset;
 } */
-
 body,
 html {
   height: 100%;
+  cursor: url("./assets/img/main/cursor.png"), auto;
+}
+body::-webkit-scrollbar {
+  width: 11px;
+}
+body::-webkit-scrollbar-thumb {
+  height: 30%;
+  background: rgba(77, 69, 93, 100%);
+  border-radius: 10px;
+}
+body::-webkit-scrollbar-track {
+  background: rgba(77, 69, 93, 50%);
 }
 .font {
   font-family: "DM Sans", sans-serif, "Dovemayo_gothic";

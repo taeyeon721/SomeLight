@@ -80,13 +80,12 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
             // 2. 공개키 프로바이더 준비
             Jwk jwk = provider.get(jwtOrigin.getKeyId());
+            System.out.println(jwk);
 
             // 3. 검증 및 디코딩
             Algorithm algorithm = Algorithm.RSA256((RSAPublicKey) jwk.getPublicKey(), null);
 
-            // JWTVerifier verifier = JWT.require(algorithm).build();
-            JWTVerifier verifier = JWT.require(algorithm).acceptLeeway(3).build();
-
+            JWTVerifier verifier = JWT.require(algorithm).acceptLeeway(2).build();
             DecodedJWT jwt = verifier.verify(idToken);
 
             String nickname = String.valueOf(jwt.getClaims().get("nickname")).replace("\"", "");

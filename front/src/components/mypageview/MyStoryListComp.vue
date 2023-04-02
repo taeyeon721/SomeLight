@@ -1,47 +1,33 @@
 <template>
   <div id="mystorylist">
     <table id="commutable">
-      <thead>
-        <!-- <th id="area1">No.</th> -->
-        <th id="area2">사연</th>
-        <th id="area3">결과</th>
-      </thead>
-      <br />
-      <tbody>
-        <tr
-          v-for="article in articles"
-          v-bind:key="article.articleId"
-          style="line-height: 25px"
-        >
-          <!-- <td id="area1">{{ article.articleId }}</td> -->
+      <div>
+        <tr>
+          <th id="area2">사연</th>
+          <th id="area3">결과</th>
+        </tr>
+      </div>
+      <div v-for="article in articles" v-bind:key="article.articleId">
+        <tr>
           <td id="area2">
-            <div
-              id="articletitle"
-              v-on:click="goDetail(article.articleId)"
-              style="
-                width: 380px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-              "
-            >
+            <div id="articletitle" v-on:click="goDetail(article.articleId)">
               {{ article.content }}
             </div>
           </td>
           <td id="area3" v-if="article.result === 0">
-            <img src="../../../src/assets/img/community/redbulb.png" alt="" />
+            <img src="../../../src/assets/img/result/redheart.png" alt="" />
           </td>
           <td id="area3" v-else-if="article.result === 1">
-            <img src="../../../src/assets/img/community/navybulb.png" alt="" />
+            <img src="../../../src/assets/img/result/navyheart.png" alt="" />
           </td>
           <td id="area3" v-else-if="article.result === 2">
-            <img src="../../../src/assets/img/community/greenbulb.png" alt="" />
+            <img src="../../../src/assets/img/result/greenheart.png" alt="" />
           </td>
         </tr>
-      </tbody>
+      </div>
     </table>
     <br />
-    <div id="page" style="position: absolute; padding-top: 29%">
+    <div id="page">
       <button v-on:click="prevPage">이전</button>
       <span v-for="p in totalpage" v-bind:key="p">
         <button
@@ -62,9 +48,6 @@
 
 <script>
 import axios from "axios";
-
-// const BASE_URL = "http://localhost:8080"
-// const BASE_URL = this.$store.state.BASE_URL;
 
 export default {
   data() {
@@ -141,53 +124,63 @@ export default {
 <style scoped>
 #mystorylist {
   font-family: "Dovemayo_gothic";
-  width: 30vw;
+  width: 40vw;
   height: 70vh;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   flex-direction: column;
-  margin-left: 5vw;
 }
 
 #commutable {
   width: 35vw;
-  height: 100wh;
-  margin: 5%;
+  height: 50vh;
+  margin: 3%;
+  font-size: 1.7rem;
+  line-height: 170%;
 }
 
-thead {
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center;
-}
-tbody {
-  font-size: 15px;
+tr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-#area1,
 #area3 {
-  width: 10vw;
+  width: 10%;
   text-align: center;
+  padding-right: 10%;
 }
+
 #area2 {
-  width: 30vw;
-  padding-left: 5%;
+  width: 60%;
+  padding-left: 10%;
 }
 
 #area3 > img {
-  width: 1vw;
+  width: 50%;
   object-fit: fill;
 }
 
 button {
   font-family: "Dovemayo_gothic";
-  font-size: 20px;
+  font-size: 1.5rem;
   border: 0px solid black;
   background-color: transparent;
 }
 
+#articletitle {
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 #articletitle:hover {
-  color: red;
+  text-decoration: underline;
+}
+
+#page {
+  position: absolute;
+  margin-top: 27%;
 }
 </style>
