@@ -1,7 +1,35 @@
 <template>
-  <div id="mainWrapper">
+  <div class="loadingWrapper" v-if="isLoading">
+    <span style="--i: 1">S</span>
+    <span style="--i: 2">O</span>
+    <span style="--i: 3">M</span>
+    <span style="--i: 4">E</span>
+    <span style="--i: 5">L</span>
+    <span style="--i: 6">I</span>
+    <span style="--i: 7">G</span>
+    <span style="--i: 8">H</span>
+    <span style="--i: 9">T</span>
+    <img
+      style="--i: 10"
+      src="@/assets/img/result/greenheart.png"
+      height="10"
+      alt=""
+    />
+    <img
+      style="--i: 11"
+      src="@/assets/img/result/navyheart.png"
+      height="10"
+      alt=""
+    />
+    <img
+      style="--i: 12"
+      src="@/assets/img/result/redheart.png"
+      height="10"
+      alt=""
+    />
+  </div>
+  <div v-else id="mainWrapper">
     <div></div>
-
     <div class="bgImg">
       <div class="bgImg bgImg2">
         <div class="side"></div>
@@ -65,9 +93,6 @@
 </template>
 
 <script>
-// const BASE_URL = "http://localhost:8080"
-// const BASE_URL = this.$store.state.BASE_URL;
-
 export default {
   components: {},
   data() {
@@ -106,17 +131,16 @@ export default {
     };
     this.recognition = recognition;
   },
+  computed: {
+    isLoading() {
+      return this.$store.state.isLoading;
+    },
+  },
   methods: {
     createStory() {
       const content = this.texts;
-      // const result =
-      // const keyword =
-      // keyword type -> list
-
       const payload = {
         content: content,
-        // result: result,
-        // keyword:keyword,
       };
 
       this.$store.dispatch("createStory", payload);
@@ -250,4 +274,45 @@ textarea {
   font-size: 2rem;
 }
 /* ----------------------- */
+// * {
+//   padding: 0;
+//   margin: 0;
+//   box-sizing: border-box;
+// }
+
+// body {
+//   background-color: #111;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   min-height: 100vh;
+// }
+.loadingWrapper {
+  margin-top: 25%;
+  margin-left: 35%;
+  position: absolute;
+  -webkit-box-reflect: below -20px linear-gradient(transparent, rgba(0, 0, 0, 0.2));
+}
+.loadingWrapper span,
+img {
+  position: relative;
+  display: inline-block;
+  font-family: "Dovemayo_gothic";
+  font-size: 5rem;
+  color: rgba(121, 80, 63, 100%);
+  font-weight: 900;
+  text-transform: uppercase;
+  animation: waviy 1.5s infinite;
+  animation-delay: calc(0.1s * var(--i));
+}
+@keyframes waviy {
+  0%,
+  40%,
+  100% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-20px);
+  }
+}
 </style>

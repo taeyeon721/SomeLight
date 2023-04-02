@@ -16,8 +16,13 @@
           height="30"
           style="margin-right: 2%"
         />
-        <a
+        <!-- <a
           href="https://kauth.kakao.com/oauth/authorize?client_id=8147c85395148371709b2199642f9108&redirect_uri=http://localhost:3000/login/kakao&state=kakao&response_type=code"
+          style="text-decoration: none; color: white"
+          >카카오톡 로그인</a
+        > -->
+        <a
+          href="https://kauth.kakao.com/oauth/authorize?client_id=8147c85395148371709b2199642f9108&redirect_uri=https://j8a109.p.ssafy.io/login/kakao&state=kakao&response_type=code"
           style="text-decoration: none; color: white"
           >카카오톡 로그인</a
         >
