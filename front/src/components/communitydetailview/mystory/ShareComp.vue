@@ -10,9 +10,6 @@
 <script>
 import axios from "axios";
 
-// const BASE_URL = "http://localhost:8080"
-// const BASE_URL = this.$store.state.BASE_URL;
-
 export default {
   props: [],
   methods: {
@@ -56,21 +53,21 @@ export default {
   justify-content: center;
   align-items: center;
 }
-button{
-    font-family: "Dovemayo_gothic";
-    background-color: #4D455D;
-    color: white;
-    font-size: 23px;
-    font-weight:bold;
-    border-radius: 30px;
-    width: 10vw;
-    height: 7vh;
+button {
+  font-family: "Dovemayo_gothic";
+  background-color: #4d455d;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 30px;
+  width: 9vw;
+  height: 5vh;
 }
 p {
-  font-size: 23px;
+  font-size: 1.7rem;
   font-weight: bold;
-  padding: 10px;
-  line-height: 35px;
+  padding: 3%;
+  line-height: 2rem;
   text-align: center;
   color: #4d455d;
 }

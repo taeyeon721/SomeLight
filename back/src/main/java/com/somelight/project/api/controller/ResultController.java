@@ -1,6 +1,5 @@
 package com.somelight.project.api.controller;
 
-import com.somelight.project.api.request.KeywordRequest;
 import com.somelight.project.api.request.ResultRequest;
 import com.somelight.project.api.response.ResultResponse;
 import com.somelight.project.api.service.ApiService;
@@ -10,14 +9,14 @@ import com.somelight.project.db.enitity.Article;
 import com.somelight.project.db.enitity.Book;
 import com.somelight.project.db.enitity.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/result")
@@ -30,27 +29,32 @@ public class ResultController {
     private ApiService apiService;
     @CrossOrigin("*")
     @PostMapping()
-    public ResponseEntity<ResultResponse> registerArticle(@Nullable Authentication authentication,
-                                                         @RequestBody ResultRequest resultRequest) {
-        String content = resultRequest.getContent();
+    public ResponseEntity<?> registerArticle(@Nullable Authentication authentication,
+                                                          @RequestBody Map<String, String> contentMap) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(new MediaType("application", "json"));
+
+        String content = contentMap.get("content");
+        HttpEntity entity = new HttpEntity(contentMap, httpHeaders);
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResultRequest resultRequest = restTemplate.exchange("http://localhost:5000/predict", HttpMethod.POST, entity, ResultRequest.class).getBody();
+
         int result = resultRequest.getResult();
-        List<KeywordRequest> keywordRequestList = resultRequest.getKeyword();
-        Comparator<KeywordRequest> comparator = new Comparator<KeywordRequest>() {
-            @Override
-            public int compare(KeywordRequest A, KeywordRequest B) {
-                return B.getCnt() - A.getCnt();
-            }
-        };
-        keywordRequestList.sort(comparator);
-        String keyword = keywordRequestList.get(0).getKeyword();
+        if (result == 1) return new ResponseEntity<>("정보를 더 입력해 주세요", HttpStatus.BAD_REQUEST);
+        List<String> keywordRequestList = resultRequest.getKeyword();
 
         int userId = 0;
         if (authentication != null) {
-            String email = (String) authentication.getCredentials();
-            userId = userService.getUserId(email);
+            userId = userService.getUserId((String) authentication.getCredentials());
+            System.out.println(userId);
+            if (userId == 0) return new ResponseEntity<>("expired token", HttpStatus.BAD_REQUEST);
         }
         Article article = articleService.createArticle(userId, content, result);
         ResultResponse res = ResultResponse.of(article, keywordRequestList, null, null, null, null);
+
+        String keyword = keywordRequestList.get(0);
+
         if (article.getResult() != 1) {
             Movie movie = apiService.requestMovie(result, keyword, content);
             res.setMovie(movie.getTitle());
@@ -62,5 +66,4 @@ public class ResultController {
         }
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
-
 }

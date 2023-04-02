@@ -21,7 +21,7 @@ export default {
 #feedback{
     width: 30vw;
     height: 7vh;
-    margin: 20px;
+    margin: 5%;
     border-radius: 30px;
     display: flex;
     justify-content: space-evenly;
@@ -32,14 +32,14 @@ export default {
 }
 #feedbacktitle{
     color: #4D455D;
-    font-size: 25px;
+    font-size: 1.7rem;
     font-weight: bold;
 }
 #feedbackbtn{
      font-family: "Dovemayo_gothic";
     background-color: #4D455D;
     color: white;
-    font-size: 20px;
+    font-size: 1.4rem;
     font-weight:bold;
     border-radius: 30px;
     width: 5vw;

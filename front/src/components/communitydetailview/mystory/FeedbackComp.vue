@@ -1,20 +1,13 @@
 <template>
   <div id="feedback">
     <p id="feedbacktitle">정확했나요?</p>
-    <button 
-    id="feedbackbtn" 
-    v-on:click="putFeedbackY">네</button>
-    <button 
-    id="feedbackbtn" 
-    v-on:click="putFeedbackN">아니오</button>
+    <button id="feedbackbtn" v-on:click="putFeedbackY">네</button>
+    <button id="feedbackbtn" v-on:click="putFeedbackN">아니오</button>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-
-// const BASE_URL = "http://localhost:8080"
-// const BASE_URL = this.$store.state.BASE_URL;
 
 export default {
   data() {
@@ -71,7 +64,7 @@ export default {
 #feedback {
   width: 30vw;
   height: 7vh;
-  margin: 20px;
+  margin: 5%;
   border-radius: 30px;
   display: flex;
   justify-content: space-evenly;
@@ -82,17 +75,16 @@ export default {
 }
 #feedbacktitle {
   color: #4d455d;
-  font-size: 25px;
+  font-size: 1.7rem;
   font-weight: bold;
 }
-#feedbackbtn{
-    font-family: "Dovemayo_gothic";
-    background-color: #4D455D;
-    color: white;
-    font-size: 20px;
-    font-weight:bold;
-    border-radius: 30px;
-    width: 5vw;
-
+#feedbackbtn {
+  font-family: "Dovemayo_gothic";
+  background-color: #4d455d;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: bold;
+  border-radius: 30px;
+  width: 5vw;
 }
 </style>

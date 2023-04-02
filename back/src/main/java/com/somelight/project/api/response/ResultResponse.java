@@ -1,6 +1,5 @@
 package com.somelight.project.api.response;
 
-import com.somelight.project.api.request.KeywordRequest;
 import com.somelight.project.db.enitity.Article;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,12 +12,12 @@ import java.util.List;
 @Builder
 public class ResultResponse {
     Article article;
-    List<KeywordRequest> keyword;
+    List<String> keyword;
     String movie;
     String movieImage;
     String book;
     String bookImage;
-    public static ResultResponse of(Article article, List<KeywordRequest> keyword, String movie, String movieImage, String book, String bookImage){
+    public static ResultResponse of(Article article, List<String> keyword, String movie, String movieImage, String book, String bookImage){
         ResultResponse res = ResultResponse.builder()
                 .article(article)
                 .keyword(keyword)

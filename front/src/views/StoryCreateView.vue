@@ -20,12 +20,37 @@
             </div>
           </div>
           <div>
-            <div
-              class="btnRecord"
-              :class="{ on: !isRecognizing }"
-              @click="toggleRecognition"
-            >
-              녹음{{ isRecognizing ? "시작" : "중지" }}
+            <div class="frame">
+              <input
+                type="checkbox"
+                id="cb-1"
+                name="cb"
+                class="checkbox"
+                v-model="isChecked"
+              />
+              <label
+                for="cb-1"
+                class="label"
+                :class="{ on: !isRecognizing }"
+                @click="toggleRecognition"
+              ></label>
+              <div class="microphone">
+                <svg width="100px" height="100px" viewBox="0 0 100 100">
+                  <circle class="circle" cx="50" cy="50" r="47" />
+                </svg>
+                <div class="icon">
+                  <div class="body">
+                    <div class="fill"></div>
+                  </div>
+                  <div class="foot_v"></div>
+                  <div class="foot_h"></div>
+                </div>
+                <div class="dots">
+                  <div class="dot dot-1"></div>
+                  <div class="dot dot-2"></div>
+                  <div class="dot dot-3"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -49,6 +74,7 @@ export default {
     return {
       texts: "",
       isRecognizing: true,
+      isChecked: false,
     };
   },
   setup() {},
@@ -69,6 +95,7 @@ export default {
     recognition.onspeechend = () => {
       recognition.stop();
       this.isRecognizing = true;
+      this.isChecked = false;
     };
 
     recognition.onresult = (e) => {
@@ -77,7 +104,6 @@ export default {
         .join("");
       console.log(this.texts);
     };
-
     this.recognition = recognition;
   },
   methods: {
@@ -97,7 +123,7 @@ export default {
     },
     // STT관련(1)
     toggleRecognition() {
-      if (this.isRecognizing) {
+      if (this.isRecognizing && !this.isChecked) {
         this.startRecognition();
       } else {
         this.stopRecognition();
@@ -105,19 +131,19 @@ export default {
     },
     // STT관련(2)
     startRecognition() {
-      this.isRecognizing = false;
       this.recognition.start();
     },
     // STT관련(3)
     stopRecognition() {
-      this.isRecognizing = true;
       this.recognition.stop();
     },
   },
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import "@/assets/css/recording.scss";
+
 #mainWrapper {
   font-family: "Dovemayo_gothic";
   width: 100vw;
@@ -128,12 +154,12 @@ export default {
 }
 #mainWrapper > div:nth-child(1) {
   width: 100%;
-  height: 10vh;
+  height: 12vh;
 }
 
 .bgImg {
   width: 75%;
-  height: 90vh;
+  height: 88vh;
   background-image: url("@/assets/img/story/bgLaptop.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -223,4 +249,5 @@ textarea {
   font-weight: bold;
   font-size: 2rem;
 }
+/* ----------------------- */
 </style>

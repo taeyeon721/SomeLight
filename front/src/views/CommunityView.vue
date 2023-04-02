@@ -1,7 +1,9 @@
 <template>
-  <div id="communityWrapper">
-    <div id="commutitle">COMMUNITY</div>
-    <community-list-comp />
+  <div id="communitywrapper">
+    <div id="commuback">
+    <div id="commutitle">커뮤니티</div>
+      <community-list-comp />
+    </div>
   </div>
 </template>
 
@@ -14,9 +16,17 @@ export default {
 </script>
 
 <style scoped>
-#communityWrapper{
-    margin-top: 11vh;
-    width: 90vw;
+#communitywrapper{
+  width: calc(100vw - (100vw - 99%));
+  height: calc(100vh - (100vh - 100%));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#commuback{
+    margin-top: 12vh;
+    width: 69vw;
     height: 88vh;
     display: flex;
     justify-content: center;
@@ -31,7 +41,9 @@ export default {
 
 }
 #commutitle{
-    font-size:40px;
+    margin-bottom:55%;
+    font-family: "Dovemayo_gothic";
+    font-size:2rem;
     font-weight: bold;
     color: #4D455D;
 }

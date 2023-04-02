@@ -6,6 +6,7 @@ import com.somelight.project.db.enitity.Book;
 import com.somelight.project.db.enitity.Movie;
 import com.somelight.project.db.repository.BookRepository;
 import com.somelight.project.db.repository.MovieRepository;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -22,12 +24,6 @@ public class ApiServiceImpl implements ApiService{
 
     //@Value("${KMDB.movieKey}")
    // private String movieKey;
-    @Value("${naver.clientId}")
-    private String clientId;
-    @Value("${naver.clientSecret}")
-    private String clientSecret;
-    @Value("${naver.movieUrl}")
-    private String movieUrl;
     @Autowired
     private MovieRepository movieRepository;
     @Autowired
@@ -40,45 +36,13 @@ public class ApiServiceImpl implements ApiService{
             movie = movieList.get((int) (Math.random() * (movieList.size() - 1)));
             return movie;
         }
-        int genre = 0;
-        if (result == 2) genre = 5;
-        else genre = 11;
 
-        URI uri = UriComponentsBuilder
-                .fromUriString(movieUrl)
-                .path("/movie.json")
-                .queryParam("query", keyword)
-                .queryParam("genre", genre)
-                .queryParam("display", 100)
-                .encode(StandardCharsets.UTF_8)
-                .build()
-                .toUri();
-
-        RestTemplate restTemplate = new RestTemplate();
-        RequestEntity<Void> requestEntity = RequestEntity
-                .get(uri)
-                .header("X-Naver-Client-Id", clientId)
-                .header("X-Naver-Client-Secret", clientSecret)
-                .build();
-
-        MovieResultResponse movieResultResponse = restTemplate.exchange(requestEntity, MovieResultResponse.class).getBody();
-        List<MovieOneResponse> movieOneResponseList = List.of(movieResultResponse.getItems());
-
-        if (movieOneResponseList.size() == 0) {
-            List<Movie> movieList = movieRepository.findAllByResult(result);
-            movie = movieList.get((int) (Math.random() * (movieList.size() - 1)));
-            return movie;
-        }
-
-        MovieOneResponse movieOneResponse = movieResultResponse.getItems()[0];
-        String title = movieOneResponse.getTitle();
-        String imgUrl = movieOneResponse.getImage();
-        movie.setTitle(title);
-        movie.setMovieImage(imgUrl);
+        List<Movie> movieList = movieRepository.findAllByResult(result);
+        movie = movieList.get((int) (Math.random() * (movieList.size() - 1)));
         return movie;
     }
 
-    public Book requestBook(int result, String content) {
+    public Book requestBook(int result, String content){
         Book book = new Book();
         double check = 0;
         List<Book> bookList = bookRepository.findAllByResult(result);
@@ -91,7 +55,6 @@ public class ApiServiceImpl implements ApiService{
                 check = similar;
             }
         }
-        System.out.println(book);
         return book;
     }
 
@@ -130,33 +93,8 @@ public class ApiServiceImpl implements ApiService{
                     }
                 }
             }
-
             if (i > 0) costs[s2.length()] = lastValue;
         }
-
         return costs[s2.length()];
     }
-
-    //    public MovieOneResponse requestMovie(int result, List<KeywordRequest> keywordlist, String content) {
-//
-//        //String movieUrl = "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=N&listCount=500&ServiceKey=" + movieKey;
-//        String searchWord = null;
-//        int genre = 0;
-//        Comparator<KeywordRequest> comparator = new Comparator<KeywordRequest>() {
-//            @Override
-//            public int compare(KeywordRequest A, KeywordRequest B) {
-//                return B.getCnt() - A.getCnt();
-//            }
-//        };
-//        if (keywordlist != null) {
-//            Collections.sort(keywordlist, comparator);
-//            searchWord = keywordlist.get(0).getKeyword();
-//        }
-//        else {
-//            if (result == 2) searchWord = "썸";
-//            else searchWord = "솔로";
-//        }
-//
-//        return null;
-//    }
 }

@@ -9,7 +9,6 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class ResultRequest {
-    String content;
     int result;
-    List<KeywordRequest> keyword;
+    List<String> keyword;
 }

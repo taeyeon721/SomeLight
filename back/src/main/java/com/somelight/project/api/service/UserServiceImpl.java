@@ -31,4 +31,10 @@ public class UserServiceImpl implements UserService{
         articles = articleRepository.findAllByUserId(userId, pageable);
         return articles;
     }
+
+    @Override
+    public User getUser(String email) {
+        User user = userRepository.findByEmail(email);
+        return user;
+    }
 }

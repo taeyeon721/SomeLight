@@ -24,6 +24,7 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int articleId;
     private int userId;
+    @Column(length=3000)
     private String content;
     private int result;
     private Boolean isChanged;

@@ -7,7 +7,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import MyInfoComp from '@/components/mypageview/MyInfoComp.vue'
 import MyStoryComp from '@/components/mypageview/MyStoryComp.vue'
 
@@ -28,7 +28,7 @@ export default {
 }
 #mypageback{
   width: 70vw;
-  margin-top:10vh ;
+  margin-top:12vh ;
   height: 88vh;
   display: flex;
   align-items: center;
@@ -36,7 +36,7 @@ export default {
   background: linear-gradient(
     rgba(250,250,250,0.2), 
     rgba(250,250,250,0.4)),
-    url("../../src/assets/img/mypage/mypageback.jpg");
+    url("../../src/assets/img/mypage/notepad.jpg");
   /* background-image: url("../../src/assets/img/main/mypageback.jpg"); */
   background-repeat: no-repeat;
   background-size: cover;

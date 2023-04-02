@@ -1,14 +1,11 @@
 <template>
   <div id="deletebtn" v-on:click="deleteArticle">
-    <p style="font-size: 20px; color: white; font-weight: bold">삭제</p>
+    <p style="font-size: 1.3rem; color: white; font-weight: bold">삭제</p>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-
-// const BASE_URL = "http://localhost:8080"
-// const BASE_URL = this.$store.state.BASE_URL;
 
 export default {
   methods: {

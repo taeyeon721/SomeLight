@@ -2,16 +2,32 @@
   <div id="mainWrapper">
     <div class="center">
       <div id="resultWrapper">
-        <div id="bulbWrapper" v-if="results.article.result === 2">
+        <div id="bulbWrapper" v-if="result === 2">
           <img src="@/assets/img/result/fix_green.png" alt="" />
         </div>
-        <div id="bulbWrapper" v-else-if="results.article.result === 1">
+        <div id="bulbWrapper" v-else-if="result === 1">=
           <img src="@/assets/img/result/fix_black.png" alt="" />
         </div>
-        <div id="bulbWrapper" v-else-if="results.article.result === 0">
+        <div id="bulbWrapper" v-else-if="result === 0">
           <img src="@/assets/img/result/fix_red.png" alt="" />
         </div>
-        <div id="textWrapper">{{ results.article.content }}</div>
+        <div id="textWrapper">
+          {{ content }}
+        <p>
+          <img v-if="result===2" src="@/assets/img/result/greenheart.png" width="20" alt="">
+          <img v-else-if="result===1" src="@/assets/img/result/navyheart.png" width="20" alt="">
+          <img v-else-if="result===0" src="@/assets/img/result/redheart.png" width="20" alt="">
+          키워드</p>
+        <div class="keywordWrapper">
+        <div id="keywordbox" v-for="ent in keyword" v-bind:key="ent[i]">
+          #{{ ent }}
+        </div>
+        </div>
+        <div>{{ movie }}</div>
+        <div>{{ book }}</div>
+        <img :src="movieImage" alt="">
+        <img :src="bookImage" alt="">
+        </div>
       </div>
       <div id="btnShare" v-on:click="share">공유하기</div>
     </div>
@@ -21,48 +37,57 @@
 <script>
 import axios from "axios";
 
-// const BASE_URL = "http://localhost:8080";
-// const BASE_URL = this.$store.state.BASE_URL;
-
 export default {
   components: {},
   data() {
     return {
-      results: {
-        article: {
-          articleId: this.$store.state.results.articleId,
-          userId: this.$store.state.results.userId,
-          content: this.$store.state.results.content,
-          result: this.$store.state.results.result,
-          createdDate: this.$store.state.results.createdDate,
-          redCount: this.$store.state.results.redCount,
-          greenCount: this.$store.state.results.greenCount,
-          isChanged: this.$store.state.results.isChanged,
-          isExposure: this.$store.state.results.isExposure,
-        },
-        keyword: this.$store.state.results.keyword,
-        movie: this.$store.state.results.movie,
-        movieImage: this.$store.state.results.movieImage,
-        book: this.$store.state.results.book,
-        bookImage: this.$store.state.results.bookImage,
-      },
+ 
     };
   },
   setup() {},
-  created() {},
+  created() {
+  },
+  computed:{
+    content(){
+      return this.$store.state.results.article.content
+    },
+    result(){
+      return this.$store.state.results.article.result
+    },
+    keyword(){
+      return this.$store.state.results.keyword
+    },
+    movie(){
+      console.log(this.$store.state.results.movie)
+      return this.$store.state.results.movie
+    },
+    movieImage(){
+      console.log(this.$store.state.results.movieImage)
+      return this.$store.state.results.movieImage
+    },
+    book(){
+      console.log(this.$store.state.results.book)
+      return this.$store.state.results.book
+    },
+    bookImage(){
+      console.log(this.$store.state.results.bookImage)
+      return this.$store.state.results.bookImage
+    },
+    
+  },
   mounted() {},
   methods: {
     share() {
       axios({
         method: "put",
-        url: `${this.$store.state.BASE_URL}/article/${this.results.article.articleId}`,
+        url: `${this.$store.state.BASE_URL}/article/${this.$store.state.results.article.articleId}`,
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },
         data: {
-          isChanged: this.$store.state.article.changed,
+          isChanged: this.$store.state.results.article.changed,
           isExposure: true,
-          voteResult: this.$store.state.article.voteResult,
+          voteResult: this.$store.state.results.article.voteResult,
         },
       })
         .then((res) => {
@@ -138,8 +163,10 @@ export default {
 }
 #textWrapper {
   width: 80%;
+  font-size: 2rem;
   height: 85%;
   margin-top: 15%;
+  color: rgba(77, 69, 93, 100%);
 }
 #btnShare {
   width: 13%;
@@ -153,5 +180,24 @@ export default {
   font-weight: bold;
   font-size: 2rem;
   margin-top: 1%;
+}
+.keywordWrapper{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#keywordbox{
+  margin: 1%;
+  padding:1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  width: 25%;
+  height: 10%;
+  border-radius: 20px;
+  background-color: rgba(245,233,207);
 }
 </style>

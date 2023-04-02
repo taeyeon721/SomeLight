@@ -1,70 +1,53 @@
 <template>
   <div id="commulist">
     <table id="commutable">
-      <thead>
-        <div>
-        <!-- <th id="area1">No.</th> -->
-        <th id="area2">사연</th>
-        <th id="area3">결과</th>
-        </div>
-      </thead>
-      <br />
-      <tbody>
-        <div v-for="article in articles" v-bind:key="article.articleId">
-        <!-- v-if="article.exposure" -->
-        <tr 
-        style="
-        line-height:28px;"
-        >
-          <!-- <td id="area1">{{ article.articleId }}</td> -->
-          <td 
-          id="area2"
-          ><div
-          id="articletitle"
-          v-on:click="goDetail(article.articleId)"
-          style="
-          width:380px;
-          white-space:nowrap;
-          overflow:hidden;
-          text-overflow:ellipsis;">
-            {{ article.content }}
-          </div></td>
-          <td id="area3" v-if="article.result===0">
-            <img 
-            src="../../../src/assets/img/community/redbulb.png" 
-            alt=""
-            >
-            </td>
-          </tr>
-        </div>
-      </tbody>
+      <div>
+        <tr>
+          <th id="area2">사연</th>
+          <th id="area3">결과</th>
+        </tr>
+      </div>
+      <div v-for="article in articles" v-bind:key="article.articleId">
+        <tr>
+          <td id="area2">
+            <div id="articletitle" v-on:click="goDetail(article.articleId)">
+              {{ article.content }}
+            </div>
+          </td>
+          <td id="area3" v-if="article.result === 0">
+            <img src="../../../src/assets/img/result/redheart.png" alt="" />
+          </td>
+          <td id="area3" v-else-if="article.result === 1">
+            <img src="../../../src/assets/img/result/navyheart.png" alt="" />
+          </td>
+          <td id="area3" v-else-if="article.result === 2">
+            <img src="../../../src/assets/img/result/greenheart.png" alt="" />
+          </td>
+        </tr>
+      </div>
     </table>
-    <br>
-  <div id="page" 
-  style="
-  position:absolute;
-  padding-left:6%;
-  padding-top:75%;"
-  >
-  <button v-on:click="prevPage">이전</button>
-  <span v-for="p in totalpage" v-bind:key="p">
-    <button v-if="p==page" style="text-decoration:underline;" v-on:click="changePage(p)" >
-      {{ p }}
-    </button>
-    <button v-else v-on:click="changePage(p)" >
-      {{ p }}
-    </button>
-  </span>
-  <button v-on:click="nextPage">다음</button>
-  </div>
+    <br />
+    <div id="page">
+      <button v-on:click="prevPage">이전</button>
+      <span v-for="p in totalpage" v-bind:key="p">
+        <button
+          v-if="p == page"
+          style="text-decoration: underline"
+          v-on:click="changePage(p)"
+        >
+          {{ p }}
+        </button>
+        <button v-else v-on:click="changePage(p)">
+          {{ p }}
+        </button>
+      </span>
+      <button v-on:click="nextPage">다음</button>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-
-// const BASE_URL = "http://localhost:8080"
-// const BASE_URL = this.$store.state.BASE_URL;
 
 export default {
   data() {
@@ -134,63 +117,79 @@ export default {
 </script>
 
 <style scoped>
-#commulist{
-    font-family: "Dovemayo_gothic";
-    position:absolute;
-    width: 42vw;
-    height: 70vh;
-    background-color: white;
-    color: #4D455D;
-    border-radius: 20px;
-    box-shadow: 3px 3px 3px rgb(205, 205, 205);
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    opacity: 0.9;
+#commulist {
+  font-family: "Dovemayo_gothic";
+  position: absolute;
+  width: 42vw;
+  height: 70vh;
+  background-color: white;
+  color: #4d455d;
+  border-radius: 20px;
+  box-shadow: 3px 3px 3px rgb(205, 205, 205);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  opacity: 0.75;
 }
 
 #commutable {
   position: absolute;
   width: 35vw;
+  font-size: 1.7rem;
+  line-height: 170%;
   height: 100vh;
   margin: 5%;
 }
 
-thead {
-  position: absolute;
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-}
-tbody {
-  font-size: 20px;
-  text-align: center;
+tr {
+  display: flex;
+  align-items: center;
 }
 
-#area1,
 #area3 {
-  width: 5vw;
+  width: 10%;
   text-align: center;
 }
 
 #area2 {
-  width: 400px;
-  padding-left: 5%;
+  width: 60%;
+  padding-left: 15%;
 }
 
 #area3 > img {
-  width: 1vw;
+  margin-top: 1vh;
+  width: 40%;
   object-fit: fill;
 }
 
-button{
+button {
   font-family: "Dovemayo_gothic";
-  font-size: 23px;
-  border: 0px solid black;
+  font-size: 1.5rem;
   background-color: transparent;
 }
 
+#articletitle {
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 #articletitle:hover {
-  color: red;
+  /* color: red; */
+  /* border-bottom: 2px solid #4D455D ; */
+  text-decoration: underline;
+}
+
+#page {
+  position: absolute;
+  margin-top: 70%;
+}
+
+button {
+  font-family: "Dovemayo_gothic";
+  font-size: 1.5rem;
+  border: 0px solid black;
+  background-color: transparent;
 }
 </style>
