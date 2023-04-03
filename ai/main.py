@@ -67,7 +67,7 @@ def make_prediction():
         else:
             score = 2
         
-        return jsonify({'result' : score, 'keyword' : keyword[:3]})
+        return jsonify({'result' : 2, 'keyword' : keyword[:3]})
 
 def sent_preprocess(text, okt, stop_words):
     retext_1 = re.sub("[a-zA-Zㄱ-ㅎㅏ-ㅣ,\\n\!?@#$%^&*()~`]", "", text)
