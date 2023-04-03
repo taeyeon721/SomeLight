@@ -8,7 +8,7 @@
     <div v-if="!isLogin" id="itemWrapper">
       <ul>
         <!-- 메인화면일경우 -->
-        <li>
+        <li class="navitem">
           <router-link to="/login" style="text-decoration: none"
             >시작하기</router-link
           >
@@ -18,22 +18,26 @@
     <div v-else id="itemWrapperLogin">
       <!-- 카카오 로그인 이후 -->
       <ul>
-        <li>
+        <li class="navitem">
+          <img src="../../assets/img/nav/banban.png" alt="" width="15">
           <router-link to="/story/create" style="text-decoration: none"
             >AI</router-link
           >
         </li>
-        <li>
+        <li class="navitem">
+          <img src="../../assets/img/nav/banban.png" alt="" width="15">
           <router-link to="/community" style="text-decoration: none"
             >커뮤니티</router-link
           >
         </li>
-        <li>
+        <li class="navitem">
+          <img src="../../assets/img/nav/banban.png" alt="" width="15">
           <router-link to="/mypage" style="text-decoration: none"
             >마이페이지</router-link
           >
         </li>
-        <li>
+        <li class="navitem">
+          <img src="../../assets/img/nav/banban.png" alt="" width="15">
           <router-link to="/" style="text-decoration: none" v-on:click="logout"
             >로그아웃</router-link
           >
@@ -130,8 +134,15 @@ li {
 }
 #itemWrapperLogin {
   height: 100%;
-  margin-left: 28vw;
+  margin-left: 25vw;
 }
+.navitem > img{
+  visibility: hidden;
+}
+.navitem:hover > img{
+  visibility: visible;
+}
+
 
 @font-face {
   font-family: "Dovemayo_gothic";

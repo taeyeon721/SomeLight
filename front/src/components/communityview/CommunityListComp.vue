@@ -28,20 +28,21 @@
     </table>
     <br />
     <div id="page">
-      <button v-on:click="prevPage">이전</button>
+      <button id="pbtn" v-on:click="prevPage">이전</button>
       <span v-for="p in totalpage" v-bind:key="p">
         <button
+          id="pbtn"
           v-if="p == page"
           style="text-decoration: underline"
           v-on:click="changePage(p)"
         >
           {{ p }}
         </button>
-        <button v-else v-on:click="changePage(p)">
+        <button id="pbtn" v-else v-on:click="changePage(p)">
           {{ p }}
         </button>
       </span>
-      <button v-on:click="nextPage">다음</button>
+      <button id="pbtn" v-on:click="nextPage">다음</button>
     </div>
   </div>
 </template>
@@ -191,5 +192,9 @@ button {
   font-size: 1.5rem;
   border: 0px solid black;
   background-color: transparent;
+}
+
+#pbtn:hover{
+  color: red;
 }
 </style>

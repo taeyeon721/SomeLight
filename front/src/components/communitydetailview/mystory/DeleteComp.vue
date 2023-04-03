@@ -42,4 +42,8 @@ export default {
   margin-left: 12vw;
   margin-top: 7vh;
 }
+
+#deletebtn:hover{
+  background-color: red;
+}
 </style>

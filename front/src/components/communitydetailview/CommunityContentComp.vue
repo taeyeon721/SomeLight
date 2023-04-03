@@ -115,6 +115,10 @@ export default {
   margin-top:7vh;
 }
 
+#backbtn:hover{
+  background-color:black ;
+}
+
 #bulbWrapper {
   border-radius: 100%;
   width: 30%;

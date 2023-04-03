@@ -101,7 +101,11 @@ export default {
   align-items: center;
 }
 
-/* #nonmeberbtn:hover{
-  background-color:#F3998A;
-} */
+#nonmemberbtn:hover {
+  background-color:#4d455d;
+}
+
+#kakaobtn:hover{
+  background-color: #FEE500;
+}
 </style>

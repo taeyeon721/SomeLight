@@ -261,6 +261,7 @@ textarea {
 .btnRecord > h1 {
   text-align: center;
 }
+
 .btnSend {
   width: 35%;
   height: 24%;
@@ -272,6 +273,9 @@ textarea {
   color: white;
   font-weight: bold;
   font-size: 2rem;
+}
+.btnSend:hover{
+  background-color: black;
 }
 /* ----------------------- */
 // * {
