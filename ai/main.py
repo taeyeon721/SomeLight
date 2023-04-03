@@ -26,14 +26,14 @@ def make_prediction():
         params = request.get_json()
         
         # 로컬에 사연 data를 저장
-        file = open('C:/Users/SSAFY/Desktop/S_PJT/NLP_tf2/AI_server/flask_AI/text_data/data.txt', 'w')
+        file = open('./data.txt', 'w')
         text_data = params['content']
         file.write(text_data)
         file.close()
         
         # # 문장 전처리 수행
         okt = Okt()
-        stop_word = pd.read_csv('C:/Users/SSAFY/Desktop/S_PJT/NLP_tf2/AI_server/flask_AI/ko_stopword_2.csv', encoding='CP949', sep='nan')
+        stop_word = pd.read_csv('./ko_stopword_2.csv', encoding='CP949', sep='nan')
         stop_word = pd.DataFrame(stop_word)
         stop_words = stop_word.to_numpy()
         
@@ -80,6 +80,6 @@ def sent_preprocess(text, okt, stop_words):
 
 if __name__=="__main__":
     # model = joblib.load('./model/model.pkl')
-    model = load_model('C:/Users/SSAFY/Desktop/S_PJT/NLP_tf2/AI_server/flask_AI/ml_load/lstm_2.h5')
+    model = load_model('./ml_load/lstm_2.h5')
     
     app.run()
