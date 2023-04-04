@@ -138,7 +138,7 @@ export default {
   width: 35vw;
   font-size: 1.7rem;
   line-height: 170%;
-  height: 100vh;
+  /* height: 100vh; */
   margin: 5%;
 }
 
@@ -194,7 +194,7 @@ button {
   background-color: transparent;
 }
 
-#pbtn:hover{
+#pbtn:hover {
   color: red;
 }
 </style>

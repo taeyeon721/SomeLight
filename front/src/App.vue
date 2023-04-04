@@ -25,26 +25,25 @@ html {
   cursor: url("./assets/img/main/cursor.png"), auto;
 }
 
-
-body::-webkit-scrollbar{
+body::-webkit-scrollbar {
   width: 11px;
 }
-body::-webkit-scrollbar-thumb{
+body::-webkit-scrollbar-thumb {
   height: 30%;
   background: rgba(77, 69, 93, 100%);
   border-radius: 10px;
 }
-body::-webkit-scrollbar-track{
+body::-webkit-scrollbar-track {
   background: rgba(77, 69, 93, 50%);
-
 }
 .font {
-  font-family: "DM Sans", sans-serif,'Dovemayo_gothic';
+  font-family: "DM Sans", sans-serif, "Dovemayo_gothic";
 }
 @font-face {
-    font-family: 'Dovemayo_gothic';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "Dovemayo_gothic";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
 }
 </style>

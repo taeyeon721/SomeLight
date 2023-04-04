@@ -13,13 +13,10 @@ import HalfComp from "@/components/communitydetailview/HalfComp.vue";
 
 export default {
   data() {
-    return {
-
-    };
+    return {};
   },
   components: { CommunityContentComp, HalfComp },
-  methods: {
-  },
+  methods: {},
   created() {
     const story_id = this.$route.params.story_id;
     const payload = { story_id: story_id };
@@ -58,6 +55,5 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  
 }
 </style>

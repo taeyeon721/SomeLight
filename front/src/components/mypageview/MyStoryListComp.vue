@@ -3,24 +3,24 @@
     <table id="commutable">
       <div>
         <tr>
-          <th id="area2">사연</th>
-          <th id="area3">결과</th>
+          <th class="area2">사연</th>
+          <th class="area3">결과</th>
         </tr>
       </div>
       <div v-for="article in articles" v-bind:key="article.articleId">
         <tr>
-          <td id="area2">
+          <td class="area2">
             <div id="articletitle" v-on:click="goDetail(article.articleId)">
               {{ article.content }}
             </div>
           </td>
-          <td id="area3" v-if="article.result === 0">
+          <td class="area3" v-if="article.result === 0">
             <img src="../../../src/assets/img/result/redheart.png" alt="" />
           </td>
-          <td id="area3" v-else-if="article.result === 1">
+          <td class="area3" v-else-if="article.result === 1">
             <img src="../../../src/assets/img/result/navyheart.png" alt="" />
           </td>
-          <td id="area3" v-else-if="article.result === 2">
+          <td class="area3" v-else-if="article.result === 2">
             <img src="../../../src/assets/img/result/greenheart.png" alt="" />
           </td>
         </tr>
@@ -34,7 +34,8 @@
           id="pbtn"
           v-if="p == page"
           style="text-decoration: underline"
-          v-on:click="changePage(p)">
+          v-on:click="changePage(p)"
+        >
           {{ p }}
         </button>
         <button id="pbtn" v-else v-on:click="changePage(p)">
@@ -137,6 +138,7 @@ export default {
   margin: 3%;
   font-size: 1.7rem;
   line-height: 170%;
+  table-layout: fixed;
 }
 
 tr {
@@ -145,18 +147,18 @@ tr {
   align-items: center;
 }
 
-#area3 {
+.area3 {
   width: 10%;
   text-align: center;
   padding-right: 10%;
 }
 
-#area2 {
+.area2 {
   width: 60%;
   padding-left: 10%;
 }
 
-#area3 > img {
+.area3 > img {
   width: 50%;
   object-fit: fill;
 }
@@ -184,7 +186,7 @@ button {
   margin-top: 27%;
 }
 
-#pbtn:hover{
+#pbtn:hover {
   color: red;
 }
 </style>
