@@ -47,9 +47,8 @@ public class ResultController {
 
         int userId = 0;
         if (authentication != null) {
-            userId = userService.getUserId((String) authentication.getCredentials());
-            System.out.println(userId);
-            if (userId == 0) return new ResponseEntity<>("expired token", HttpStatus.BAD_REQUEST);
+            String email = (String) authentication.getCredentials();
+            userId = userService.getUserId(email);
         }
         Article article = articleService.createArticle(userId, content, result);
         ResultResponse res = ResultResponse.of(article, keywordRequestList, null, null, null, null);

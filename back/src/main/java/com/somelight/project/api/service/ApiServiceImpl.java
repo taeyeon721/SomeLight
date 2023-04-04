@@ -64,18 +64,17 @@ public class ApiServiceImpl implements ApiService{
         JsonParser parser = new JsonParser();
         JsonElement element = parser.parse(String.valueOf(sb));
         JsonObject jsonObject = element.getAsJsonObject();
-        int movieCnt = jsonObject.get("TotalCount").getAsInt();
         JsonObject movieArray = (JsonObject) jsonObject.get("Data").getAsJsonArray().get(0);
-        JsonArray movieResult = movieArray.get("Result").getAsJsonArray();
-
+        int movieCnt = movieArray.get("Count").getAsInt();
         if (movieCnt == 0) {
             List<Movie> movieList = movieRepository.findAllByResult(result);
             movie = movieList.get((int) (Math.random() * (movieList.size() - 1)));
             return movie;
         }
+        JsonArray movieResult = movieArray.get("Result").getAsJsonArray();
         double check = 0;
         for (int idx = 0; idx < movieCnt; idx++) {
-            if (movieResult.get(idx).getAsJsonObject().get("posters").getAsString() == null) continue;
+            if ("".equals(movieResult.get(idx).getAsJsonObject().get("posters").getAsString())) continue;
             JsonObject plots = (JsonObject) movieResult.get(idx).getAsJsonObject().get("plots");
             JsonObject plot = (JsonObject) plots.get("plot").getAsJsonArray().get(0);
             String plotText = plot.getAsJsonObject().get("plotText").getAsString();
