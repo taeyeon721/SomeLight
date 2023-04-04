@@ -3,13 +3,13 @@
     <button id="backbtn" v-on:click="$router.go(-1)">뒤로</button>
     <div id="content">
     <div id="resultWrapper">
-      <div id="bulbWrapper" v-if="articleId===2">
+      <div id="bulbWrapper" v-if="result===2">
           <img src="@/assets/img/result/fix_green.png" alt="" />
         </div>
-        <div id="bulbWrapper" v-else-if="articleId===1">
+        <div id="bulbWrapper" v-else-if="result===1">
           <img src="@/assets/img/result/fix_black.png" alt="" />
         </div>
-        <div id="bulbWrapper" v-else-if="articleId===0">
+        <div id="bulbWrapper" v-else-if="result===0">
           <img src="@/assets/img/result/fix_red.png" alt="" />
         </div>
     </div>
@@ -43,6 +43,9 @@ export default {
     "loginflag",
   ],
   computed:{
+    result(){
+      return this.$store.state.article.result
+    },
     content(){
       return this.$store.state.article.content
     }
