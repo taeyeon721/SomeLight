@@ -24,6 +24,7 @@ html {
   height: 100%;
   cursor: url("./assets/img/main/cursor.png"), auto;
 }
+
 body::-webkit-scrollbar {
   width: 11px;
 }

@@ -87,4 +87,10 @@ export default {
   border-radius: 30px;
   width: 5vw;
 }
+
+#feedbackbtn:hover{
+  background-color: white;
+  color:#4d455d;
+}
+
 </style>

@@ -3,24 +3,24 @@
     <table id="commutable">
       <div>
         <tr>
-          <th id="area2">사연</th>
-          <th id="area3">결과</th>
+          <th class="area2">사연</th>
+          <th class="area3">결과</th>
         </tr>
       </div>
       <div v-for="article in articles" v-bind:key="article.articleId">
         <tr>
-          <td id="area2">
+          <td class="area2">
             <div id="articletitle" v-on:click="goDetail(article.articleId)">
               {{ article.content }}
             </div>
           </td>
-          <td id="area3" v-if="article.result === 0">
+          <td class="area3" v-if="article.result === 0">
             <img src="../../../src/assets/img/result/redheart.png" alt="" />
           </td>
-          <td id="area3" v-else-if="article.result === 1">
+          <td class="area3" v-else-if="article.result === 1">
             <img src="../../../src/assets/img/result/navyheart.png" alt="" />
           </td>
-          <td id="area3" v-else-if="article.result === 2">
+          <td class="area3" v-else-if="article.result === 2">
             <img src="../../../src/assets/img/result/greenheart.png" alt="" />
           </td>
         </tr>
@@ -28,20 +28,21 @@
     </table>
     <br />
     <div id="page">
-      <button v-on:click="prevPage">이전</button>
+      <button id="pbtn" v-on:click="prevPage">이전</button>
       <span v-for="p in totalpage" v-bind:key="p">
         <button
+          id="pbtn"
           v-if="p == page"
           style="text-decoration: underline"
           v-on:click="changePage(p)"
         >
           {{ p }}
         </button>
-        <button v-else v-on:click="changePage(p)">
+        <button id="pbtn" v-else v-on:click="changePage(p)">
           {{ p }}
         </button>
       </span>
-      <button v-on:click="nextPage">다음</button>
+      <button id="pbtn" v-on:click="nextPage">다음</button>
     </div>
   </div>
 </template>
@@ -137,6 +138,7 @@ export default {
   margin: 3%;
   font-size: 1.7rem;
   line-height: 170%;
+  table-layout: fixed;
 }
 
 tr {
@@ -145,18 +147,18 @@ tr {
   align-items: center;
 }
 
-#area3 {
+.area3 {
   width: 10%;
   text-align: center;
   padding-right: 10%;
 }
 
-#area2 {
+.area2 {
   width: 60%;
   padding-left: 10%;
 }
 
-#area3 > img {
+.area3 > img {
   width: 50%;
   object-fit: fill;
 }
@@ -182,5 +184,9 @@ button {
 #page {
   position: absolute;
   margin-top: 27%;
+}
+
+#pbtn:hover {
+  color: red;
 }
 </style>

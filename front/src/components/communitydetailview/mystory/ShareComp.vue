@@ -63,6 +63,10 @@ button {
   width: 9vw;
   height: 5vh;
 }
+button:hover{
+  background-color: white;
+  color: #4d455d;
+}
 p {
   font-size: 1.7rem;
   font-weight: bold;
