@@ -51,7 +51,7 @@
           </div>
         </div>
       </div>
-      <div id="btnShare" v-on:click="share">공유하기</div>
+      <div id="btnShare" v-on:click="share" v-if="isLogin">공유하기</div>
     </div>
   </div>
 </template>
@@ -67,6 +67,9 @@ export default {
   setup() {},
   created() {},
   computed: {
+    isLogin(){
+      return this.$store.state.isLogin;
+    },
     content() {
       return this.$store.state.results.article.content;
     },
