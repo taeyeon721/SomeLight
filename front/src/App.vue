@@ -22,7 +22,7 @@ export default {
 body,
 html {
   height: 100%;
-  cursor: url("./assets/img/main/cursor.png"), auto;
+  /* cursor: url("./assets/img/main/cursor.png"), auto; */
 }
 
 body::-webkit-scrollbar {

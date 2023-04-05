@@ -138,6 +138,7 @@ export default {
   width: 35vw;
   font-size: 1.7rem;
   line-height: 170%;
+  table-layout: fixed;
   /* height: 100vh; */
   margin: 5%;
 }
