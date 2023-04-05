@@ -133,7 +133,6 @@ export default {
 #redbar {
   font-size: 0.7rem;
   display: flex;
-  justify-content: center;
   align-items: center;
   background-color: white;
   width: 17vw;
