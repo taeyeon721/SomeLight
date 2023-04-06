@@ -6,7 +6,7 @@ from konlpy.tag import Okt
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import load_model
-import sentencepiece as spm
+import numpy as np
 
 # http 통신하는 import
 
@@ -46,7 +46,6 @@ def make_prediction():
         clean_sent.append(clean_text)
         
         tokenizer = Tokenizer()
-
         # # 문장 내 키워드(명사) 추출 및 빈도수 순으로 출력
         nouns_sent = okt.nouns(clean_sent[0])
         tokenizer.fit_on_texts(nouns_sent)
@@ -55,20 +54,23 @@ def make_prediction():
         for key in word_index:
             keyword.append(key)
         
-        vocab_file = './kowiki.model'
-        vocab = spm.SentencePieceProcessor()
-        vocab.load(vocab_file)
-        encoded = []
-        pieces = vocab.encode_as_pieces(text_data)
-        ids = vocab.encode_as_ids(text_data)
-        encoded.append(ids)
-        text_pad = pad_sequences(encoded, maxlen=1017)
+        # vocab_file = './kowiki.model'
+        # vocab = spm.SentencePieceProcessor()
+        # vocab.load(vocab_file)
+        # encoded = []
+        # pieces = vocab.encode_as_pieces(text_data)
+        # ids = vocab.encode_as_ids(text_data)
+        # encoded.append(ids)
+        # text_pad = pad_sequences(encoded, maxlen=1017)
         
-        # tokenizer.fit_on_texts(clean_sent)
-        # encoded = tokenizer.texts_to_sequences(clean_sent)
-        # text_pad = pad_sequences(encoded, maxlen=300, padding='post')
+        X_train = np.load('./X_train.npy', allow_pickle=True)
+        tokenizer = Tokenizer()
+        tokenizer.fit_on_texts(X_train)
+        encoded = tokenizer.texts_to_sequences(clean_sent)
+        text_pad = pad_sequences(encoded, maxlen=300)
         
         score = model.predict(text_pad)
+        # score = int(score*100)
         
         if(score[0][0]<0.4):
             score = 0
@@ -93,6 +95,6 @@ def sent_preprocess(text, okt, stop_words):
 
 if __name__=="__main__":
     # model = joblib.load('./model/model.pkl')
-    model = load_model('./1D_CNN_rare_kowiki_1.h5')
+    model = load_model('./1D_CNN_re_1.h5')
     
     app.run()
