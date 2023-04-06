@@ -35,7 +35,7 @@ public class ArticleController {
     @CrossOrigin("*")
     @GetMapping()
     public ResponseEntity<Page<Article>> getArticleList(@RequestParam(required = false, defaultValue = "1", value = "page") int pageNo) {
-        Pageable pageable = PageRequest.of(pageNo-1, 9);
+        Pageable pageable = PageRequest.of(pageNo-1, 8);
         Page<Article> articles = articleService.findArticles(true, pageable);
         return new ResponseEntity<>(articles, HttpStatus.OK);
     }
