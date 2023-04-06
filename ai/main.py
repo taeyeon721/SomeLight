@@ -6,6 +6,7 @@ from konlpy.tag import Okt
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import load_model
+import sentencepiece as spm
 
 # http 통신하는 import
 
@@ -26,14 +27,14 @@ def make_prediction():
         params = request.get_json()
         
         # 로컬에 사연 data를 저장
-        file = open('C:/Users/SSAFY/Desktop/S_PJT/NLP_tf2/AI_server/flask_AI/text_data/data.txt', 'w')
+        file = open('./data.txt', 'w')
         text_data = params['content']
         file.write(text_data)
         file.close()
         
         # # 문장 전처리 수행
         okt = Okt()
-        stop_word = pd.read_csv('C:/Users/SSAFY/Desktop/S_PJT/NLP_tf2/AI_server/flask_AI/ko_stopword_2.csv', encoding='CP949', sep='nan')
+        stop_word = pd.read_csv('./ko_stopword_2.csv', encoding='CP949', sep='nan')
         stop_word = pd.DataFrame(stop_word)
         stop_words = stop_word.to_numpy()
         
@@ -53,10 +54,19 @@ def make_prediction():
         keyword = []
         for key in word_index:
             keyword.append(key)
-            
-        tokenizer.fit_on_texts(clean_sent)
-        encoded = tokenizer.texts_to_sequences(clean_sent)
-        text_pad = pad_sequences(encoded, maxlen=300, padding='post')
+        
+        vocab_file = './kowiki.model'
+        vocab = spm.SentencePieceProcessor()
+        vocab.load(vocab_file)
+        encoded = []
+        pieces = vocab.encode_as_pieces(text_data)
+        ids = vocab.encode_as_ids(text_data)
+        encoded.append(ids)
+        text_pad = pad_sequences(encoded, maxlen=1017)
+        
+        # tokenizer.fit_on_texts(clean_sent)
+        # encoded = tokenizer.texts_to_sequences(clean_sent)
+        # text_pad = pad_sequences(encoded, maxlen=300, padding='post')
         
         score = model.predict(text_pad)
         
@@ -70,16 +80,19 @@ def make_prediction():
         return jsonify({'result' : score, 'keyword' : keyword[:3]})
 
 def sent_preprocess(text, okt, stop_words):
+    # print(text)
     retext_1 = re.sub("[a-zA-Zㄱ-ㅎㅏ-ㅣ,\\n\!?@#$%^&*()~`]", "", text)
+    # print(retext_1)
     retext_2 = okt.morphs(retext_1, stem=False)
-    
+    # print(retext_2)
     clean_text = [token for token in retext_2 if not token in stop_words]
     
     clean_text = ' '.join(clean_text)
+    # print(clean_text)
     return clean_text
 
 if __name__=="__main__":
     # model = joblib.load('./model/model.pkl')
-    model = load_model('C:/Users/SSAFY/Desktop/S_PJT/NLP_tf2/AI_server/flask_AI/ml_load/lstm_2.h5')
+    model = load_model('./1D_CNN_rare_kowiki_1.h5')
     
     app.run()
