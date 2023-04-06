@@ -60,7 +60,7 @@ def make_prediction():
         
         score = model.predict(text_pad)
         
-        if(score[0][0]<=0.37):
+        if(score[0][0]<=0.4):
             score = 0
         else:
             score = 2
