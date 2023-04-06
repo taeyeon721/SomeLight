@@ -24,7 +24,6 @@ public class UserServiceImpl implements UserService{
         User user = userRepository.findByEmail(email);
         return user.getUserId();
     }
-
     @Override
     public Page<Article> getUserArticles(int userId, Pageable pageable){
         Page<Article> articles = null;

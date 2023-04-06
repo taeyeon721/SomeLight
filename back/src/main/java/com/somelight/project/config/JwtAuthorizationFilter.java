@@ -1,5 +1,6 @@
 package com.somelight.project.config;
 
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.somelight.project.api.service.UserService;
 import com.somelight.project.db.enitity.User;
 import com.auth0.jwk.Jwk;
@@ -61,7 +62,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             // jwt 토큰으로 부터 획득한 인증 정보(authentication) 설정.
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        } catch (Exception ex) {
+        }  catch (Exception ex) {
             ex.printStackTrace();
             return;
         }
@@ -108,7 +109,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             System.out.println("ERROR : JwkException ");
             e.printStackTrace();
         }
-
         return null;
     }
 }

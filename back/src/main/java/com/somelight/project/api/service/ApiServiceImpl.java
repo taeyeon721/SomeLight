@@ -1,44 +1,90 @@
 package com.somelight.project.api.service;
 
-import com.somelight.project.api.response.MovieOneResponse;
-import com.somelight.project.api.response.MovieResultResponse;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.somelight.project.db.enitity.Book;
 import com.somelight.project.db.enitity.Movie;
 import com.somelight.project.db.repository.BookRepository;
 import com.somelight.project.db.repository.MovieRepository;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.RequestEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.URI;
-import java.nio.charset.StandardCharsets;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
 
 @Service
 public class ApiServiceImpl implements ApiService{
 
-    //@Value("${KMDB.movieKey}")
-   // private String movieKey;
+    @Value("${KMDB.movieKey}")
+    private String movieKey;
     @Autowired
     private MovieRepository movieRepository;
     @Autowired
     private BookRepository bookRepository;
 
-    public Movie requestMovie(int result, String keyword, String content) {
+    public Movie requestMovie(int result, String keyword, String content) throws IOException {
         Movie movie = new Movie();
         if (keyword == null) {
             List<Movie> movieList = movieRepository.findAllByResult(result);
             movie = movieList.get((int) (Math.random() * (movieList.size() - 1)));
             return movie;
         }
+        String genre;
+        if (result == 2) genre = "로맨스";
+        else genre = "코메디";
+        StringBuilder urlBuilder = new StringBuilder("http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2");
+        /*URL*/
+        urlBuilder.append("&" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + URLEncoder.encode(movieKey, "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("query","UTF-8") + "=" + URLEncoder.encode(keyword, "UTF-8"))
+                .append("&" + URLEncoder.encode("detail", "UTF-8") + "=" + URLEncoder.encode("Y","UTF-8"))
+                .append("&" + URLEncoder.encode("genre", "UTF-8") + "=" + URLEncoder.encode(genre, "UTF-8"))
+                .append("&" + URLEncoder.encode("listCount","UTF-8") + "=500");
+        System.out.println(urlBuilder);
+        URL url = new URL(urlBuilder.toString());
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Content-type", "application/json");
+        System.out.println("Response code: " + conn.getResponseCode());
+        BufferedReader rd;
+        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) { rd = new BufferedReader(new InputStreamReader(conn.getInputStream())); }
+        else { rd = new BufferedReader(new InputStreamReader(conn.getErrorStream())); }
 
-        List<Movie> movieList = movieRepository.findAllByResult(result);
-        movie = movieList.get((int) (Math.random() * (movieList.size() - 1)));
+        StringBuilder sb = new StringBuilder(); String line;
+        while ((line = rd.readLine()) != null) { sb.append(line); } rd.close();
+        conn.disconnect();
+
+        JsonParser parser = new JsonParser();
+        JsonElement element = parser.parse(String.valueOf(sb));
+        JsonObject jsonObject = element.getAsJsonObject();
+        JsonObject movieArray = (JsonObject) jsonObject.get("Data").getAsJsonArray().get(0);
+        int movieCnt = movieArray.get("Count").getAsInt();
+        if (movieCnt == 0) {
+            List<Movie> movieList = movieRepository.findAllByResult(result);
+            movie = movieList.get((int) (Math.random() * (movieList.size() - 1)));
+            return movie;
+        }
+        JsonArray movieResult = movieArray.get("Result").getAsJsonArray();
+        double check = 0;
+        for (int idx = 0; idx < movieCnt; idx++) {
+            if ("".equals(movieResult.get(idx).getAsJsonObject().get("posters").getAsString())) continue;
+            JsonObject plots = (JsonObject) movieResult.get(idx).getAsJsonObject().get("plots");
+            JsonObject plot = (JsonObject) plots.get("plot").getAsJsonArray().get(0);
+            String plotText = plot.getAsJsonObject().get("plotText").getAsString();
+            double similar = similarity(content, plotText);
+            if (check < similar) {
+                movie.setTitle(movieResult.get(idx).getAsJsonObject().get("title").getAsString());
+                movie.setMovieImage(movieResult.get(idx).getAsJsonObject().get("posters").getAsString().split("[|]")[0]);
+                check = similar;
+            }
+        }
         return movie;
     }
 

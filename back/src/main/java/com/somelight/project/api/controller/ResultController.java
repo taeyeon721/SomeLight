@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,7 @@ public class ResultController {
     @CrossOrigin("*")
     @PostMapping()
     public ResponseEntity<?> registerArticle(@Nullable Authentication authentication,
-                                                          @RequestBody Map<String, String> contentMap) {
+                                                          @RequestBody Map<String, String> contentMap) throws IOException {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(new MediaType("application", "json"));
 
@@ -46,9 +47,8 @@ public class ResultController {
 
         int userId = 0;
         if (authentication != null) {
-            userId = userService.getUserId((String) authentication.getCredentials());
-            System.out.println(userId);
-            if (userId == 0) return new ResponseEntity<>("expired token", HttpStatus.BAD_REQUEST);
+            String email = (String) authentication.getCredentials();
+            userId = userService.getUserId(email);
         }
         Article article = articleService.createArticle(userId, content, result);
         ResultResponse res = ResultResponse.of(article, keywordRequestList, null, null, null, null);
