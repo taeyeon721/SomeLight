@@ -60,14 +60,19 @@ def make_prediction():
         
         score = model.predict(text_pad)
         
-        if(score[0][0]<0.4):
+        if(score[0][0]<=0.37):
             score = 0
-        elif((score[0][0]>=0.4) & (score[0][0]<0.6)):
-            score = 1
         else:
             score = 2
+            
+        # if(score[0][0]<0.4):
+        #     score = 0
+        # elif((score[0][0]>=0.4) & (score[0][0]<0.6)):
+        #     score = 1
+        # else:
+        #     score = 2
         
-        return jsonify({'result' : 0, 'keyword' : keyword[:3]})
+        return jsonify({'result' : score, 'keyword' : keyword[:3]})
 
 def sent_preprocess(text, okt, stop_words):
     retext_1 = re.sub("[a-zA-Zㄱ-ㅎㅏ-ㅣ,\\n\!?@#$%^&*()~`]", "", text)
