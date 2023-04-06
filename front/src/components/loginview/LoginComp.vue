@@ -41,7 +41,7 @@ export default {
   setup() {},
   methods: {
     nonmemberLogin() {
-      sessionStorage.setItem("pk", 0);
+      sessionStorage.setItem("", 0);
       sessionStorage.setItem("token", null);
       router.push({ name: "storyCreate" });
     },

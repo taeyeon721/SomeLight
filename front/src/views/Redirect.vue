@@ -32,7 +32,8 @@ export default defineComponent({
   },
   created(this: ComponentPublicInstance<{}, any>) {
     const code: string | null = this.$route.query.code as string | null;
-    if (code != null) {
+    if (code !== null) {
+      console.log(code)
       this.getUser(code);
       console.log("로그인 성공");
     } else {

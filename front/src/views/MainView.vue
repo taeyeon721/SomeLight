@@ -17,7 +17,7 @@
     <div class="section" ref="section2">
       <div class="article">
         <div class="imgWrapper">
-          <img src="@/assets/img/main/item2.png" alt="" />
+          <img src="@/assets/img/main/item5.png" alt="" />
         </div>
         <div class="textWrapper">
           <h1 class="font">나만의 프라이빗한<br />연애상담소</h1>
@@ -44,7 +44,7 @@
     <div class="section" ref="section4">
       <div class="article">
         <div class="imgWrapper">
-          <img src="@/assets/img/main/item4.png" alt="" />
+          <img src="@/assets/img/main/item6.png" alt="" />
         </div>
         <div class="textWrapper">
           <h1 class="font">다른 사람이 봐도 <br />썸일까?</h1>
