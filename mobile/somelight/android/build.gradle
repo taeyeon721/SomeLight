@@ -29,3 +29,13 @@ subprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+
+// apk 만들때 말고는 꼭 주석처리 할것 -> 빌드시 에러 발생
+//android {
+//    lintOptions {
+//        warningsAsErrors true
+//        // Add this line to enable the deprecation lint
+//        enableObsoleteLintCheck true
+//    }
+//}
