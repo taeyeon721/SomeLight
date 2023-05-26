@@ -35,7 +35,7 @@ public class UserController {
                                                          @RequestParam(value = "page", defaultValue = "1") int page) {
         String email = (String) authentication.getCredentials();
         int userId = userService.getUserId(email);
-        Pageable pageable = PageRequest.of(page-1, 15);
+        Pageable pageable = PageRequest.of(page-1, 7);
         Page<Article> userStories = userService.getUserArticles(userId, pageable);
         return new ResponseEntity<>(userStories, HttpStatus.OK);
     }
