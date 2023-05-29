@@ -2,8 +2,13 @@ import { createStore } from "vuex";
 import axios from "axios";
 import router from "@/router";
 
+<<<<<<< HEAD
 const BASE_URL = "https://j8a109.p.ssafy.io/api"
 // const BASE_URL = "http://localhost:8080";
+=======
+// const BASE_URL = "https://j8a109.p.ssafy.io/api"
+const BASE_URL = "http://localhost:8080";
+>>>>>>> front
 
 export default createStore({
   state: {
