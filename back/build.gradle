@@ -1,0 +1,63 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.9'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.somelight'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-web-services'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	//javax.annotation.meta.When
+	implementation 'com.google.code.findbugs:jsr305:3.0.2'
+
+	// spring-security
+	implementation 'org.springframework.security:spring-security-oauth2-client:5.7.5'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	testImplementation 'org.springframework.security:spring-security-test'
+
+	// MariaDB
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
+	// json parsing
+	implementation 'com.google.code.gson:gson:2.8.7'
+	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+
+	// jwt 유효성 검사
+	implementation 'com.auth0:java-jwt:4.2.2'
+	implementation 'com.auth0:jwks-rsa:0.21.1'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+bootJar {
+	jar.enabled = true // 빌드시 jar 을 실행
+}
+
+jar {
+	manifest { // 빌드시 Main-Class 설정
+		attributes 'Main-Class': 'com.somelight.project.ProjectApplication'
+	}
+}
