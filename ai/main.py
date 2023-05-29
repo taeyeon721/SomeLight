@@ -6,6 +6,7 @@ from konlpy.tag import Okt
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import load_model
+import numpy as np
 
 # http 통신하는 import
 
@@ -45,7 +46,6 @@ def make_prediction():
         clean_sent.append(clean_text)
         
         tokenizer = Tokenizer()
-
         # # 문장 내 키워드(명사) 추출 및 빈도수 순으로 출력
         nouns_sent = okt.nouns(clean_sent[0])
         tokenizer.fit_on_texts(nouns_sent)
@@ -53,31 +53,48 @@ def make_prediction():
         keyword = []
         for key in word_index:
             keyword.append(key)
-            
-        tokenizer.fit_on_texts(clean_sent)
+        
+        # vocab_file = './kowiki.model'
+        # vocab = spm.SentencePieceProcessor()
+        # vocab.load(vocab_file)
+        # encoded = []
+        # pieces = vocab.encode_as_pieces(text_data)
+        # ids = vocab.encode_as_ids(text_data)
+        # encoded.append(ids)
+        # text_pad = pad_sequences(encoded, maxlen=1017)
+        
+        X_train = np.load('./X_train.npy', allow_pickle=True)
+        tokenizer = Tokenizer()
+        tokenizer.fit_on_texts(X_train)
         encoded = tokenizer.texts_to_sequences(clean_sent)
-        text_pad = pad_sequences(encoded, maxlen=300, padding='post')
+        text_pad = pad_sequences(encoded, maxlen=300)
         
         score = model.predict(text_pad)
+        # score = int(score*100)
         
-        if(score[0][0]<=0.4):
+        if(score[0][0]<0.4):
             score = 0
+        elif((score[0][0]>=0.4) & (score[0][0]<0.6)):
+            score = 1
         else:
             score = 2
         
-        return jsonify({'result' : 0, 'keyword' : keyword[:3]})
+        return jsonify({'result' : score, 'keyword' : keyword[:3]})
 
 def sent_preprocess(text, okt, stop_words):
+    # print(text)
     retext_1 = re.sub("[a-zA-Zㄱ-ㅎㅏ-ㅣ,\\n\!?@#$%^&*()~`]", "", text)
+    # print(retext_1)
     retext_2 = okt.morphs(retext_1, stem=False)
-    
+    # print(retext_2)
     clean_text = [token for token in retext_2 if not token in stop_words]
     
     clean_text = ' '.join(clean_text)
+    # print(clean_text)
     return clean_text
 
 if __name__=="__main__":
     # model = joblib.load('./model/model.pkl')
-    model = load_model('./ml_load/lstm_2.h5')
+    model = load_model('./1D_CNN_re_1.h5')
     
     app.run()
